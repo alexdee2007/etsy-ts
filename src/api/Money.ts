@@ -41,6 +41,4 @@ export interface IMoney {
 
 
 //methods class
-export class Money {
-
-}
+export class Money {}

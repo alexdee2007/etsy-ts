@@ -46,6 +46,4 @@ export interface ITreasuryListingData {
 
 
 //methods class
-export class TreasuryListingData {
-
-}
+export class TreasuryListingData {}

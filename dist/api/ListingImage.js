@@ -1,11 +1,14 @@
-import { request } from "../client/client";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ListingImage = void 0;
+const client_1 = require("../client/client");
 //methods class
-export class ListingImage {
+class ListingImage {
     /**
      * Retrieves a set of ListingImage objects associated to a Listing.
      */
     static findAllListingImages(parameters, options) {
-        return request("/listings/:listing_id/images", parameters, "GET", options);
+        return client_1.request("/listings/:listing_id/images", parameters, "GET", options);
     }
     /**
      * Upload a new listing image, or re-associate a previously deleted one. You may associate an image
@@ -19,13 +22,13 @@ export class ListingImage {
      will not be affected by this parameter.
      */
     static uploadListingImage(parameters, options) {
-        return request("/listings/:listing_id/images", parameters, "POST", options);
+        return client_1.request("/listings/:listing_id/images", parameters, "POST", options);
     }
     /**
      * Retrieves a Image_Listing by id.
      */
     static getImage_Listing(parameters, options) {
-        return request("/listings/:listing_id/images/:listing_image_id", parameters, "GET", options);
+        return client_1.request("/listings/:listing_id/images/:listing_image_id", parameters, "GET", options);
     }
     /**
      * Deletes a listing image. A copy of the file remains on our servers,
@@ -33,6 +36,7 @@ export class ListingImage {
      re-uploading the original image; see uploadListingImage
      */
     static deleteListingImage(parameters, options) {
-        return request("/listings/:listing_id/images/:listing_image_id", parameters, "DELETE", options);
+        return client_1.request("/listings/:listing_id/images/:listing_image_id", parameters, "DELETE", options);
     }
 }
+exports.ListingImage = ListingImage;

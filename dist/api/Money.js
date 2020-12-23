@@ -1,4 +1,8 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Money = void 0;
 //parameters types
 //methods class
-export class Money {
+class Money {
 }
+exports.Money = Money;

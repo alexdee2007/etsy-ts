@@ -1,6 +1,8 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth } from './../client/ClientOauth';
+import { IOptions } from '../client/client';
+import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
+import { IAuthOptions } from '../client/ClientOauth';
 export interface ITransaction {
     /**
      * The numeric ID for this transaction.
@@ -135,6 +137,8 @@ export interface IFindAllUserBuyerTransactionsParameters extends IStandardParame
     page?: number;
 }
 export declare class Transaction {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Retrieves a Shop_Transaction by id.
      */
@@ -150,7 +154,7 @@ export declare class Transaction {
     /**
      * Retrieves a set of Transaction objects associated to a Shop.
      */
-    static findAllShopTransactions<TResult>(parameters: IFindAllShopTransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopTransactionsParameters, TResult>>;
+    findAllShopTransactions(parameters: IFindAllShopTransactionsParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a set of Transaction objects associated to a User.
      */

@@ -1,51 +1,49 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 
 //fields
 export interface IApiMethod {
     /**
      * The method's descriptive name.
      */
-    name: string,
+    name: string;
     /**
      * The method's URI pattern.  Parameters are marked with a leading colon.
      */
-    uri: string,
+    uri: string;
     /**
      * An array of method parameters and types.
      */
-    params: any,
+    params: any;
     /**
      * An array of default values for parameters.  Parameters that lack a default are required.
      */
-    defaults: any,
+    defaults: any;
     /**
      * The resource type returned by the method.
      */
-    type: string,
+    type: string;
     /**
      * The method's visibility level.  Methods marked "private" require authentication.
      */
-    visibility: string,
+    visibility: string;
     /**
      * The HTTP method used to call the API method.
      */
-    http_method: string
+    http_method: string;
 }
 
 //parameters types
-export interface IGetMethodTableParameters extends IStandardParameters {
-
-}
+export interface IGetMethodTableParameters extends IStandardParameters {}
 
 //methods class
 export class ApiMethod {
+    constructor(private readonly client: ClientOauth) {}
 
     /**
      * Get a list of all methods available.
      */
-    static getMethodTable<TResult>(parameters: IGetMethodTableParameters, options?: IOptions): Promise<IStandardResponse<IGetMethodTableParameters, TResult>> {
-        return request<IGetMethodTableParameters, TResult>("/", parameters, "GET", options);
+    async getMethodTable(parameters: IGetMethodTableParameters, options?: IAuthOptions) {
+        return this.client.request('/', parameters, 'GET', options);
     }
 }

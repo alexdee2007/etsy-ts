@@ -1,4 +1,8 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TaxonomyPropertyScale = void 0;
 //parameters types
 //methods class
-export class TaxonomyPropertyScale {
+class TaxonomyPropertyScale {
 }
+exports.TaxonomyPropertyScale = TaxonomyPropertyScale;

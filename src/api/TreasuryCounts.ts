@@ -22,6 +22,4 @@ export interface ITreasuryCounts {
 
 
 //methods class
-export class TreasuryCounts {
-
-}
+export class TreasuryCounts {}

@@ -42,6 +42,4 @@ export interface ICartListing {
 
 
 //methods class
-export class CartListing {
-
-}
+export class CartListing {}

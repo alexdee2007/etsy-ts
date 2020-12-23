@@ -1,45 +1,50 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 
 //fields
 export interface IListingOffering {
     /**
      * The numeric ID of this offering.
      */
-    offering_id: number,
+    offering_id: number;
     /**
      * The price of the product
      */
-    price: any,
+    price: any;
     /**
      * How many of this product are available?
      */
-    quantity: number,
+    quantity: number;
     /**
      * Is the offering shown to buyers?
      */
-    is_enabled: boolean,
+    is_enabled: boolean;
     /**
      * Has the offering been deleted?
      */
-    is_deleted: boolean
+    is_deleted: boolean;
 }
 
 //parameters types
 export interface IGetOfferingParameters extends IStandardParameters {
-    listing_id: number,
-    product_id: number,
-    offering_id: number
+    listing_id: number;
+    product_id: number;
+    offering_id: number;
 }
 
 //methods class
 export class ListingOffering {
+    constructor(private readonly client: ClientOauth) {}
 
     /**
      * Get a specific offering for a listing
      */
-    static getOffering<TResult>(parameters: IGetOfferingParameters, options?: IOptions): Promise<IStandardResponse<IGetOfferingParameters, TResult>> {
-        return request<IGetOfferingParameters, TResult>("/listings/:listing_id/products/:product_id/offerings/:offering_id", parameters, "GET", options);
+    async getOffering(parameters: IGetOfferingParameters, options?: IAuthOptions) {
+        return this.client.request(
+            '/listings/:listing_id/products/:product_id/offerings/:offering_id',
+            parameters,
+            'GET',
+            options,
+        );
     }
 }

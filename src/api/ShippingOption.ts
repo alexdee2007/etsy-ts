@@ -26,6 +26,4 @@ export interface IShippingOption {
 
 
 //methods class
-export class ShippingOption {
-
-}
+export class ShippingOption {}

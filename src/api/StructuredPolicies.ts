@@ -47,6 +47,4 @@ export interface IStructuredPolicies {
 
 
 //methods class
-export class StructuredPolicies {
-
-}
+export class StructuredPolicies {}

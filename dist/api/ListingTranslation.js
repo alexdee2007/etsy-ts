@@ -1,28 +1,32 @@
-import { request } from "../client/client";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ListingTranslation = void 0;
+const client_1 = require("../client/client");
 //methods class
-export class ListingTranslation {
+class ListingTranslation {
     /**
      * Retrieves a ListingTranslation by listing_id and language
      */
     static getListingTranslation(parameters, options) {
-        return request("/listings/:listing_id/translations/:language", parameters, "GET", options);
+        return client_1.request("/listings/:listing_id/translations/:language", parameters, "GET", options);
     }
     /**
      * Creates a ListingTranslation by listing_id and language
      */
     static createListingTranslation(parameters, options) {
-        return request("/listings/:listing_id/translations/:language", parameters, "POST", options);
+        return client_1.request("/listings/:listing_id/translations/:language", parameters, "POST", options);
     }
     /**
      * Updates a ListingTranslation by listing_id and language
      */
     static updateListingTranslation(parameters, options) {
-        return request("/listings/:listing_id/translations/:language", parameters, "PUT", options);
+        return client_1.request("/listings/:listing_id/translations/:language", parameters, "PUT", options);
     }
     /**
      * Deletes a ListingTranslation by listing_id and language
      */
     static deleteListingTranslation(parameters, options) {
-        return request("/listings/:listing_id/translations/:language", parameters, "DELETE", options);
+        return client_1.request("/listings/:listing_id/translations/:language", parameters, "DELETE", options);
     }
 }
+exports.ListingTranslation = ListingTranslation;

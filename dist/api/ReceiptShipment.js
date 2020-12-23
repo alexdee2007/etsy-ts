@@ -1,4 +1,8 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ReceiptShipment = void 0;
 //parameters types
 //methods class
-export class ReceiptShipment {
+class ReceiptShipment {
 }
+exports.ReceiptShipment = ReceiptShipment;

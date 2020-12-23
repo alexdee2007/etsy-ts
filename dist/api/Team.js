@@ -1,22 +1,26 @@
-import { request } from "../client/client";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Team = void 0;
+const client_1 = require("../client/client");
 //methods class
-export class Team {
+class Team {
     /**
      * Returns all Teams
      */
     static findAllTeams(parameters, options) {
-        return request("/teams", parameters, "GET", options);
+        return client_1.request("/teams", parameters, "GET", options);
     }
     /**
      * Returns specified team by ID or team name
      */
     static findTeams(parameters, options) {
-        return request("/teams/:team_ids/", parameters, "GET", options);
+        return client_1.request("/teams/:team_ids/", parameters, "GET", options);
     }
     /**
      * Returns a list of teams for a specific user
      */
     static findAllTeamsForUser(parameters, options) {
-        return request("/users/:user_id/teams", parameters, "GET", options);
+        return client_1.request("/users/:user_id/teams", parameters, "GET", options);
     }
 }
+exports.Team = Team;

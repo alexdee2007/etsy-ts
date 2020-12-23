@@ -1,31 +1,29 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 
 //fields
 export interface IStyle {
     /**
      * Style ID for this style
      */
-    style_id: number,
+    style_id: number;
     /**
      * Style Name
      */
-    style: string
+    style: string;
 }
 
 //parameters types
-export interface IFindSuggestedStylesParameters extends IStandardParameters {
-
-}
+export interface IFindSuggestedStylesParameters extends IStandardParameters {}
 
 //methods class
 export class Style {
+    constructor(private readonly client: ClientOauth) {}
 
     /**
      * Retrieve all suggested styles.
      */
-    static findSuggestedStyles<TResult>(parameters: IFindSuggestedStylesParameters, options?: IOptions): Promise<IStandardResponse<IFindSuggestedStylesParameters, TResult>> {
-        return request<IFindSuggestedStylesParameters, TResult>("/taxonomy/styles", parameters, "GET", options);
+    async findSuggestedStyles(parameters: IFindSuggestedStylesParameters, options?: IAuthOptions) {
+        return this.client.request('/taxonomy/styles', parameters, 'GET', options);
     }
 }

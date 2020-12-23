@@ -1,70 +1,70 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 
 //fields
 export interface ITeam {
     /**
      * The team's numeric ID.
      */
-    group_id: number,
+    group_id: number;
     /**
      * The team's name.
      */
-    name: string,
+    name: string;
     /**
      * The date and time the team was created in Epoch seconds.
      */
-    create_date: number,
+    create_date: number;
     /**
      * The date and time the team was last updated in Epoch seconds.
      */
-    update_date: number,
+    update_date: number;
     /**
      * A list of tags describing the team.
      */
-    tags: string[]
+    tags: string[];
 }
 
 //parameters types
 export interface IFindAllTeamsParameters extends IStandardParameters {
-    limit?: number,
-    offset?: number,
-    page?: number
+    limit?: number;
+    offset?: number;
+    page?: number;
 }
 
 export interface IFindTeamsParameters extends IStandardParameters {
-    team_ids: (string | number)[]
+    team_ids: (string | number)[];
 }
 
 export interface IFindAllTeamsForUserParameters extends IStandardParameters {
-    user_id: string | number,
-    limit?: number,
-    offset?: number,
-    page?: number
+    user_id: string | number;
+    limit?: number;
+    offset?: number;
+    page?: number;
 }
 
 //methods class
 export class Team {
+    constructor(private readonly client: ClientOauth) {}
 
     /**
      * Returns all Teams
      */
-    static findAllTeams<TResult>(parameters: IFindAllTeamsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllTeamsParameters, TResult>> {
-        return request<IFindAllTeamsParameters, TResult>("/teams", parameters, "GET", options);
+    async findAllTeams(parameters: IFindAllTeamsParameters, options?: IAuthOptions) {
+        return this.client.request('/teams', parameters, 'GET', options);
     }
 
     /**
      * Returns specified team by ID or team name
      */
-    static findTeams<TResult>(parameters: IFindTeamsParameters, options?: IOptions): Promise<IStandardResponse<IFindTeamsParameters, TResult>> {
-        return request<IFindTeamsParameters, TResult>("/teams/:team_ids/", parameters, "GET", options);
+    async findTeams(parameters: IFindTeamsParameters, options?: IAuthOptions) {
+        return this.client.request('/teams/:team_ids/', parameters, 'GET', options);
     }
 
     /**
      * Returns a list of teams for a specific user
      */
-    static findAllTeamsForUser<TResult>(parameters: IFindAllTeamsForUserParameters, options?: IOptions): Promise<IStandardResponse<IFindAllTeamsForUserParameters, TResult>> {
-        return request<IFindAllTeamsForUserParameters, TResult>("/users/:user_id/teams", parameters, "GET", options);
+    async findAllTeamsForUser(parameters: IFindAllTeamsForUserParameters, options?: IAuthOptions) {
+        return this.client.request('/users/:user_id/teams', parameters, 'GET', options);
     }
 }

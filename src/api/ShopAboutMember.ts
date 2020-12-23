@@ -46,6 +46,4 @@ export interface IShopAboutMember {
 
 
 //methods class
-export class ShopAboutMember {
-
-}
+export class ShopAboutMember {}

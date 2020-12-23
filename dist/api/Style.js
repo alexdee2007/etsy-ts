@@ -1,10 +1,14 @@
-import { request } from "../client/client";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Style = void 0;
+const client_1 = require("../client/client");
 //methods class
-export class Style {
+class Style {
     /**
      * Retrieve all suggested styles.
      */
     static findSuggestedStyles(parameters, options) {
-        return request("/taxonomy/styles", parameters, "GET", options);
+        return client_1.request("/taxonomy/styles", parameters, "GET", options);
     }
 }
+exports.Style = Style;

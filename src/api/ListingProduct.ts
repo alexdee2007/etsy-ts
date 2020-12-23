@@ -1,44 +1,44 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 
 //fields
 export interface IListingProduct {
     /**
      * The numeric ID of this product.
      */
-    product_id: number,
+    product_id: number;
     /**
      * A list of 0-2 properties associated with this product and their values.
      */
-    property_values: any[],
+    property_values: any[];
     /**
      * The product identifier (if set).
      */
-    sku: string,
+    sku: string;
     /**
      * A JSON list of active offerings for this product.
      */
-    offerings: any[],
+    offerings: any[];
     /**
      * Has the product been deleted?
      */
-    is_deleted: boolean
+    is_deleted: boolean;
 }
 
 //parameters types
 export interface IGetProductParameters extends IStandardParameters {
-    listing_id: number,
-    product_id: number
+    listing_id: number;
+    product_id: number;
 }
 
 //methods class
 export class ListingProduct {
+    constructor(private readonly client: ClientOauth) {}
 
     /**
      * Get a specific offering for a listing
      */
-    static getProduct<TResult>(parameters: IGetProductParameters, options?: IOptions): Promise<IStandardResponse<IGetProductParameters, TResult>> {
-        return request<IGetProductParameters, TResult>("/listings/:listing_id/products/:product_id", parameters, "GET", options);
+    async getProduct(parameters: IGetProductParameters, options?: IAuthOptions) {
+        return this.client.request('/listings/:listing_id/products/:product_id', parameters, 'GET', options);
     }
 }

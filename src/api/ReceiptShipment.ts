@@ -30,6 +30,4 @@ export interface IReceiptShipment {
 
 
 //methods class
-export class ReceiptShipment {
-
-}
+export class ReceiptShipment {}

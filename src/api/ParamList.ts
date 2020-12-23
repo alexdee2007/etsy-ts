@@ -10,6 +10,4 @@ export interface IParamList {
 
 
 //methods class
-export class ParamList {
-
-}
+export class ParamList {}

@@ -1,10 +1,14 @@
-import { request } from "../client/client";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Ledger = void 0;
+const client_1 = require("../client/client");
 //methods class
-export class Ledger {
+class Ledger {
     /**
      * Get a Shop Payment Account Ledger
      */
     static findLedger(parameters, options) {
-        return request("/shops/:shop_id/ledger/", parameters, "GET", options);
+        return client_1.request("/shops/:shop_id/ledger/", parameters, "GET", options);
     }
 }
+exports.Ledger = Ledger;

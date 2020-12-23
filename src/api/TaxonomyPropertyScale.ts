@@ -18,6 +18,4 @@ export interface ITaxonomyPropertyScale {
 
 
 //methods class
-export class TaxonomyPropertyScale {
-
-}
+export class TaxonomyPropertyScale {}

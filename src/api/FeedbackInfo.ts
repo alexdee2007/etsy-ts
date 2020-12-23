@@ -14,6 +14,4 @@ export interface IFeedbackInfo {
 
 
 //methods class
-export class FeedbackInfo {
-
-}
+export class FeedbackInfo {}

@@ -38,6 +38,4 @@ export interface IShopAboutImage {
 
 
 //methods class
-export class ShopAboutImage {
-
-}
+export class ShopAboutImage {}

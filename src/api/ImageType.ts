@@ -1,35 +1,33 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 
 //fields
 export interface IImageType {
     /**
      * Code for this image type, used in image URLs
      */
-    code: string,
+    code: string;
     /**
      * Text description of the image type
      */
-    desc: string,
+    desc: string;
     /**
      * Available sizes for this image type
      */
-    sizes: string[]
+    sizes: string[];
 }
 
 //parameters types
-export interface IListImageTypesParameters extends IStandardParameters {
-
-}
+export interface IListImageTypesParameters extends IStandardParameters {}
 
 //methods class
 export class ImageType {
+    constructor(private readonly client: ClientOauth) {}
 
     /**
      * Lists available image types along with their supported sizes.
      */
-    static listImageTypes<TResult>(parameters: IListImageTypesParameters, options?: IOptions): Promise<IStandardResponse<IListImageTypesParameters, TResult>> {
-        return request<IListImageTypesParameters, TResult>("/image_types", parameters, "GET", options);
+    async listImageTypes(parameters: IListImageTypesParameters, options?: IAuthOptions) {
+        return this.client.request('/image_types', parameters, 'GET', options);
     }
 }

@@ -1,243 +1,251 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 
 //fields
 export interface ICart {
     /**
      * The numeric ID of the cart
      */
-    cart_id: number,
+    cart_id: number;
     /**
      * The shop name
      */
-    shop_name: string,
+    shop_name: string;
     /**
      * The message to the seller
      */
-    message_to_seller: string,
+    message_to_seller: string;
     /**
      * The numeric ID of the destination country
      */
-    destination_country_id: number,
+    destination_country_id: number;
     /**
      @deprecated
      * The alphanumeric coupon code applied to the cart
 
      Deprecated: The Etsy API no longer supports coupons.
      */
-    coupon_code: string,
+    coupon_code: string;
     /**
      * The ISO (alphabetic) code for the currency
      */
-    currency_code: string,
+    currency_code: string;
     /**
      * The total price
      */
-    total: string,
+    total: string;
     /**
      * The subtotal price
      */
-    subtotal: string,
+    subtotal: string;
     /**
      * The shipping cost
      */
-    shipping_cost: string,
+    shipping_cost: string;
     /**
      * The tax cost
      */
-    tax_cost: string,
+    tax_cost: string;
     /**
      * The line-item discount amount (does not include tax or shipping)
      */
-    discount_amount: string,
+    discount_amount: string;
     /**
      * The shipping discount amount
      */
-    shipping_discount_amount: string,
+    shipping_discount_amount: string;
     /**
      * The tax discount amount
      */
-    tax_discount_amount: string,
+    tax_discount_amount: string;
     /**
      * The full URL to the cart page on Etsy
      */
-    url: string,
+    url: string;
     /**
      * An array of purchase information for the listings
      */
-    listings: any[],
+    listings: any[];
     /**
      * The cart is download only
      */
-    is_download_only: boolean,
+    is_download_only: boolean;
     /**
      * The cart has VAT tax
      */
-    has_vat: boolean,
+    has_vat: boolean;
     /**
      * The selected shipping option identifier for the cart
      */
-    shipping_option: any
+    shipping_option: any;
 }
 
 //parameters types
 export interface IGetAllUserCartsParameters extends IStandardParameters {
-    user_id: string | number,
-    limit?: number,
-    offset?: number,
-    page?: number
+    user_id: string | number;
+    limit?: number;
+    offset?: number;
+    page?: number;
 }
 
 export interface IAddToCartParameters extends IStandardParameters {
-    user_id: string | number,
-    listing_id: number,
-    quantity?: number,
-    selected_variations?: [any, any],
-    personalization?: any
+    user_id: string | number;
+    listing_id: number;
+    quantity?: number;
+    selected_variations?: [any, any];
+    personalization?: any;
 }
 
 export interface IUpdateCartListingQuantityParameters extends IStandardParameters {
-    user_id: string | number,
-    listing_id: number,
-    quantity: number,
-    listing_customization_id?: number
+    user_id: string | number;
+    listing_id: number;
+    quantity: number;
+    listing_customization_id?: number;
 }
 
 export interface IRemoveCartListingParameters extends IStandardParameters {
-    user_id: string | number,
-    listing_id: number,
-    listing_customization_id?: number
+    user_id: string | number;
+    listing_id: number;
+    listing_customization_id?: number;
 }
 
 export interface IGetUserCartParameters extends IStandardParameters {
-    user_id: string | number,
-    cart_id: string | number
+    user_id: string | number;
+    cart_id: string | number;
 }
 
 export interface IUpdateCartParameters extends IStandardParameters {
-    user_id: string | number,
-    cart_id: string | number,
-    destination_country_id?: number,
-    message_to_seller?: string,
-    coupon_code?: string,
-    shipping_option_id?: string,
-    destination_zip?: string
+    user_id: string | number;
+    cart_id: string | number;
+    destination_country_id?: number;
+    message_to_seller?: string;
+    coupon_code?: string;
+    shipping_option_id?: string;
+    destination_zip?: string;
 }
 
 export interface IDeleteCartParameters extends IStandardParameters {
-    user_id: string | number,
-    cart_id: string | number
+    user_id: string | number;
+    cart_id: string | number;
 }
 
 export interface IAddAndSelectShippingForApplePayParameters extends IStandardParameters {
-    user_id: string | number,
-    cart_id: string | number,
-    second_line?: string,
-    city: string,
-    state?: string,
-    zip: string,
-    country_id: number
+    user_id: string | number;
+    cart_id: string | number;
+    second_line?: string;
+    city: string;
+    state?: string;
+    zip: string;
+    country_id: number;
 }
 
 export interface ISaveListingForLaterParameters extends IStandardParameters {
-    user_id: string | number,
-    cart_id: number,
-    listing_id: number,
-    listing_inventory_id?: number,
-    listing_customization_id?: number
+    user_id: string | number;
+    cart_id: number;
+    listing_id: number;
+    listing_inventory_id?: number;
+    listing_customization_id?: number;
 }
 
 export interface IGetUserCartForShopParameters extends IStandardParameters {
-    user_id: string | number,
-    shop_id: string | number
+    user_id: string | number;
+    shop_id: string | number;
 }
 
 export interface ICreateSingleListingCartParameters extends IStandardParameters {
-    user_id: string | number,
-    listing_id: number,
-    quantity?: number,
-    selected_variations?: [any, any],
-    personalization?: any
+    user_id: string | number;
+    listing_id: number;
+    quantity?: number;
+    selected_variations?: [any, any];
+    personalization?: any;
 }
 
 //methods class
 export class Cart {
+    constructor(private readonly client: ClientOauth) {}
 
     /**
      * Get a user's Carts
      */
-    static getAllUserCarts<TResult>(parameters: IGetAllUserCartsParameters, options?: IOptions): Promise<IStandardResponse<IGetAllUserCartsParameters, TResult>> {
-        return request<IGetAllUserCartsParameters, TResult>("/users/:user_id/carts", parameters, "GET", options);
+    async getAllUserCarts(parameters: IGetAllUserCartsParameters, options?: IAuthOptions) {
+        return this.client.request('/users/:user_id/carts', parameters, 'GET', options);
     }
 
     /**
      * Add a listing to a cart
      */
-    static addToCart<TResult>(parameters: IAddToCartParameters, options?: IOptions): Promise<IStandardResponse<IAddToCartParameters, TResult>> {
-        return request<IAddToCartParameters, TResult>("/users/:user_id/carts", parameters, "POST", options);
+    async addToCart(parameters: IAddToCartParameters, options?: IAuthOptions) {
+        return this.client.request('/users/:user_id/carts', parameters, 'POST', options);
     }
 
     /**
      * Update a cart listing purchase quantity
      */
-    static updateCartListingQuantity<TResult>(parameters: IUpdateCartListingQuantityParameters, options?: IOptions): Promise<IStandardResponse<IUpdateCartListingQuantityParameters, TResult>> {
-        return request<IUpdateCartListingQuantityParameters, TResult>("/users/:user_id/carts", parameters, "PUT", options);
+    async updateCartListingQuantity(parameters: IUpdateCartListingQuantityParameters, options?: IAuthOptions) {
+        return this.client.request('/users/:user_id/carts', parameters, 'PUT', options);
     }
 
     /**
      * Remove a listing from a cart
      */
-    static removeCartListing<TResult>(parameters: IRemoveCartListingParameters, options?: IOptions): Promise<IStandardResponse<IRemoveCartListingParameters, TResult>> {
-        return request<IRemoveCartListingParameters, TResult>("/users/:user_id/carts", parameters, "DELETE", options);
+    async removeCartListing(parameters: IRemoveCartListingParameters, options?: IAuthOptions) {
+        return this.client.request('/users/:user_id/carts', parameters, 'DELETE', options);
     }
 
     /**
      * Get a cart
      */
-    static getUserCart<TResult>(parameters: IGetUserCartParameters, options?: IOptions): Promise<IStandardResponse<IGetUserCartParameters, TResult>> {
-        return request<IGetUserCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "GET", options);
+    async getUserCart(parameters: IGetUserCartParameters, options?: IAuthOptions) {
+        return this.client.request('/users/:user_id/carts/:cart_id', parameters, 'GET', options);
     }
 
     /**
      * Update a cart
      */
-    static updateCart<TResult>(parameters: IUpdateCartParameters, options?: IOptions): Promise<IStandardResponse<IUpdateCartParameters, TResult>> {
-        return request<IUpdateCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "PUT", options);
+    async updateCart(parameters: IUpdateCartParameters, options?: IAuthOptions) {
+        return this.client.request('/users/:user_id/carts/:cart_id', parameters, 'PUT', options);
     }
 
     /**
      * Delete a cart
      */
-    static deleteCart<TResult>(parameters: IDeleteCartParameters, options?: IOptions): Promise<IStandardResponse<IDeleteCartParameters, TResult>> {
-        return request<IDeleteCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "DELETE", options);
+    async deleteCart(parameters: IDeleteCartParameters, options?: IAuthOptions) {
+        return this.client.request('/users/:user_id/carts/:cart_id', parameters, 'DELETE', options);
     }
 
     /**
      * Saves and selects a shipping address for apple pay
      */
-    static addAndSelectShippingForApplePay<TResult>(parameters: IAddAndSelectShippingForApplePayParameters, options?: IOptions): Promise<IStandardResponse<IAddAndSelectShippingForApplePayParameters, TResult>> {
-        return request<IAddAndSelectShippingForApplePayParameters, TResult>("/users/:user_id/carts/:cart_id/add_and_select_shipping_for_apple", parameters, "POST", options);
+    async addAndSelectShippingForApplePay(
+        parameters: IAddAndSelectShippingForApplePayParameters,
+        options?: IAuthOptions,
+    ) {
+        return this.client.request(
+            '/users/:user_id/carts/:cart_id/add_and_select_shipping_for_apple',
+            parameters,
+            'POST',
+            options,
+        );
     }
 
     /**
      * Move a listing to Saved for Later
      */
-    static saveListingForLater<TResult>(parameters: ISaveListingForLaterParameters, options?: IOptions): Promise<IStandardResponse<ISaveListingForLaterParameters, TResult>> {
-        return request<ISaveListingForLaterParameters, TResult>("/users/:user_id/carts/save", parameters, "DELETE", options);
+    async saveListingForLater(parameters: ISaveListingForLaterParameters, options?: IAuthOptions) {
+        return this.client.request('/users/:user_id/carts/save', parameters, 'DELETE', options);
     }
 
     /**
      * Get a cart from a shop ID
      */
-    static getUserCartForShop<TResult>(parameters: IGetUserCartForShopParameters, options?: IOptions): Promise<IStandardResponse<IGetUserCartForShopParameters, TResult>> {
-        return request<IGetUserCartForShopParameters, TResult>("/users/:user_id/carts/shop/:shop_id", parameters, "GET", options);
+    async getUserCartForShop(parameters: IGetUserCartForShopParameters, options?: IAuthOptions) {
+        return this.client.request('/users/:user_id/carts/shop/:shop_id', parameters, 'GET', options);
     }
 
     /**
      * Create a single-listing cart from a listing
      */
-    static createSingleListingCart<TResult>(parameters: ICreateSingleListingCartParameters, options?: IOptions): Promise<IStandardResponse<ICreateSingleListingCartParameters, TResult>> {
-        return request<ICreateSingleListingCartParameters, TResult>("/users/:user_id/carts/single_listing", parameters, "POST", options);
+    async createSingleListingCart(parameters: ICreateSingleListingCartParameters, options?: IAuthOptions) {
+        return this.client.request('/users/:user_id/carts/single_listing', parameters, 'POST', options);
     }
 }

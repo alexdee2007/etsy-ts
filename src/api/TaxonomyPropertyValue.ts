@@ -26,6 +26,4 @@ export interface ITaxonomyPropertyValue {
 
 
 //methods class
-export class TaxonomyPropertyValue {
-
-}
+export class TaxonomyPropertyValue {}
