@@ -113,7 +113,7 @@ class ClientOauth {
     request(uri, parameters, method, options) {
         return __awaiter(this, void 0, void 0, function* () {
             let url = this.baseUrl + this.fillUriPlaceholders(uri, parameters);
-            let data;
+            let body;
             let headers = {};
             switch (method.toUpperCase()) {
                 case 'GET':
@@ -125,18 +125,13 @@ class ClientOauth {
                     break;
                 default:
                     headers['Content-Type'] = 'application/json';
-                    data = JSON.stringify(parameters);
+                    body = JSON.stringify(parameters);
             }
             if (options && options.token && options.tokenSecret) {
                 headers['Authorization'] = this.etsyOAuth.authHeader(url, options.token, options.tokenSecret, method);
             }
-            let response = yield axios_1.default({ method, url, data, headers });
-            if (response.status >= 200 && response.status < 300) {
-                return response.data;
-            }
-            else {
-                throw response.statusText;
-            }
+            const { data } = yield axios_1.default({ method, url, data: body, headers });
+            return data;
         });
     }
     fillUriPlaceholders(uri, parameters) {
