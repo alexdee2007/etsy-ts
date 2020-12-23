@@ -1,140 +1,195 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Listing = void 0;
-const client_1 = require("../client/client");
 //methods class
 class Listing {
+    constructor(client) {
+        this.client = client;
+    }
     /**
      * Creates a new Listing.
      */
-    static createListing(parameters, options) {
-        return client_1.request("/listings", parameters, "POST", options);
+    createListing(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/listings', parameters, 'POST', options);
+        });
     }
     /**
      * Finds all FeaturedTreasury listings.
      */
-    static findAllFeaturedListings(parameters, options) {
-        return client_1.request("/featured_treasuries/listings", parameters, "GET", options);
+    findAllFeaturedListings(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/featured_treasuries/listings', parameters, 'GET', options);
+        });
     }
     /**
      * Retrieves a Listing by id.
      */
-    static getListing(parameters, options) {
-        return client_1.request("/listings/:listing_id", parameters, "GET", options);
+    getListing(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/listings/:listing_id', parameters, 'GET', options);
+        });
     }
     /**
      * Updates a Listing
      */
-    static updateListing(parameters, options) {
-        return client_1.request("/listings/:listing_id", parameters, "PUT", options);
+    updateListing(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/listings/:listing_id', parameters, 'PUT', options);
+        });
     }
     /**
      * Deletes a Listing
      */
-    static deleteListing(parameters, options) {
-        return client_1.request("/listings/:listing_id", parameters, "DELETE", options);
+    deleteListing(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/listings/:listing_id', parameters, 'DELETE', options);
+        });
     }
     /**
      * Finds all active Listings. (Note: the sort_on and sort_order options only work when combined with one of the search options: keywords, color, tags, location, etc.)
      */
-    static findAllListingActive(parameters, options) {
-        return client_1.request("/listings/active", parameters, "GET", options);
+    findAllListingActive(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/listings/active', parameters, 'GET', options);
+        });
     }
     /**
      * Collects the list of interesting listings
      */
-    static getInterestingListings(parameters, options) {
-        return client_1.request("/listings/interesting", parameters, "GET", options);
+    getInterestingListings(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/listings/interesting', parameters, 'GET', options);
+        });
     }
     /**
      * Collects the list of listings used to generate the trending listing page
      */
-    static getTrendingListings(parameters, options) {
-        return client_1.request("/listings/trending", parameters, "GET", options);
+    getTrendingListings(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/listings/trending', parameters, 'GET', options);
+        });
     }
     /**
      * Finds all listings for a certain FeaturedTreasury.
      */
-    static findAllListingsForFeaturedTreasuryId(parameters, options) {
-        return client_1.request("/featured_treasuries/:featured_treasury_id/listings", parameters, "GET", options);
+    findAllListingsForFeaturedTreasuryId(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/featured_treasuries/:featured_treasury_id/listings', parameters, 'GET', options);
+        });
     }
     /**
      * Finds all active listings for a certain FeaturedTreasury.
      */
-    static findAllActiveListingsForFeaturedTreasuryId(parameters, options) {
-        return client_1.request("/featured_treasuries/:featured_treasury_id/listings/active", parameters, "GET", options);
+    findAllActiveListingsForFeaturedTreasuryId(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/featured_treasuries/:featured_treasury_id/listings/active', parameters, 'GET', options);
+        });
     }
     /**
      * Finds FeaturedTreasury listings that are currently displayed on a regional homepage.
      */
-    static findAllCurrentFeaturedListings(parameters, options) {
-        return client_1.request("/featured_treasuries/listings/homepage_current", parameters, "GET", options);
+    findAllCurrentFeaturedListings(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/featured_treasuries/listings/homepage_current', parameters, 'GET', options);
+        });
     }
     /**
      * Finds all listings in a receipt
      */
-    static findAllReceiptListings(parameters, options) {
-        return client_1.request("/receipts/:receipt_id/listings", parameters, "GET", options);
+    findAllReceiptListings(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/receipts/:receipt_id/listings', parameters, 'GET', options);
+        });
     }
     /**
      * Finds all active Listings associated with a Shop.(NOTE: If calling on behalf of a shop owner in the context of listing management, be sure to include the parameter include_private = true.  This will return private listings that are not publicly visible in the shop, but which can be managed.  This is an experimental feature and may change.)
      */
-    static findAllShopListingsActive(parameters, options) {
-        return client_1.request("/shops/:shop_id/listings/active", parameters, "GET", options);
+    findAllShopListingsActive(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/shops/:shop_id/listings/active', parameters, 'GET', options);
+        });
     }
     /**
      * Finds all of a Shop's draft listings
      */
-    static findAllShopListingsDraft(parameters, options) {
-        return client_1.request("/shops/:shop_id/listings/draft", parameters, "GET", options);
+    findAllShopListingsDraft(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/shops/:shop_id/listings/draft', parameters, 'GET', options);
+        });
     }
     /**
      * Retrieves Listings associated to a Shop that are expired
      */
-    static findAllShopListingsExpired(parameters, options) {
-        return client_1.request("/shops/:shop_id/listings/expired", parameters, "GET", options);
+    findAllShopListingsExpired(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/shops/:shop_id/listings/expired', parameters, 'GET', options);
+        });
     }
     /**
      * Retrieves a Listing associated to a Shop that is inactive
      */
-    static getShopListingExpired(parameters, options) {
-        return client_1.request("/shops/:shop_id/listings/expired/:listing_id", parameters, "GET", options);
+    getShopListingExpired(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/shops/:shop_id/listings/expired/:listing_id', parameters, 'GET', options);
+        });
     }
     /**
      * Retrieves Listings associated to a Shop that are featured
      */
-    static findAllShopListingsFeatured(parameters, options) {
-        return client_1.request("/shops/:shop_id/listings/featured", parameters, "GET", options);
+    findAllShopListingsFeatured(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/shops/:shop_id/listings/featured', parameters, 'GET', options);
+        });
     }
     /**
      * Retrieves Listings associated to a Shop that are inactive
      */
-    static findAllShopListingsInactive(parameters, options) {
-        return client_1.request("/shops/:shop_id/listings/inactive", parameters, "GET", options);
+    findAllShopListingsInactive(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/shops/:shop_id/listings/inactive', parameters, 'GET', options);
+        });
     }
     /**
      * Retrieves a Listing associated to a Shop that is inactive
      */
-    static getShopListingInactive(parameters, options) {
-        return client_1.request("/shops/:shop_id/listings/inactive/:listing_id", parameters, "GET", options);
+    getShopListingInactive(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/shops/:shop_id/listings/inactive/:listing_id', parameters, 'GET', options);
+        });
     }
     /**
      * Finds all listings within a shop section
      */
-    static findAllShopSectionListings(parameters, options) {
-        return client_1.request("/shops/:shop_id/sections/:shop_section_id/listings", parameters, "GET", options);
+    findAllShopSectionListings(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/shops/:shop_id/sections/:shop_section_id/listings', parameters, 'GET', options);
+        });
     }
     /**
      * Finds all listings within a shop section
      */
-    static findAllShopSectionListingsActive(parameters, options) {
-        return client_1.request("/shops/:shop_id/sections/:shop_section_id/listings/active", parameters, "GET", options);
+    findAllShopSectionListingsActive(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/shops/:shop_id/sections/:shop_section_id/listings/active', parameters, 'GET', options);
+        });
     }
     /**
      * Finds all listings in a given Cart
      */
-    static findAllCartListings(parameters, options) {
-        return client_1.request("/users/:user_id/carts/:cart_id/listings", parameters, "GET", options);
+    findAllCartListings(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/users/:user_id/carts/:cart_id/listings', parameters, 'GET', options);
+        });
     }
 }
 exports.Listing = Listing;

@@ -1,26 +1,43 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Region = void 0;
-const client_1 = require("../client/client");
 //methods class
 class Region {
+    constructor(client) {
+        this.client = client;
+    }
     /**
      * Finds all Region.
      */
-    static findAllRegion(parameters, options) {
-        return client_1.request("/regions", parameters, "GET", options);
+    findAllRegion(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/regions', parameters, 'GET', options);
+        });
     }
     /**
      * Retrieves a Region by id.
      */
-    static getRegion(parameters, options) {
-        return client_1.request("/regions/:region_id", parameters, "GET", options);
+    getRegion(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/regions/:region_id', parameters, 'GET', options);
+        });
     }
     /**
      *
      */
-    static findEligibleRegions(parameters, options) {
-        return client_1.request("/regions/eligible", parameters, "GET", options);
+    findEligibleRegions(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/regions/eligible', parameters, 'GET', options);
+        });
     }
 }
 exports.Region = Region;

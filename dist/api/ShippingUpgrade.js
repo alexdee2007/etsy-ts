@@ -1,56 +1,83 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ShippingUpgrade = void 0;
-const client_1 = require("../client/client");
 //methods class
 class ShippingUpgrade {
+    constructor(client) {
+        this.client = client;
+    }
     /**
      * Get the shipping upgrades available for a listing.
      */
-    static getListingShippingUpgrades(parameters, options) {
-        return client_1.request("/listings/:listing_id/shipping/upgrades", parameters, "GET", options);
+    getListingShippingUpgrades(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/listings/:listing_id/shipping/upgrades', parameters, 'GET', options);
+        });
     }
     /**
      * Creates a new ShippingUpgrade for the listing. Will unlink the listing if linked to a ShippingTemplate.
      */
-    static createListingShippingUpgrade(parameters, options) {
-        return client_1.request("/listings/:listing_id/shipping/upgrades", parameters, "POST", options);
+    createListingShippingUpgrade(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/listings/:listing_id/shipping/upgrades', parameters, 'POST', options);
+        });
     }
     /**
      * Updates a ShippingUpgrade on a listing. Will unlink the listing if linked to a ShippingTemplate.
      */
-    static updateListingShippingUpgrade(parameters, options) {
-        return client_1.request("/listings/:listing_id/shipping/upgrades", parameters, "PUT", options);
+    updateListingShippingUpgrade(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/listings/:listing_id/shipping/upgrades', parameters, 'PUT', options);
+        });
     }
     /**
      * Deletes the ShippingUpgrade from the listing. Will unlink the listing if linked to a ShippingTemplate.
      */
-    static deleteListingShippingUpgrade(parameters, options) {
-        return client_1.request("/listings/:listing_id/shipping/upgrades", parameters, "DELETE", options);
+    deleteListingShippingUpgrade(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/listings/:listing_id/shipping/upgrades', parameters, 'DELETE', options);
+        });
     }
     /**
      * Retrieves a list of shipping upgrades for the parent ShippingTemplate
      */
-    static findAllShippingTemplateUpgrades(parameters, options) {
-        return client_1.request("/shipping/templates/:shipping_template_id/upgrades", parameters, "GET", options);
+    findAllShippingTemplateUpgrades(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/shipping/templates/:shipping_template_id/upgrades', parameters, 'GET', options);
+        });
     }
     /**
      * Creates a new ShippingUpgrade for the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
      */
-    static createShippingTemplateUpgrade(parameters, options) {
-        return client_1.request("/shipping/templates/:shipping_template_id/upgrades", parameters, "POST", options);
+    createShippingTemplateUpgrade(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/shipping/templates/:shipping_template_id/upgrades', parameters, 'POST', options);
+        });
     }
     /**
      * Updates a ShippingUpgrade of the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
      */
-    static updateShippingTemplateUpgrade(parameters, options) {
-        return client_1.request("/shipping/templates/:shipping_template_id/upgrades", parameters, "PUT", options);
+    updateShippingTemplateUpgrade(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/shipping/templates/:shipping_template_id/upgrades', parameters, 'PUT', options);
+        });
     }
     /**
      * Deletes the ShippingUpgrade from the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
      */
-    static deleteShippingTemplateUpgrade(parameters, options) {
-        return client_1.request("/shipping/templates/:shipping_template_id/upgrades", parameters, "DELETE", options);
+    deleteShippingTemplateUpgrade(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/shipping/templates/:shipping_template_id/upgrades', parameters, 'DELETE', options);
+        });
     }
 }
 exports.ShippingUpgrade = ShippingUpgrade;

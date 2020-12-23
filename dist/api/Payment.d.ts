@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IPayment {
     /**
      * The payment's numeric ID.
@@ -111,20 +110,22 @@ export interface IFindShopPaymentByReceiptParameters extends IStandardParameters
     shop_id: string | number;
 }
 export declare class Payment {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Get an Etsy Payments Transaction
      */
-    static findPayment<TResult>(parameters: IFindPaymentParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentParameters, TResult>>;
+    findPayment(parameters: IFindPaymentParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Get a Payment from a Ledger Entry ID, if applicable
      */
-    static findPaymentForLedgerEntry<TResult>(parameters: IFindPaymentForLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentForLedgerEntryParameters, TResult>>;
+    findPaymentForLedgerEntry(parameters: IFindPaymentForLedgerEntryParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Get a Payment from a PaymentAccount Ledger Entry ID, if applicable
      */
-    static findPaymentForPaymentAccountLedgerEntry<TResult>(parameters: IFindPaymentForPaymentAccountLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentForPaymentAccountLedgerEntryParameters, TResult>>;
+    findPaymentForPaymentAccountLedgerEntry(parameters: IFindPaymentForPaymentAccountLedgerEntryParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Get a Payment by Shop Receipt ID
      */
-    static findShopPaymentByReceipt<TResult>(parameters: IFindShopPaymentByReceiptParameters, options?: IOptions): Promise<IStandardResponse<IFindShopPaymentByReceiptParameters, TResult>>;
+    findShopPaymentByReceipt(parameters: IFindShopPaymentByReceiptParameters, options?: IAuthOptions): Promise<any>;
 }

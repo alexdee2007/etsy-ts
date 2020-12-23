@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IApiMethod {
     /**
      * The method's descriptive name.
@@ -34,8 +33,10 @@ export interface IApiMethod {
 export interface IGetMethodTableParameters extends IStandardParameters {
 }
 export declare class ApiMethod {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Get a list of all methods available.
      */
-    static getMethodTable<TResult>(parameters: IGetMethodTableParameters, options?: IOptions): Promise<IStandardResponse<IGetMethodTableParameters, TResult>>;
+    getMethodTable(parameters: IGetMethodTableParameters, options?: IAuthOptions): Promise<any>;
 }

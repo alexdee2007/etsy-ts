@@ -1,50 +1,75 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Receipt = void 0;
-const client_1 = require("../client/client");
 //methods class
 class Receipt {
+    constructor(client) {
+        this.client = client;
+    }
     /**
      * Retrieves a Shop_Receipt2 by id.
      */
-    static getShop_Receipt2(parameters, options) {
-        return client_1.request("/receipts/:receipt_id", parameters, "GET", options);
+    getShop_Receipt2(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/receipts/:receipt_id', parameters, 'GET', options);
+        });
     }
     /**
      * Updates a Shop_Receipt2
      */
-    static updateReceipt(parameters, options) {
-        return client_1.request("/receipts/:receipt_id", parameters, "PUT", options);
+    updateReceipt(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/receipts/:receipt_id', parameters, 'PUT', options);
+        });
     }
     /**
      * Retrieves a set of Receipt objects associated to a Shop.
      */
-    static findAllShopReceipts(parameters, options) {
-        return client_1.request("/shops/:shop_id/receipts", parameters, "GET", options);
+    findAllShopReceipts(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/shops/:shop_id/receipts', parameters, 'GET', options);
+        });
     }
     /**
      * Submits tracking information and sends a shipping notification email to the buyer. If send_bcc is true, the shipping notification will be sent to the seller as well. Refer to additional documentation.
      */
-    static submitTracking(parameters, options) {
-        return client_1.request("/shops/:shop_id/receipts/:receipt_id/tracking", parameters, "POST", options);
+    submitTracking(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/shops/:shop_id/receipts/:receipt_id/tracking', parameters, 'POST', options);
+        });
     }
     /**
      * Retrieves a set of Receipt objects associated to a Shop based on the status.
      */
-    static findAllShopReceiptsByStatus(parameters, options) {
-        return client_1.request("/shops/:shop_id/receipts/:status", parameters, "GET", options);
+    findAllShopReceiptsByStatus(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/shops/:shop_id/receipts/:status', parameters, 'GET', options);
+        });
     }
     /**
      * Searches the set of Receipt objects associated to a Shop by a query
      */
-    static searchAllShopReceipts(parameters, options) {
-        return client_1.request("/shops/:shop_id/receipts/search", parameters, "GET", options);
+    searchAllShopReceipts(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/shops/:shop_id/receipts/search', parameters, 'GET', options);
+        });
     }
     /**
      * Retrieves a set of Receipt objects associated to a User.
      */
-    static findAllUserBuyerReceipts(parameters, options) {
-        return client_1.request("/users/:user_id/receipts", parameters, "GET", options);
+    findAllUserBuyerReceipts(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/users/:user_id/receipts', parameters, 'GET', options);
+        });
     }
 }
 exports.Receipt = Receipt;

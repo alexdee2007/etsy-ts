@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IDataType {
     /**
      * Base type of data
@@ -21,20 +20,22 @@ export interface IDescribeWhenMadeEnumParameters extends IStandardParameters {
 export interface IDescribeWhoMadeEnumParameters extends IStandardParameters {
 }
 export declare class DataType {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Describes the legal values for Listing.occasion.
      */
-    static describeOccasionEnum<TResult>(parameters: IDescribeOccasionEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeOccasionEnumParameters, TResult>>;
+    describeOccasionEnum(parameters: IDescribeOccasionEnumParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Describes the legal values for Listing.recipient.
      */
-    static describeRecipientEnum<TResult>(parameters: IDescribeRecipientEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeRecipientEnumParameters, TResult>>;
+    describeRecipientEnum(parameters: IDescribeRecipientEnumParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Describes the legal values for Listing.when_made.
      */
-    static describeWhenMadeEnum<TResult>(parameters: IDescribeWhenMadeEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeWhenMadeEnumParameters, TResult>>;
+    describeWhenMadeEnum(parameters: IDescribeWhenMadeEnumParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Describes the legal values for Listing.who_made.
      */
-    static describeWhoMadeEnum<TResult>(parameters: IDescribeWhoMadeEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeWhoMadeEnumParameters, TResult>>;
+    describeWhoMadeEnum(parameters: IDescribeWhoMadeEnumParameters, options?: IAuthOptions): Promise<any>;
 }

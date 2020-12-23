@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IShippingUpgrade {
     /**
      * Identifier for the parent shipping profile
@@ -84,36 +83,38 @@ export interface IDeleteShippingTemplateUpgradeParameters extends IStandardParam
     type: number;
 }
 export declare class ShippingUpgrade {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Get the shipping upgrades available for a listing.
      */
-    static getListingShippingUpgrades<TResult>(parameters: IGetListingShippingUpgradesParameters, options?: IOptions): Promise<IStandardResponse<IGetListingShippingUpgradesParameters, TResult>>;
+    getListingShippingUpgrades(parameters: IGetListingShippingUpgradesParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Creates a new ShippingUpgrade for the listing. Will unlink the listing if linked to a ShippingTemplate.
      */
-    static createListingShippingUpgrade<TResult>(parameters: ICreateListingShippingUpgradeParameters, options?: IOptions): Promise<IStandardResponse<ICreateListingShippingUpgradeParameters, TResult>>;
+    createListingShippingUpgrade(parameters: ICreateListingShippingUpgradeParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Updates a ShippingUpgrade on a listing. Will unlink the listing if linked to a ShippingTemplate.
      */
-    static updateListingShippingUpgrade<TResult>(parameters: IUpdateListingShippingUpgradeParameters, options?: IOptions): Promise<IStandardResponse<IUpdateListingShippingUpgradeParameters, TResult>>;
+    updateListingShippingUpgrade(parameters: IUpdateListingShippingUpgradeParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Deletes the ShippingUpgrade from the listing. Will unlink the listing if linked to a ShippingTemplate.
      */
-    static deleteListingShippingUpgrade<TResult>(parameters: IDeleteListingShippingUpgradeParameters, options?: IOptions): Promise<IStandardResponse<IDeleteListingShippingUpgradeParameters, TResult>>;
+    deleteListingShippingUpgrade(parameters: IDeleteListingShippingUpgradeParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a list of shipping upgrades for the parent ShippingTemplate
      */
-    static findAllShippingTemplateUpgrades<TResult>(parameters: IFindAllShippingTemplateUpgradesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShippingTemplateUpgradesParameters, TResult>>;
+    findAllShippingTemplateUpgrades(parameters: IFindAllShippingTemplateUpgradesParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Creates a new ShippingUpgrade for the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
      */
-    static createShippingTemplateUpgrade<TResult>(parameters: ICreateShippingTemplateUpgradeParameters, options?: IOptions): Promise<IStandardResponse<ICreateShippingTemplateUpgradeParameters, TResult>>;
+    createShippingTemplateUpgrade(parameters: ICreateShippingTemplateUpgradeParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Updates a ShippingUpgrade of the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
      */
-    static updateShippingTemplateUpgrade<TResult>(parameters: IUpdateShippingTemplateUpgradeParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShippingTemplateUpgradeParameters, TResult>>;
+    updateShippingTemplateUpgrade(parameters: IUpdateShippingTemplateUpgradeParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Deletes the ShippingUpgrade from the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
      */
-    static deleteShippingTemplateUpgrade<TResult>(parameters: IDeleteShippingTemplateUpgradeParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShippingTemplateUpgradeParameters, TResult>>;
+    deleteShippingTemplateUpgrade(parameters: IDeleteShippingTemplateUpgradeParameters, options?: IAuthOptions): Promise<any>;
 }

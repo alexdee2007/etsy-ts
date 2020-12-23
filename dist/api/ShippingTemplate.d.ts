@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IShippingTemplate {
     /**
      * The numeric ID of this shipping template.
@@ -67,28 +66,30 @@ export interface IFindAllUserShippingProfilesParameters extends IStandardParamet
     page?: number;
 }
 export declare class ShippingTemplate {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Creates a new ShippingTemplate
      */
-    static createShippingTemplate<TResult>(parameters: ICreateShippingTemplateParameters, options?: IOptions): Promise<IStandardResponse<ICreateShippingTemplateParameters, TResult>>;
+    createShippingTemplate(parameters: ICreateShippingTemplateParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a ShippingTemplate by id.
      */
-    static getShippingTemplate<TResult>(parameters: IGetShippingTemplateParameters, options?: IOptions): Promise<IStandardResponse<IGetShippingTemplateParameters, TResult>>;
+    getShippingTemplate(parameters: IGetShippingTemplateParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Updates a ShippingTemplate
      */
-    static updateShippingTemplate<TResult>(parameters: IUpdateShippingTemplateParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShippingTemplateParameters, TResult>>;
+    updateShippingTemplate(parameters: IUpdateShippingTemplateParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Deletes the ShippingTemplate with the given id.
      */
-    static deleteShippingTemplate<TResult>(parameters: IDeleteShippingTemplateParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShippingTemplateParameters, TResult>>;
+    deleteShippingTemplate(parameters: IDeleteShippingTemplateParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a set of ShippingTemplateEntry objects associated to a ShippingTemplate.
      */
-    static findAllShippingTemplateEntries<TResult>(parameters: IFindAllShippingTemplateEntriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShippingTemplateEntriesParameters, TResult>>;
+    findAllShippingTemplateEntries(parameters: IFindAllShippingTemplateEntriesParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a set of ShippingTemplate objects associated to a User.
      */
-    static findAllUserShippingProfiles<TResult>(parameters: IFindAllUserShippingProfilesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserShippingProfilesParameters, TResult>>;
+    findAllUserShippingProfiles(parameters: IFindAllUserShippingProfilesParameters, options?: IAuthOptions): Promise<any>;
 }

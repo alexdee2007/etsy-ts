@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IUserAddress {
     /**
      * The numeric ID of the user's address.
@@ -70,20 +69,22 @@ export interface IDeleteUserAddressParameters extends IStandardParameters {
     user_address_id: number;
 }
 export declare class UserAddress {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Retrieves a set of UserAddress objects associated to a User.
      */
-    static findAllUserAddresses<TResult>(parameters: IFindAllUserAddressesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserAddressesParameters, TResult>>;
+    findAllUserAddresses(parameters: IFindAllUserAddressesParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Creates a new UserAddress. Note: state is required when the country is US, Canada, or Australia. See section above about valid codes.
      */
-    static createUserAddress<TResult>(parameters: ICreateUserAddressParameters, options?: IOptions): Promise<IStandardResponse<ICreateUserAddressParameters, TResult>>;
+    createUserAddress(parameters: ICreateUserAddressParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a UserAddress by id.
      */
-    static getUserAddress<TResult>(parameters: IGetUserAddressParameters, options?: IOptions): Promise<IStandardResponse<IGetUserAddressParameters, TResult>>;
+    getUserAddress(parameters: IGetUserAddressParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Deletes the UserAddress with the given id.
      */
-    static deleteUserAddress<TResult>(parameters: IDeleteUserAddressParameters, options?: IOptions): Promise<IStandardResponse<IDeleteUserAddressParameters, TResult>>;
+    deleteUserAddress(parameters: IDeleteUserAddressParameters, options?: IAuthOptions): Promise<any>;
 }

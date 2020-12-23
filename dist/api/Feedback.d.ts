@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IFeedback {
     /**
      * The feedback record's numeric ID.
@@ -92,32 +91,34 @@ export interface IFindAllFeedbackFromSellersParameters extends IStandardParamete
     page?: number;
 }
 export declare class Feedback {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    static findAllUserFeedbackAsAuthor<TResult>(parameters: IFindAllUserFeedbackAsAuthorParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsAuthorParameters, TResult>>;
+    findAllUserFeedbackAsAuthor(parameters: IFindAllUserFeedbackAsAuthorParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    static findAllUserFeedbackAsBuyer<TResult>(parameters: IFindAllUserFeedbackAsBuyerParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsBuyerParameters, TResult>>;
+    findAllUserFeedbackAsBuyer(parameters: IFindAllUserFeedbackAsBuyerParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    static findAllUserFeedbackAsSeller<TResult>(parameters: IFindAllUserFeedbackAsSellerParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsSellerParameters, TResult>>;
+    findAllUserFeedbackAsSeller(parameters: IFindAllUserFeedbackAsSellerParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    static findAllUserFeedbackAsSubject<TResult>(parameters: IFindAllUserFeedbackAsSubjectParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsSubjectParameters, TResult>>;
+    findAllUserFeedbackAsSubject(parameters: IFindAllUserFeedbackAsSubjectParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Returns a set of FeedBack objects associated to a User.
      This is essentially the union between the findAllUserFeedbackAsBuyer
      and findAllUserFeedbackAsSubject methods.
      */
-    static findAllFeedbackFromBuyers<TResult>(parameters: IFindAllFeedbackFromBuyersParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeedbackFromBuyersParameters, TResult>>;
+    findAllFeedbackFromBuyers(parameters: IFindAllFeedbackFromBuyersParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Returns a set of FeedBack objects associated to a User.
      This is essentially the union between
      the findAllUserFeedbackAsBuyer and findAllUserFeedbackAsSubject methods.
      */
-    static findAllFeedbackFromSellers<TResult>(parameters: IFindAllFeedbackFromSellersParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeedbackFromSellersParameters, TResult>>;
+    findAllFeedbackFromSellers(parameters: IFindAllFeedbackFromSellersParameters, options?: IAuthOptions): Promise<any>;
 }

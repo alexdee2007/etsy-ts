@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IShop {
     /**
      * The shop's numeric ID.
@@ -255,32 +254,34 @@ export interface IFindAllUserShopsParameters extends IStandardParameters {
     page?: number;
 }
 export declare class Shop {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Finds all Shops.  If there is a keywords parameter, finds shops with shop_name starting with keywords.
      */
-    static findAllShops<TResult>(parameters: IFindAllShopsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopsParameters, TResult>>;
+    findAllShops(parameters: IFindAllShopsParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a Shop by id.
      */
-    static getShop<TResult>(parameters: IGetShopParameters, options?: IOptions): Promise<IStandardResponse<IGetShopParameters, TResult>>;
+    getShop(parameters: IGetShopParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Updates a Shop
      */
-    static updateShop<TResult>(parameters: IUpdateShopParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShopParameters, TResult>>;
+    updateShop(parameters: IUpdateShopParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Upload a new shop banner image
      */
-    static uploadShopBanner<TResult>(parameters: IUploadShopBannerParameters, options?: IOptions): Promise<IStandardResponse<IUploadShopBannerParameters, TResult>>;
+    uploadShopBanner(parameters: IUploadShopBannerParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Deletes a shop banner image
      */
-    static deleteShopBanner<TResult>(parameters: IDeleteShopBannerParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShopBannerParameters, TResult>>;
+    deleteShopBanner(parameters: IDeleteShopBannerParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a shop by a listing id.
      */
-    static getListingShop<TResult>(parameters: IGetListingShopParameters, options?: IOptions): Promise<IStandardResponse<IGetListingShopParameters, TResult>>;
+    getListingShop(parameters: IGetListingShopParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a set of Shop objects associated to a User.
      */
-    static findAllUserShops<TResult>(parameters: IFindAllUserShopsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserShopsParameters, TResult>>;
+    findAllUserShops(parameters: IFindAllUserShopsParameters, options?: IAuthOptions): Promise<any>;
 }

@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IBillPayment {
     /**
      * The numeric ID for this bill payment record.
@@ -44,13 +43,15 @@ export interface IFindAllUserPaymentsParameters extends IStandardParameters {
     offset?: number;
     page?: number;
     user_id: string | number;
-    sort_order?: "up" | "down";
+    sort_order?: 'up' | 'down';
     min_created?: number;
     max_created?: number;
 }
 export declare class BillPayment {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Retrieves a set of BillPayment objects associated to a User.
      */
-    static findAllUserPayments<TResult>(parameters: IFindAllUserPaymentsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserPaymentsParameters, TResult>>;
+    findAllUserPayments(parameters: IFindAllUserPaymentsParameters, options?: IAuthOptions): Promise<any>;
 }

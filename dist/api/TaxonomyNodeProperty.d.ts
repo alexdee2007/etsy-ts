@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface ITaxonomyNodeProperty {
     /**
      * The ID of the property.
@@ -47,8 +46,10 @@ export interface IGetTaxonomyNodePropertiesParameters extends IStandardParameter
     taxonomy_id: number;
 }
 export declare class TaxonomyNodeProperty {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Get the possible properties of a taxonomy node
      */
-    static getTaxonomyNodeProperties<TResult>(parameters: IGetTaxonomyNodePropertiesParameters, options?: IOptions): Promise<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>>;
+    getTaxonomyNodeProperties(parameters: IGetTaxonomyNodePropertiesParameters, options?: IAuthOptions): Promise<any>;
 }

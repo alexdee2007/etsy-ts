@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface ICoupon {
     /**
      * The numeric ID of the coupon
@@ -76,24 +75,26 @@ export interface IDeleteCouponParameters extends IStandardParameters {
     coupon_id: number;
 }
 export declare class Coupon {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Retrieves all Shop_Coupons by shop_id
      */
-    static findAllShopCoupons<TResult>(parameters: IFindAllShopCouponsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopCouponsParameters, TResult>>;
+    findAllShopCoupons(parameters: IFindAllShopCouponsParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Creates a new Coupon. May only have one of free_shipping, pct_discount or fixed_discount
      */
-    static createCoupon<TResult>(parameters: ICreateCouponParameters, options?: IOptions): Promise<IStandardResponse<ICreateCouponParameters, TResult>>;
+    createCoupon(parameters: ICreateCouponParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a Shop_Coupon by id and shop_id
      */
-    static findCoupon<TResult>(parameters: IFindCouponParameters, options?: IOptions): Promise<IStandardResponse<IFindCouponParameters, TResult>>;
+    findCoupon(parameters: IFindCouponParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Updates a coupon
      */
-    static updateCoupon<TResult>(parameters: IUpdateCouponParameters, options?: IOptions): Promise<IStandardResponse<IUpdateCouponParameters, TResult>>;
+    updateCoupon(parameters: IUpdateCouponParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Deletes a coupon
      */
-    static deleteCoupon<TResult>(parameters: IDeleteCouponParameters, options?: IOptions): Promise<IStandardResponse<IDeleteCouponParameters, TResult>>;
+    deleteCoupon(parameters: IDeleteCouponParameters, options?: IAuthOptions): Promise<any>;
 }

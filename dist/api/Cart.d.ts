@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface ICart {
     /**
      * The numeric ID of the cart
@@ -147,48 +146,50 @@ export interface ICreateSingleListingCartParameters extends IStandardParameters 
     personalization?: any;
 }
 export declare class Cart {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Get a user's Carts
      */
-    static getAllUserCarts<TResult>(parameters: IGetAllUserCartsParameters, options?: IOptions): Promise<IStandardResponse<IGetAllUserCartsParameters, TResult>>;
+    getAllUserCarts(parameters: IGetAllUserCartsParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Add a listing to a cart
      */
-    static addToCart<TResult>(parameters: IAddToCartParameters, options?: IOptions): Promise<IStandardResponse<IAddToCartParameters, TResult>>;
+    addToCart(parameters: IAddToCartParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Update a cart listing purchase quantity
      */
-    static updateCartListingQuantity<TResult>(parameters: IUpdateCartListingQuantityParameters, options?: IOptions): Promise<IStandardResponse<IUpdateCartListingQuantityParameters, TResult>>;
+    updateCartListingQuantity(parameters: IUpdateCartListingQuantityParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Remove a listing from a cart
      */
-    static removeCartListing<TResult>(parameters: IRemoveCartListingParameters, options?: IOptions): Promise<IStandardResponse<IRemoveCartListingParameters, TResult>>;
+    removeCartListing(parameters: IRemoveCartListingParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Get a cart
      */
-    static getUserCart<TResult>(parameters: IGetUserCartParameters, options?: IOptions): Promise<IStandardResponse<IGetUserCartParameters, TResult>>;
+    getUserCart(parameters: IGetUserCartParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Update a cart
      */
-    static updateCart<TResult>(parameters: IUpdateCartParameters, options?: IOptions): Promise<IStandardResponse<IUpdateCartParameters, TResult>>;
+    updateCart(parameters: IUpdateCartParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Delete a cart
      */
-    static deleteCart<TResult>(parameters: IDeleteCartParameters, options?: IOptions): Promise<IStandardResponse<IDeleteCartParameters, TResult>>;
+    deleteCart(parameters: IDeleteCartParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Saves and selects a shipping address for apple pay
      */
-    static addAndSelectShippingForApplePay<TResult>(parameters: IAddAndSelectShippingForApplePayParameters, options?: IOptions): Promise<IStandardResponse<IAddAndSelectShippingForApplePayParameters, TResult>>;
+    addAndSelectShippingForApplePay(parameters: IAddAndSelectShippingForApplePayParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Move a listing to Saved for Later
      */
-    static saveListingForLater<TResult>(parameters: ISaveListingForLaterParameters, options?: IOptions): Promise<IStandardResponse<ISaveListingForLaterParameters, TResult>>;
+    saveListingForLater(parameters: ISaveListingForLaterParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Get a cart from a shop ID
      */
-    static getUserCartForShop<TResult>(parameters: IGetUserCartForShopParameters, options?: IOptions): Promise<IStandardResponse<IGetUserCartForShopParameters, TResult>>;
+    getUserCartForShop(parameters: IGetUserCartForShopParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Create a single-listing cart from a listing
      */
-    static createSingleListingCart<TResult>(parameters: ICreateSingleListingCartParameters, options?: IOptions): Promise<IStandardResponse<ICreateSingleListingCartParameters, TResult>>;
+    createSingleListingCart(parameters: ICreateSingleListingCartParameters, options?: IAuthOptions): Promise<any>;
 }

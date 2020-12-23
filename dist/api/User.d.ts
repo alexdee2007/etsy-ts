@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IUser {
     /**
      * The user's numeric ID. This is also valid as the user's shop ID.
@@ -46,7 +45,7 @@ export interface IGetUserParameters extends IStandardParameters {
 }
 export interface IFindAllUsersForTeamParameters extends IStandardParameters {
     team_id: number;
-    status?: "active" | "invited" | "pending";
+    status?: 'active' | 'invited' | 'pending';
     limit?: number;
     offset?: number;
     page?: number;
@@ -79,36 +78,38 @@ export interface IConnectUsersParameters extends IStandardParameters {
     to_user_id: string | number;
 }
 export declare class User {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Finds all Users whose name or username match the keywords parameter.
      */
-    static findAllUsers<TResult>(parameters: IFindAllUsersParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUsersParameters, TResult>>;
+    findAllUsers(parameters: IFindAllUsersParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a User by id.
      */
-    static getUser<TResult>(parameters: IGetUserParameters, options?: IOptions): Promise<IStandardResponse<IGetUserParameters, TResult>>;
+    getUser(parameters: IGetUserParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Returns a list of users for a specific team
      */
-    static findAllUsersForTeam<TResult>(parameters: IFindAllUsersForTeamParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUsersForTeamParameters, TResult>>;
+    findAllUsersForTeam(parameters: IFindAllUsersForTeamParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Returns a list of users who have circled this user
      */
-    static getCirclesContainingUser<TResult>(parameters: IGetCirclesContainingUserParameters, options?: IOptions): Promise<IStandardResponse<IGetCirclesContainingUserParameters, TResult>>;
+    getCirclesContainingUser(parameters: IGetCirclesContainingUserParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Returns details about a connection between users
      */
-    static getConnectedUser<TResult>(parameters: IGetConnectedUserParameters, options?: IOptions): Promise<IStandardResponse<IGetConnectedUserParameters, TResult>>;
+    getConnectedUser(parameters: IGetConnectedUserParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Removes a user (to_user_id) from the logged in user's (user_id) circle
      */
-    static unconnectUsers<TResult>(parameters: IUnconnectUsersParameters, options?: IOptions): Promise<IStandardResponse<IUnconnectUsersParameters, TResult>>;
+    unconnectUsers(parameters: IUnconnectUsersParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Returns a list of users that are in this user's cricle
      */
-    static getConnectedUsers<TResult>(parameters: IGetConnectedUsersParameters, options?: IOptions): Promise<IStandardResponse<IGetConnectedUsersParameters, TResult>>;
+    getConnectedUsers(parameters: IGetConnectedUsersParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Adds user (to_user_id) to the user's (user_id) circle
      */
-    static connectUsers<TResult>(parameters: IConnectUsersParameters, options?: IOptions): Promise<IStandardResponse<IConnectUsersParameters, TResult>>;
+    connectUsers(parameters: IConnectUsersParameters, options?: IAuthOptions): Promise<any>;
 }

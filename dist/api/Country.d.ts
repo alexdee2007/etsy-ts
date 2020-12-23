@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface ICountry {
     /**
      * The country's numeric ID.
@@ -43,16 +42,18 @@ export interface IFindByIsoCodeParameters extends IStandardParameters {
     iso_code: string;
 }
 export declare class Country {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Finds all Country.
      */
-    static findAllCountry<TResult>(parameters: IFindAllCountryParameters, options?: IOptions): Promise<IStandardResponse<IFindAllCountryParameters, TResult>>;
+    findAllCountry(parameters: IFindAllCountryParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a Country by id.
      */
-    static getCountry<TResult>(parameters: IGetCountryParameters, options?: IOptions): Promise<IStandardResponse<IGetCountryParameters, TResult>>;
+    getCountry(parameters: IGetCountryParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Get the country info for the given ISO code.
      */
-    static findByIsoCode<TResult>(parameters: IFindByIsoCodeParameters, options?: IOptions): Promise<IStandardResponse<IFindByIsoCodeParameters, TResult>>;
+    findByIsoCode(parameters: IFindByIsoCodeParameters, options?: IAuthOptions): Promise<any>;
 }

@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface ITaxonomy {
     /**
      * The unique ID of this taxonomy node.
@@ -50,16 +49,18 @@ export interface IGetSellerTaxonomyParameters extends IStandardParameters {
 export interface IGetSellerTaxonomyVersionParameters extends IStandardParameters {
 }
 export declare class Taxonomy {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Retrieve the entire taxonomy as seen by buyers in search.
      */
-    static getBuyerTaxonomy<TResult>(parameters: IGetBuyerTaxonomyParameters, options?: IOptions): Promise<IStandardResponse<IGetBuyerTaxonomyParameters, TResult>>;
+    getBuyerTaxonomy(parameters: IGetBuyerTaxonomyParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieve the entire taxonomy as used by sellers in the listing process.
      */
-    static getSellerTaxonomy<TResult>(parameters: IGetSellerTaxonomyParameters, options?: IOptions): Promise<IStandardResponse<IGetSellerTaxonomyParameters, TResult>>;
+    getSellerTaxonomy(parameters: IGetSellerTaxonomyParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Get the current version of the seller taxonomy
      */
-    static getSellerTaxonomyVersion<TResult>(parameters: IGetSellerTaxonomyVersionParameters, options?: IOptions): Promise<IStandardResponse<IGetSellerTaxonomyVersionParameters, TResult>>;
+    getSellerTaxonomyVersion(parameters: IGetSellerTaxonomyVersionParameters, options?: IAuthOptions): Promise<any>;
 }

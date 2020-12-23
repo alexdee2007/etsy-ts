@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IShopSectionTranslation {
     /**
      * The numeric ID for the ShopSection.
@@ -38,20 +37,22 @@ export interface IDeleteShopSectionTranslationParameters extends IStandardParame
     language: string;
 }
 export declare class ShopSectionTranslation {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Retrieves a ShopSectionTranslation by shop_id, shop_section_id and language
      */
-    static getShopSectionTranslation<TResult>(parameters: IGetShopSectionTranslationParameters, options?: IOptions): Promise<IStandardResponse<IGetShopSectionTranslationParameters, TResult>>;
+    getShopSectionTranslation(parameters: IGetShopSectionTranslationParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Creates a ShopSectionTranslation by shop_id, shop_section_id and language
      */
-    static createShopSectionTranslation<TResult>(parameters: ICreateShopSectionTranslationParameters, options?: IOptions): Promise<IStandardResponse<ICreateShopSectionTranslationParameters, TResult>>;
+    createShopSectionTranslation(parameters: ICreateShopSectionTranslationParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Updates a ShopSectionTranslation by shop_id, shop_section_id and language
      */
-    static updateShopSectionTranslation<TResult>(parameters: IUpdateShopSectionTranslationParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShopSectionTranslationParameters, TResult>>;
+    updateShopSectionTranslation(parameters: IUpdateShopSectionTranslationParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Deletes a ShopSectionTranslation by shop_id, shop_section_id and language
      */
-    static deleteShopSectionTranslation<TResult>(parameters: IDeleteShopSectionTranslationParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShopSectionTranslationParameters, TResult>>;
+    deleteShopSectionTranslation(parameters: IDeleteShopSectionTranslationParameters, options?: IAuthOptions): Promise<any>;
 }

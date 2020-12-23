@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IShopTranslation {
     /**
      * The numeric ID for the Shop.
@@ -104,20 +103,22 @@ export interface IDeleteShopTranslationParameters extends IStandardParameters {
     language: string;
 }
 export declare class ShopTranslation {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Retrieves a ShopTranslation by shop_id and language
      */
-    static getShopTranslation<TResult>(parameters: IGetShopTranslationParameters, options?: IOptions): Promise<IStandardResponse<IGetShopTranslationParameters, TResult>>;
+    getShopTranslation(parameters: IGetShopTranslationParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Creates a ShopTranslation by shop_id and language
      */
-    static createShopTranslation<TResult>(parameters: ICreateShopTranslationParameters, options?: IOptions): Promise<IStandardResponse<ICreateShopTranslationParameters, TResult>>;
+    createShopTranslation(parameters: ICreateShopTranslationParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Updates a ShopTranslation by shop_id and language
      */
-    static updateShopTranslation<TResult>(parameters: IUpdateShopTranslationParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShopTranslationParameters, TResult>>;
+    updateShopTranslation(parameters: IUpdateShopTranslationParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Deletes a ShopTranslation by shop_id and language
      */
-    static deleteShopTranslation<TResult>(parameters: IDeleteShopTranslationParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShopTranslationParameters, TResult>>;
+    deleteShopTranslation(parameters: IDeleteShopTranslationParameters, options?: IAuthOptions): Promise<any>;
 }

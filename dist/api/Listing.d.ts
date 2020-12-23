@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IListing {
     /**
      * The listing's numeric ID.
@@ -123,7 +122,7 @@ export interface IListing {
     /**
      * Who made the item being listed.
      */
-    who_made: "i_did" | "collective" | "someone_else";
+    who_made: 'i_did' | 'collective' | 'someone_else';
     /**
      * True if the listing is a supply.
      */
@@ -131,7 +130,7 @@ export interface IListing {
     /**
      * When was the item made.
      */
-    when_made: "made_to_order" | "2020_2020" | "2010_2019" | "2001_2009" | "before_2001" | "2000_2000" | "1990s" | "1980s" | "1970s" | "1960s" | "1950s" | "1940s" | "1930s" | "1920s" | "1910s" | "1900s" | "1800s" | "1700s" | "before_1700";
+    when_made: 'made_to_order' | '2020_2020' | '2010_2019' | '2001_2009' | 'before_2001' | '2000_2000' | '1990s' | '1980s' | '1970s' | '1960s' | '1950s' | '1940s' | '1930s' | '1920s' | '1910s' | '1900s' | '1800s' | '1700s' | 'before_1700';
     /**
      * How much the item weighs.
      */
@@ -139,7 +138,7 @@ export interface IListing {
     /**
      * The units used to represent the weight of this item.
      */
-    item_weight_unit: "oz" | "lb" | "g" | "kg";
+    item_weight_unit: 'oz' | 'lb' | 'g' | 'kg';
     /**
      * How long the item is.
      */
@@ -155,7 +154,7 @@ export interface IListing {
     /**
      * The units used to represent the dimensions of this item.
      */
-    item_dimensions_unit: "in" | "ft" | "mm" | "cm" | "m";
+    item_dimensions_unit: 'in' | 'ft' | 'mm' | 'cm' | 'm';
     /**
      * Is this listing a private listing that is intendend for a specific buyer and hidden from shop view.Note: This field is experimental and may change at any time.
      */
@@ -163,11 +162,11 @@ export interface IListing {
     /**
      * Who is this listing for.
      */
-    recipient: "men" | "women" | "unisex_adults" | "teen_boys" | "teen_girls" | "teens" | "boys" | "girls" | "children" | "baby_boys" | "baby_girls" | "babies" | "birds" | "cats" | "dogs" | "pets" | "not_specified";
+    recipient: 'men' | 'women' | 'unisex_adults' | 'teen_boys' | 'teen_girls' | 'teens' | 'boys' | 'girls' | 'children' | 'baby_boys' | 'baby_girls' | 'babies' | 'birds' | 'cats' | 'dogs' | 'pets' | 'not_specified';
     /**
      * What is the occasion for this listing.
      */
-    occasion: "anniversary" | "baptism" | "bar_or_bat_mitzvah" | "birthday" | "canada_day" | "chinese_new_year" | "cinco_de_mayo" | "confirmation" | "christmas" | "day_of_the_dead" | "easter" | "eid" | "engagement" | "fathers_day" | "get_well" | "graduation" | "halloween" | "hanukkah" | "housewarming" | "kwanzaa" | "prom" | "july_4th" | "mothers_day" | "new_baby" | "new_years" | "quinceanera" | "retirement" | "st_patricks_day" | "sweet_16" | "sympathy" | "thanksgiving" | "valentines" | "wedding";
+    occasion: 'anniversary' | 'baptism' | 'bar_or_bat_mitzvah' | 'birthday' | 'canada_day' | 'chinese_new_year' | 'cinco_de_mayo' | 'confirmation' | 'christmas' | 'day_of_the_dead' | 'easter' | 'eid' | 'engagement' | 'fathers_day' | 'get_well' | 'graduation' | 'halloween' | 'hanukkah' | 'housewarming' | 'kwanzaa' | 'prom' | 'july_4th' | 'mothers_day' | 'new_baby' | 'new_years' | 'quinceanera' | 'retirement' | 'st_patricks_day' | 'sweet_16' | 'sympathy' | 'thanksgiving' | 'valentines' | 'wedding';
     /**
      * Style of this listing. Each style is a free-form text string such as "Formal", or "Steampunk". A Listing may have up to two styles. A style is valid if it does not match the pattern: /[^\p{L}\p{Nd}\p{Zs}]/u
      */
@@ -218,15 +217,15 @@ export interface ICreateListingParameters extends IStandardParameters {
     is_customizable?: boolean;
     non_taxable?: boolean;
     image?: string;
-    state?: "active" | "draft";
+    state?: 'active' | 'draft';
     processing_min?: number;
     processing_max?: number;
     tags?: string[];
-    who_made: "i_did" | "collective" | "someone_else";
+    who_made: 'i_did' | 'collective' | 'someone_else';
     is_supply: boolean;
-    when_made: "made_to_order" | "2020_2020" | "2010_2019" | "2001_2009" | "before_2001" | "2000_2000" | "1990s" | "1980s" | "1970s" | "1960s" | "1950s" | "1940s" | "1930s" | "1920s" | "1910s" | "1900s" | "1800s" | "1700s" | "before_1700";
-    recipient?: "men" | "women" | "unisex_adults" | "teen_boys" | "teen_girls" | "teens" | "boys" | "girls" | "children" | "baby_boys" | "baby_girls" | "babies" | "birds" | "cats" | "dogs" | "pets" | "not_specified";
-    occasion?: "anniversary" | "baptism" | "bar_or_bat_mitzvah" | "birthday" | "canada_day" | "chinese_new_year" | "cinco_de_mayo" | "confirmation" | "christmas" | "day_of_the_dead" | "easter" | "eid" | "engagement" | "fathers_day" | "get_well" | "graduation" | "halloween" | "hanukkah" | "housewarming" | "kwanzaa" | "prom" | "july_4th" | "mothers_day" | "new_baby" | "new_years" | "quinceanera" | "retirement" | "st_patricks_day" | "sweet_16" | "sympathy" | "thanksgiving" | "valentines" | "wedding";
+    when_made: 'made_to_order' | '2020_2020' | '2010_2019' | '2001_2009' | 'before_2001' | '2000_2000' | '1990s' | '1980s' | '1970s' | '1960s' | '1950s' | '1940s' | '1930s' | '1920s' | '1910s' | '1900s' | '1800s' | '1700s' | 'before_1700';
+    recipient?: 'men' | 'women' | 'unisex_adults' | 'teen_boys' | 'teen_girls' | 'teens' | 'boys' | 'girls' | 'children' | 'baby_boys' | 'baby_girls' | 'babies' | 'birds' | 'cats' | 'dogs' | 'pets' | 'not_specified';
+    occasion?: 'anniversary' | 'baptism' | 'bar_or_bat_mitzvah' | 'birthday' | 'canada_day' | 'chinese_new_year' | 'cinco_de_mayo' | 'confirmation' | 'christmas' | 'day_of_the_dead' | 'easter' | 'eid' | 'engagement' | 'fathers_day' | 'get_well' | 'graduation' | 'halloween' | 'hanukkah' | 'housewarming' | 'kwanzaa' | 'prom' | 'july_4th' | 'mothers_day' | 'new_baby' | 'new_years' | 'quinceanera' | 'retirement' | 'st_patricks_day' | 'sweet_16' | 'sympathy' | 'thanksgiving' | 'valentines' | 'wedding';
     style?: string[];
 }
 export interface IFindAllFeaturedListingsParameters extends IStandardParameters {
@@ -246,7 +245,7 @@ export interface IUpdateListingParameters extends IStandardParameters {
     renew?: boolean;
     shipping_template_id?: number;
     shop_section_id?: number;
-    state?: "active" | "inactive" | "draft";
+    state?: 'active' | 'inactive' | 'draft';
     image_ids?: number[];
     is_customizable?: boolean;
     item_weight?: number;
@@ -258,11 +257,11 @@ export interface IUpdateListingParameters extends IStandardParameters {
     non_taxable?: boolean;
     taxonomy_id?: number;
     tags?: string[];
-    who_made?: "i_did" | "collective" | "someone_else";
+    who_made?: 'i_did' | 'collective' | 'someone_else';
     is_supply?: boolean;
-    when_made?: "made_to_order" | "2020_2020" | "2010_2019" | "2001_2009" | "before_2001" | "2000_2000" | "1990s" | "1980s" | "1970s" | "1960s" | "1950s" | "1940s" | "1930s" | "1920s" | "1910s" | "1900s" | "1800s" | "1700s" | "before_1700";
-    recipient?: "men" | "women" | "unisex_adults" | "teen_boys" | "teen_girls" | "teens" | "boys" | "girls" | "children" | "baby_boys" | "baby_girls" | "babies" | "birds" | "cats" | "dogs" | "pets" | "not_specified";
-    occasion?: "anniversary" | "baptism" | "bar_or_bat_mitzvah" | "birthday" | "canada_day" | "chinese_new_year" | "cinco_de_mayo" | "confirmation" | "christmas" | "day_of_the_dead" | "easter" | "eid" | "engagement" | "fathers_day" | "get_well" | "graduation" | "halloween" | "hanukkah" | "housewarming" | "kwanzaa" | "prom" | "july_4th" | "mothers_day" | "new_baby" | "new_years" | "quinceanera" | "retirement" | "st_patricks_day" | "sweet_16" | "sympathy" | "thanksgiving" | "valentines" | "wedding";
+    when_made?: 'made_to_order' | '2020_2020' | '2010_2019' | '2001_2009' | 'before_2001' | '2000_2000' | '1990s' | '1980s' | '1970s' | '1960s' | '1950s' | '1940s' | '1930s' | '1920s' | '1910s' | '1900s' | '1800s' | '1700s' | 'before_1700';
+    recipient?: 'men' | 'women' | 'unisex_adults' | 'teen_boys' | 'teen_girls' | 'teens' | 'boys' | 'girls' | 'children' | 'baby_boys' | 'baby_girls' | 'babies' | 'birds' | 'cats' | 'dogs' | 'pets' | 'not_specified';
+    occasion?: 'anniversary' | 'baptism' | 'bar_or_bat_mitzvah' | 'birthday' | 'canada_day' | 'chinese_new_year' | 'cinco_de_mayo' | 'confirmation' | 'christmas' | 'day_of_the_dead' | 'easter' | 'eid' | 'engagement' | 'fathers_day' | 'get_well' | 'graduation' | 'halloween' | 'hanukkah' | 'housewarming' | 'kwanzaa' | 'prom' | 'july_4th' | 'mothers_day' | 'new_baby' | 'new_years' | 'quinceanera' | 'retirement' | 'st_patricks_day' | 'sweet_16' | 'sympathy' | 'thanksgiving' | 'valentines' | 'wedding';
     style?: string[];
     processing_min?: number;
     processing_max?: number;
@@ -276,8 +275,8 @@ export interface IFindAllListingActiveParameters extends IStandardParameters {
     offset?: number;
     page?: number;
     keywords?: string;
-    sort_on?: "created" | "price" | "score";
-    sort_order?: "up" | "down";
+    sort_on?: 'created' | 'price' | 'score';
+    sort_order?: 'up' | 'down';
     min_price?: number;
     max_price?: number;
     color?: string;
@@ -288,7 +287,7 @@ export interface IFindAllListingActiveParameters extends IStandardParameters {
     lat?: number;
     lon?: number;
     region?: string;
-    geo_level?: "city" | "state" | "country";
+    geo_level?: 'city' | 'state' | 'country';
     accepts_gift_cards?: boolean;
     translate_keywords?: boolean;
 }
@@ -323,8 +322,8 @@ export interface IFindAllShopListingsActiveParameters extends IStandardParameter
     page?: number;
     shop_id: string | number;
     keywords?: string;
-    sort_on?: "created" | "price" | "score";
-    sort_order?: "up" | "down";
+    sort_on?: 'created' | 'price' | 'score';
+    sort_order?: 'up' | 'down';
     min_price?: number;
     max_price?: number;
     color?: string;
@@ -379,100 +378,102 @@ export interface IFindAllShopSectionListingsActiveParameters extends IStandardPa
     page?: number;
     shop_id: string | number;
     shop_section_id: number[];
-    sort_on?: "created" | "price";
-    sort_order?: "up" | "down";
+    sort_on?: 'created' | 'price';
+    sort_order?: 'up' | 'down';
 }
 export interface IFindAllCartListingsParameters extends IStandardParameters {
     user_id: string | number;
     cart_id: string | number;
 }
 export declare class Listing {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Creates a new Listing.
      */
-    static createListing<TResult>(parameters: ICreateListingParameters, options?: IOptions): Promise<IStandardResponse<ICreateListingParameters, TResult>>;
+    createListing(parameters: ICreateListingParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Finds all FeaturedTreasury listings.
      */
-    static findAllFeaturedListings<TResult>(parameters: IFindAllFeaturedListingsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeaturedListingsParameters, TResult>>;
+    findAllFeaturedListings(parameters: IFindAllFeaturedListingsParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a Listing by id.
      */
-    static getListing<TResult>(parameters: IGetListingParameters, options?: IOptions): Promise<IStandardResponse<IGetListingParameters, TResult>>;
+    getListing(parameters: IGetListingParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Updates a Listing
      */
-    static updateListing<TResult>(parameters: IUpdateListingParameters, options?: IOptions): Promise<IStandardResponse<IUpdateListingParameters, TResult>>;
+    updateListing(parameters: IUpdateListingParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Deletes a Listing
      */
-    static deleteListing<TResult>(parameters: IDeleteListingParameters, options?: IOptions): Promise<IStandardResponse<IDeleteListingParameters, TResult>>;
+    deleteListing(parameters: IDeleteListingParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Finds all active Listings. (Note: the sort_on and sort_order options only work when combined with one of the search options: keywords, color, tags, location, etc.)
      */
-    static findAllListingActive<TResult>(parameters: IFindAllListingActiveParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingActiveParameters, TResult>>;
+    findAllListingActive(parameters: IFindAllListingActiveParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Collects the list of interesting listings
      */
-    static getInterestingListings<TResult>(parameters: IGetInterestingListingsParameters, options?: IOptions): Promise<IStandardResponse<IGetInterestingListingsParameters, TResult>>;
+    getInterestingListings(parameters: IGetInterestingListingsParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Collects the list of listings used to generate the trending listing page
      */
-    static getTrendingListings<TResult>(parameters: IGetTrendingListingsParameters, options?: IOptions): Promise<IStandardResponse<IGetTrendingListingsParameters, TResult>>;
+    getTrendingListings(parameters: IGetTrendingListingsParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Finds all listings for a certain FeaturedTreasury.
      */
-    static findAllListingsForFeaturedTreasuryId<TResult>(parameters: IFindAllListingsForFeaturedTreasuryIdParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingsForFeaturedTreasuryIdParameters, TResult>>;
+    findAllListingsForFeaturedTreasuryId(parameters: IFindAllListingsForFeaturedTreasuryIdParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Finds all active listings for a certain FeaturedTreasury.
      */
-    static findAllActiveListingsForFeaturedTreasuryId<TResult>(parameters: IFindAllActiveListingsForFeaturedTreasuryIdParameters, options?: IOptions): Promise<IStandardResponse<IFindAllActiveListingsForFeaturedTreasuryIdParameters, TResult>>;
+    findAllActiveListingsForFeaturedTreasuryId(parameters: IFindAllActiveListingsForFeaturedTreasuryIdParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Finds FeaturedTreasury listings that are currently displayed on a regional homepage.
      */
-    static findAllCurrentFeaturedListings<TResult>(parameters: IFindAllCurrentFeaturedListingsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllCurrentFeaturedListingsParameters, TResult>>;
+    findAllCurrentFeaturedListings(parameters: IFindAllCurrentFeaturedListingsParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Finds all listings in a receipt
      */
-    static findAllReceiptListings<TResult>(parameters: IFindAllReceiptListingsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllReceiptListingsParameters, TResult>>;
+    findAllReceiptListings(parameters: IFindAllReceiptListingsParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Finds all active Listings associated with a Shop.(NOTE: If calling on behalf of a shop owner in the context of listing management, be sure to include the parameter include_private = true.  This will return private listings that are not publicly visible in the shop, but which can be managed.  This is an experimental feature and may change.)
      */
-    static findAllShopListingsActive<TResult>(parameters: IFindAllShopListingsActiveParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopListingsActiveParameters, TResult>>;
+    findAllShopListingsActive(parameters: IFindAllShopListingsActiveParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Finds all of a Shop's draft listings
      */
-    static findAllShopListingsDraft<TResult>(parameters: IFindAllShopListingsDraftParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopListingsDraftParameters, TResult>>;
+    findAllShopListingsDraft(parameters: IFindAllShopListingsDraftParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves Listings associated to a Shop that are expired
      */
-    static findAllShopListingsExpired<TResult>(parameters: IFindAllShopListingsExpiredParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopListingsExpiredParameters, TResult>>;
+    findAllShopListingsExpired(parameters: IFindAllShopListingsExpiredParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a Listing associated to a Shop that is inactive
      */
-    static getShopListingExpired<TResult>(parameters: IGetShopListingExpiredParameters, options?: IOptions): Promise<IStandardResponse<IGetShopListingExpiredParameters, TResult>>;
+    getShopListingExpired(parameters: IGetShopListingExpiredParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves Listings associated to a Shop that are featured
      */
-    static findAllShopListingsFeatured<TResult>(parameters: IFindAllShopListingsFeaturedParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopListingsFeaturedParameters, TResult>>;
+    findAllShopListingsFeatured(parameters: IFindAllShopListingsFeaturedParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves Listings associated to a Shop that are inactive
      */
-    static findAllShopListingsInactive<TResult>(parameters: IFindAllShopListingsInactiveParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopListingsInactiveParameters, TResult>>;
+    findAllShopListingsInactive(parameters: IFindAllShopListingsInactiveParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a Listing associated to a Shop that is inactive
      */
-    static getShopListingInactive<TResult>(parameters: IGetShopListingInactiveParameters, options?: IOptions): Promise<IStandardResponse<IGetShopListingInactiveParameters, TResult>>;
+    getShopListingInactive(parameters: IGetShopListingInactiveParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Finds all listings within a shop section
      */
-    static findAllShopSectionListings<TResult>(parameters: IFindAllShopSectionListingsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopSectionListingsParameters, TResult>>;
+    findAllShopSectionListings(parameters: IFindAllShopSectionListingsParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Finds all listings within a shop section
      */
-    static findAllShopSectionListingsActive<TResult>(parameters: IFindAllShopSectionListingsActiveParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopSectionListingsActiveParameters, TResult>>;
+    findAllShopSectionListingsActive(parameters: IFindAllShopSectionListingsActiveParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Finds all listings in a given Cart
      */
-    static findAllCartListings<TResult>(parameters: IFindAllCartListingsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllCartListingsParameters, TResult>>;
+    findAllCartListings(parameters: IFindAllCartListingsParameters, options?: IAuthOptions): Promise<any>;
 }

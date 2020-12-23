@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IBillingOverview {
     /**
      * True if the user has an overdue balance.
@@ -38,8 +37,10 @@ export interface IGetUserBillingOverviewParameters extends IStandardParameters {
     user_id: string | number;
 }
 export declare class BillingOverview {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Retrieves the user's current balance.
      */
-    static getUserBillingOverview<TResult>(parameters: IGetUserBillingOverviewParameters, options?: IOptions): Promise<IStandardResponse<IGetUserBillingOverviewParameters, TResult>>;
+    getUserBillingOverview(parameters: IGetUserBillingOverviewParameters, options?: IAuthOptions): Promise<any>;
 }

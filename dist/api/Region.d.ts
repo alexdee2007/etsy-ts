@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IRegion {
     /**
      * The numeric ID of this region.
@@ -23,16 +22,18 @@ export interface IGetRegionParameters extends IStandardParameters {
 export interface IFindEligibleRegionsParameters extends IStandardParameters {
 }
 export declare class Region {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Finds all Region.
      */
-    static findAllRegion<TResult>(parameters: IFindAllRegionParameters, options?: IOptions): Promise<IStandardResponse<IFindAllRegionParameters, TResult>>;
+    findAllRegion(parameters: IFindAllRegionParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a Region by id.
      */
-    static getRegion<TResult>(parameters: IGetRegionParameters, options?: IOptions): Promise<IStandardResponse<IGetRegionParameters, TResult>>;
+    getRegion(parameters: IGetRegionParameters, options?: IAuthOptions): Promise<any>;
     /**
      *
      */
-    static findEligibleRegions<TResult>(parameters: IFindEligibleRegionsParameters, options?: IOptions): Promise<IStandardResponse<IFindEligibleRegionsParameters, TResult>>;
+    findEligibleRegions(parameters: IFindEligibleRegionsParameters, options?: IAuthOptions): Promise<any>;
 }

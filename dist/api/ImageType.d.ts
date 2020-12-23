@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IImageType {
     /**
      * Code for this image type, used in image URLs
@@ -18,8 +17,10 @@ export interface IImageType {
 export interface IListImageTypesParameters extends IStandardParameters {
 }
 export declare class ImageType {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Lists available image types along with their supported sizes.
      */
-    static listImageTypes<TResult>(parameters: IListImageTypesParameters, options?: IOptions): Promise<IStandardResponse<IListImageTypesParameters, TResult>>;
+    listImageTypes(parameters: IListImageTypesParameters, options?: IAuthOptions): Promise<any>;
 }

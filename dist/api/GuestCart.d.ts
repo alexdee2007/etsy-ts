@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IGuestCart {
     /**
      * The numeric ID of the cart
@@ -117,32 +116,34 @@ export interface IDeleteGuestCartParameters extends IStandardParameters {
     cart_id: string | number;
 }
 export declare class GuestCart {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Get all guest's carts
      */
-    static findAllGuestCarts<TResult>(parameters: IFindAllGuestCartsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllGuestCartsParameters, TResult>>;
+    findAllGuestCarts(parameters: IFindAllGuestCartsParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Add a listing to guest's cart
      */
-    static addToGuestCart<TResult>(parameters: IAddToGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IAddToGuestCartParameters, TResult>>;
+    addToGuestCart(parameters: IAddToGuestCartParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Update a guest's cart listing purchase quantity
      */
-    static updateGuestCartListingQuantity<TResult>(parameters: IUpdateGuestCartListingQuantityParameters, options?: IOptions): Promise<IStandardResponse<IUpdateGuestCartListingQuantityParameters, TResult>>;
+    updateGuestCartListingQuantity(parameters: IUpdateGuestCartListingQuantityParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Remove a listing from a guest's cart
      */
-    static removeGuestCartListing<TResult>(parameters: IRemoveGuestCartListingParameters, options?: IOptions): Promise<IStandardResponse<IRemoveGuestCartListingParameters, TResult>>;
+    removeGuestCartListing(parameters: IRemoveGuestCartListingParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Get a guest's cart
      */
-    static findGuestCart<TResult>(parameters: IFindGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IFindGuestCartParameters, TResult>>;
+    findGuestCart(parameters: IFindGuestCartParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Update a guest's cart
      */
-    static updateGuestCart<TResult>(parameters: IUpdateGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IUpdateGuestCartParameters, TResult>>;
+    updateGuestCart(parameters: IUpdateGuestCartParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Delete a guest's cart
      */
-    static deleteGuestCart<TResult>(parameters: IDeleteGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IDeleteGuestCartParameters, TResult>>;
+    deleteGuestCart(parameters: IDeleteGuestCartParameters, options?: IAuthOptions): Promise<any>;
 }

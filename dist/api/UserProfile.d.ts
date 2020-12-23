@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IUserProfile {
     /**
      @deprecated
@@ -117,12 +116,14 @@ export interface IUpdateUserProfileParameters extends IStandardParameters {
     city?: string;
 }
 export declare class UserProfile {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Returns the UserProfile object associated with a User.
      */
-    static findUserProfile<TResult>(parameters: IFindUserProfileParameters, options?: IOptions): Promise<IStandardResponse<IFindUserProfileParameters, TResult>>;
+    findUserProfile(parameters: IFindUserProfileParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Updates the UserProfile object associated with a User. Notes:Name changes are subject to admin review and therefore unavailable via the API.Materials must be provided as a period-separated list of ASCII words.
      */
-    static updateUserProfile<TResult>(parameters: IUpdateUserProfileParameters, options?: IOptions): Promise<IStandardResponse<IUpdateUserProfileParameters, TResult>>;
+    updateUserProfile(parameters: IUpdateUserProfileParameters, options?: IAuthOptions): Promise<any>;
 }

@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IFavoriteListing {
     /**
      * The listings numeric ID.
@@ -44,24 +43,26 @@ export interface IDeleteUserFavoriteListingsParameters extends IStandardParamete
     listing_id: number;
 }
 export declare class FavoriteListing {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Retrieves a set of FavoriteListing objects associated to a Listing.
      */
-    static findAllListingFavoredBy<TResult>(parameters: IFindAllListingFavoredByParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingFavoredByParameters, TResult>>;
+    findAllListingFavoredBy(parameters: IFindAllListingFavoredByParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Finds all favorite listings for a user
      */
-    static findAllUserFavoriteListings<TResult>(parameters: IFindAllUserFavoriteListingsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFavoriteListingsParameters, TResult>>;
+    findAllUserFavoriteListings(parameters: IFindAllUserFavoriteListingsParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Finds a favorite listing for a user
      */
-    static findUserFavoriteListings<TResult>(parameters: IFindUserFavoriteListingsParameters, options?: IOptions): Promise<IStandardResponse<IFindUserFavoriteListingsParameters, TResult>>;
+    findUserFavoriteListings(parameters: IFindUserFavoriteListingsParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Creates a new favorite listing for a user
      */
-    static createUserFavoriteListings<TResult>(parameters: ICreateUserFavoriteListingsParameters, options?: IOptions): Promise<IStandardResponse<ICreateUserFavoriteListingsParameters, TResult>>;
+    createUserFavoriteListings(parameters: ICreateUserFavoriteListingsParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Delete a favorite listing for a user
      */
-    static deleteUserFavoriteListings<TResult>(parameters: IDeleteUserFavoriteListingsParameters, options?: IOptions): Promise<IStandardResponse<IDeleteUserFavoriteListingsParameters, TResult>>;
+    deleteUserFavoriteListings(parameters: IDeleteUserFavoriteListingsParameters, options?: IAuthOptions): Promise<any>;
 }

@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IPaymentAdjustment {
     /**
      * The payment adjustment's numeric ID.
@@ -70,20 +69,22 @@ export interface IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters ex
     ledger_entry_id: number[];
 }
 export declare class PaymentAdjustment {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Get a Payment Adjustments from a Payment Id
      */
-    static findPaymentAdjustments<TResult>(parameters: IFindPaymentAdjustmentsParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentsParameters, TResult>>;
+    findPaymentAdjustments(parameters: IFindPaymentAdjustmentsParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Get an Etsy Payments Transaction Adjustment
      */
-    static findPaymentAdjustment<TResult>(parameters: IFindPaymentAdjustmentParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentParameters, TResult>>;
+    findPaymentAdjustment(parameters: IFindPaymentAdjustmentParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Get a Payment Adjustment from a Ledger Entry ID, if applicable
      */
-    static findPaymentAdjustmentForLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>>;
+    findPaymentAdjustmentForLedgerEntry(parameters: IFindPaymentAdjustmentForLedgerEntryParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Get a Payment Adjustment from a Payment Account Ledger Entry ID, if applicable
      */
-    static findPaymentAdjustmentForPaymentAccountLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, TResult>>;
+    findPaymentAdjustmentForPaymentAccountLedgerEntry(parameters: IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, options?: IAuthOptions): Promise<any>;
 }

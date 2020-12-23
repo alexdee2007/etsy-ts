@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IListingVariationImage {
     /**
      * The variation images on a listing. An array with inputs for the property_id, value_id, and image_id fields.
@@ -15,12 +14,14 @@ export interface IUpdateVariationImagesParameters extends IStandardParameters {
     variation_images: any;
 }
 export declare class ListingVariationImage {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Gets all variation images on a listing
      */
-    static getVariationImages<TResult>(parameters: IGetVariationImagesParameters, options?: IOptions): Promise<IStandardResponse<IGetVariationImagesParameters, TResult>>;
+    getVariationImages(parameters: IGetVariationImagesParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Creates variation images on a listing
      */
-    static updateVariationImages<TResult>(parameters: IUpdateVariationImagesParameters, options?: IOptions): Promise<IStandardResponse<IUpdateVariationImagesParameters, TResult>>;
+    updateVariationImages(parameters: IUpdateVariationImagesParameters, options?: IAuthOptions): Promise<any>;
 }

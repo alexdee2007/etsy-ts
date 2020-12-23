@@ -1,20 +1,35 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserProfile = void 0;
-const client_1 = require("../client/client");
 //methods class
 class UserProfile {
+    constructor(client) {
+        this.client = client;
+    }
     /**
      * Returns the UserProfile object associated with a User.
      */
-    static findUserProfile(parameters, options) {
-        return client_1.request("/users/:user_id/profile", parameters, "GET", options);
+    findUserProfile(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/users/:user_id/profile', parameters, 'GET', options);
+        });
     }
     /**
      * Updates the UserProfile object associated with a User. Notes:Name changes are subject to admin review and therefore unavailable via the API.Materials must be provided as a period-separated list of ASCII words.
      */
-    static updateUserProfile(parameters, options) {
-        return client_1.request("/users/:user_id/profile", parameters, "PUT", options);
+    updateUserProfile(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/users/:user_id/profile', parameters, 'PUT', options);
+        });
     }
 }
 exports.UserProfile = UserProfile;

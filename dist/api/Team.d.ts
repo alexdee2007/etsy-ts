@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface ITeam {
     /**
      * The team's numeric ID.
@@ -38,16 +37,18 @@ export interface IFindAllTeamsForUserParameters extends IStandardParameters {
     page?: number;
 }
 export declare class Team {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Returns all Teams
      */
-    static findAllTeams<TResult>(parameters: IFindAllTeamsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllTeamsParameters, TResult>>;
+    findAllTeams(parameters: IFindAllTeamsParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Returns specified team by ID or team name
      */
-    static findTeams<TResult>(parameters: IFindTeamsParameters, options?: IOptions): Promise<IStandardResponse<IFindTeamsParameters, TResult>>;
+    findTeams(parameters: IFindTeamsParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Returns a list of teams for a specific user
      */
-    static findAllTeamsForUser<TResult>(parameters: IFindAllTeamsForUserParameters, options?: IOptions): Promise<IStandardResponse<IFindAllTeamsForUserParameters, TResult>>;
+    findAllTeamsForUser(parameters: IFindAllTeamsForUserParameters, options?: IAuthOptions): Promise<any>;
 }

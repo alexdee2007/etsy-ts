@@ -1,14 +1,27 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ListingImage = void 0;
-const client_1 = require("../client/client");
 //methods class
 class ListingImage {
+    constructor(client) {
+        this.client = client;
+    }
     /**
      * Retrieves a set of ListingImage objects associated to a Listing.
      */
-    static findAllListingImages(parameters, options) {
-        return client_1.request("/listings/:listing_id/images", parameters, "GET", options);
+    findAllListingImages(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/listings/:listing_id/images', parameters, 'GET', options);
+        });
     }
     /**
      * Upload a new listing image, or re-associate a previously deleted one. You may associate an image
@@ -21,22 +34,28 @@ class ListingImage {
      When uploading a new listing image with a watermark, pass is_watermarked=1; existing listing images
      will not be affected by this parameter.
      */
-    static uploadListingImage(parameters, options) {
-        return client_1.request("/listings/:listing_id/images", parameters, "POST", options);
+    uploadListingImage(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/listings/:listing_id/images', parameters, 'POST', options);
+        });
     }
     /**
      * Retrieves a Image_Listing by id.
      */
-    static getImage_Listing(parameters, options) {
-        return client_1.request("/listings/:listing_id/images/:listing_image_id", parameters, "GET", options);
+    getImage_Listing(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/listings/:listing_id/images/:listing_image_id', parameters, 'GET', options);
+        });
     }
     /**
      * Deletes a listing image. A copy of the file remains on our servers,
      and so a deleted image may be re-associated with the listing without
      re-uploading the original image; see uploadListingImage
      */
-    static deleteListingImage(parameters, options) {
-        return client_1.request("/listings/:listing_id/images/:listing_image_id", parameters, "DELETE", options);
+    deleteListingImage(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/listings/:listing_id/images/:listing_image_id', parameters, 'DELETE', options);
+        });
     }
 }
 exports.ListingImage = ListingImage;

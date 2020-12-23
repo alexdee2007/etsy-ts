@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Transaction = void 0;
-const client_1 = require("../client/client");
 //methods class
 class Transaction {
     constructor(client) {
@@ -19,20 +18,26 @@ class Transaction {
     /**
      * Retrieves a Shop_Transaction by id.
      */
-    static getShop_Transaction(parameters, options) {
-        return client_1.request('/transactions/:transaction_id', parameters, 'GET', options);
+    getShop_Transaction(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/transactions/:transaction_id', parameters, 'GET', options);
+        });
     }
     /**
      * Retrieves a set of Transaction objects associated to a Listing.
      */
-    static findAllListingTransactions(parameters, options) {
-        return client_1.request('/listings/:listing_id/transactions', parameters, 'GET', options);
+    findAllListingTransactions(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/listings/:listing_id/transactions', parameters, 'GET', options);
+        });
     }
     /**
      * Retrieves a set of Transaction objects associated to a Shop_Receipt2.
      */
-    static findAllShop_Receipt2Transactions(parameters, options) {
-        return client_1.request('/receipts/:receipt_id/transactions', parameters, 'GET', options);
+    findAllShop_Receipt2Transactions(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/receipts/:receipt_id/transactions', parameters, 'GET', options);
+        });
     }
     /**
      * Retrieves a set of Transaction objects associated to a Shop.
@@ -45,8 +50,10 @@ class Transaction {
     /**
      * Retrieves a set of Transaction objects associated to a User.
      */
-    static findAllUserBuyerTransactions(parameters, options) {
-        return client_1.request('/users/:user_id/transactions', parameters, 'GET', options);
+    findAllUserBuyerTransactions(parameters, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.client.request('/users/:user_id/transactions', parameters, 'GET', options);
+        });
     }
 }
 exports.Transaction = Transaction;

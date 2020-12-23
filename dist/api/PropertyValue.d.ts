@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IPropertyValue {
     /**
      * The numeric ID of this property.
@@ -46,20 +45,22 @@ export interface IDeleteAttributeParameters extends IStandardParameters {
     property_id: number;
 }
 export declare class PropertyValue {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Get all of the attributes for a listing
      */
-    static getAttributes<TResult>(parameters: IGetAttributesParameters, options?: IOptions): Promise<IStandardResponse<IGetAttributesParameters, TResult>>;
+    getAttributes(parameters: IGetAttributesParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Get an attribute for a listing
      */
-    static getAttribute<TResult>(parameters: IGetAttributeParameters, options?: IOptions): Promise<IStandardResponse<IGetAttributeParameters, TResult>>;
+    getAttribute(parameters: IGetAttributeParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Update or populate an attribute for a listing
      */
-    static updateAttribute<TResult>(parameters: IUpdateAttributeParameters, options?: IOptions): Promise<IStandardResponse<IUpdateAttributeParameters, TResult>>;
+    updateAttribute(parameters: IUpdateAttributeParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Delete an attribute for a listing
      */
-    static deleteAttribute<TResult>(parameters: IDeleteAttributeParameters, options?: IOptions): Promise<IStandardResponse<IDeleteAttributeParameters, TResult>>;
+    deleteAttribute(parameters: IDeleteAttributeParameters, options?: IAuthOptions): Promise<any>;
 }

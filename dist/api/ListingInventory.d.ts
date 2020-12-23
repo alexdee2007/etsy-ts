@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IListingInventory {
     /**
      * The products available for this listing.
@@ -31,12 +30,14 @@ export interface IUpdateInventoryParameters extends IStandardParameters {
     sku_on_property?: number[];
 }
 export declare class ListingInventory {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Get the inventory for a listing
      */
-    static getInventory<TResult>(parameters: IGetInventoryParameters, options?: IOptions): Promise<IStandardResponse<IGetInventoryParameters, TResult>>;
+    getInventory(parameters: IGetInventoryParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Update the inventory for a listing
      */
-    static updateInventory<TResult>(parameters: IUpdateInventoryParameters, options?: IOptions): Promise<IStandardResponse<IUpdateInventoryParameters, TResult>>;
+    updateInventory(parameters: IUpdateInventoryParameters, options?: IAuthOptions): Promise<any>;
 }

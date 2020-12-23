@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface ITreasuryListing {
     /**
      * The detailed fields of the listing
@@ -20,12 +19,14 @@ export interface IRemoveTreasuryListingParameters extends IStandardParameters {
     listing_id: number;
 }
 export declare class TreasuryListing {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Add listing to a Treasury
      */
-    static addTreasuryListing<TResult>(parameters: IAddTreasuryListingParameters, options?: IOptions): Promise<IStandardResponse<IAddTreasuryListingParameters, TResult>>;
+    addTreasuryListing(parameters: IAddTreasuryListingParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Remove listing from a Treasury
      */
-    static removeTreasuryListing<TResult>(parameters: IRemoveTreasuryListingParameters, options?: IOptions): Promise<IStandardResponse<IRemoveTreasuryListingParameters, TResult>>;
+    removeTreasuryListing(parameters: IRemoveTreasuryListingParameters, options?: IAuthOptions): Promise<any>;
 }

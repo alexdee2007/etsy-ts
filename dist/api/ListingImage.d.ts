@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IListingImage {
     /**
      * The numeric ID of the listing image.
@@ -95,10 +94,12 @@ export interface IDeleteListingImageParameters extends IStandardParameters {
     listing_image_id: number;
 }
 export declare class ListingImage {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Retrieves a set of ListingImage objects associated to a Listing.
      */
-    static findAllListingImages<TResult>(parameters: IFindAllListingImagesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingImagesParameters, TResult>>;
+    findAllListingImages(parameters: IFindAllListingImagesParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Upload a new listing image, or re-associate a previously deleted one. You may associate an image
      to any listing within the same shop that the image's original listing belongs to.
@@ -110,15 +111,15 @@ export declare class ListingImage {
      When uploading a new listing image with a watermark, pass is_watermarked=1; existing listing images
      will not be affected by this parameter.
      */
-    static uploadListingImage<TResult>(parameters: IUploadListingImageParameters, options?: IOptions): Promise<IStandardResponse<IUploadListingImageParameters, TResult>>;
+    uploadListingImage(parameters: IUploadListingImageParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Retrieves a Image_Listing by id.
      */
-    static getImage_Listing<TResult>(parameters: IGetImageListingParameters, options?: IOptions): Promise<IStandardResponse<IGetImageListingParameters, TResult>>;
+    getImage_Listing(parameters: IGetImageListingParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Deletes a listing image. A copy of the file remains on our servers,
      and so a deleted image may be re-associated with the listing without
      re-uploading the original image; see uploadListingImage
      */
-    static deleteListingImage<TResult>(parameters: IDeleteListingImageParameters, options?: IOptions): Promise<IStandardResponse<IDeleteListingImageParameters, TResult>>;
+    deleteListingImage(parameters: IDeleteListingImageParameters, options?: IAuthOptions): Promise<any>;
 }

@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IShopAbout {
     /**
      * Numeric ID of the shop section.
@@ -35,8 +34,10 @@ export interface IGetShopAboutParameters extends IStandardParameters {
     shop_id: string | number;
 }
 export declare class ShopAbout {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Retrieves a ShopAbout object associated to a Shop.
      */
-    static getShopAbout<TResult>(parameters: IGetShopAboutParameters, options?: IOptions): Promise<IStandardResponse<IGetShopAboutParameters, TResult>>;
+    getShopAbout(parameters: IGetShopAboutParameters, options?: IAuthOptions): Promise<any>;
 }

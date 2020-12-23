@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IListingFile {
     /**
      * The numeric ID of the listing file.
@@ -54,24 +53,26 @@ export interface IDeleteListingFileParameters extends IStandardParameters {
     listing_file_id: number;
 }
 export declare class ListingFile {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Finds all ListingFiles on a Listing
      */
-    static findAllListingFiles<TResult>(parameters: IFindAllListingFilesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingFilesParameters, TResult>>;
+    findAllListingFiles(parameters: IFindAllListingFilesParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Upload a new listing file, or attach an existing file to this listing.  You must either provide the listing_file_id
      of an existing listing file, or the name and file data of a new file that you are uploading.  If you are attaching
      a file to a listing that is currently not digital, the listing will be converted to a digital listing.  This will
      cause the listing to have free shipping and will remove any variations.
      */
-    static uploadListingFile<TResult>(parameters: IUploadListingFileParameters, options?: IOptions): Promise<IStandardResponse<IUploadListingFileParameters, TResult>>;
+    uploadListingFile(parameters: IUploadListingFileParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Finds a ListingFile by ID
      */
-    static findListingFile<TResult>(parameters: IFindListingFileParameters, options?: IOptions): Promise<IStandardResponse<IFindListingFileParameters, TResult>>;
+    findListingFile(parameters: IFindListingFileParameters, options?: IAuthOptions): Promise<any>;
     /**
      * Removes the listing file from this listing.  If this is the last file on a listing, the listing will no longer
      be considered a digital listing.
      */
-    static deleteListingFile<TResult>(parameters: IDeleteListingFileParameters, options?: IOptions): Promise<IStandardResponse<IDeleteListingFileParameters, TResult>>;
+    deleteListingFile(parameters: IDeleteListingFileParameters, options?: IAuthOptions): Promise<any>;
 }

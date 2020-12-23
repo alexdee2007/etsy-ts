@@ -1,6 +1,5 @@
-import { IOptions } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { IStandardParameters } from '../client/IStandardParameters';
 export interface IListingOffering {
     /**
      * The numeric ID of this offering.
@@ -29,8 +28,10 @@ export interface IGetOfferingParameters extends IStandardParameters {
     offering_id: number;
 }
 export declare class ListingOffering {
+    private readonly client;
+    constructor(client: ClientOauth);
     /**
      * Get a specific offering for a listing
      */
-    static getOffering<TResult>(parameters: IGetOfferingParameters, options?: IOptions): Promise<IStandardResponse<IGetOfferingParameters, TResult>>;
+    getOffering(parameters: IGetOfferingParameters, options?: IAuthOptions): Promise<any>;
 }
