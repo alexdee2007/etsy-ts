@@ -172,6 +172,7 @@ export class ClientOauth {
     async request<TParameters>(uri: string, parameters: TParameters, method: Method, options?: IAuthOptions) {
         let url = this.baseUrl + this.fillUriPlaceholders(uri, parameters);
         let data: string | undefined;
+        let headers = {};
 
         switch (method.toUpperCase()) {
             case 'GET':
@@ -183,12 +184,12 @@ export class ClientOauth {
                 break;
 
             default:
+                headers['Content-Type'] = 'application/json';
                 data = JSON.stringify(parameters);
         }
 
-        let headers = {};
         if (options && options.token && options.tokenSecret) {
-            headers = { Authorization: this.etsyOAuth.authHeader(url, options.token, options.tokenSecret) };
+            headers['Authorization'] = this.etsyOAuth.authHeader(url, options.token, options.tokenSecret, method);
         }
 
         let response = await axios({ method, url, data, headers });

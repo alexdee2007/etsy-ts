@@ -114,6 +114,7 @@ class ClientOauth {
         return __awaiter(this, void 0, void 0, function* () {
             let url = this.baseUrl + this.fillUriPlaceholders(uri, parameters);
             let data;
+            let headers = {};
             switch (method.toUpperCase()) {
                 case 'GET':
                 case 'DELETE':
@@ -123,11 +124,11 @@ class ClientOauth {
                     }
                     break;
                 default:
+                    headers['Content-Type'] = 'application/json';
                     data = JSON.stringify(parameters);
             }
-            let headers = {};
             if (options && options.token && options.tokenSecret) {
-                headers = { Authorization: this.etsyOAuth.authHeader(url, options.token, options.tokenSecret) };
+                headers['Authorization'] = this.etsyOAuth.authHeader(url, options.token, options.tokenSecret, method);
             }
             let response = yield axios_1.default({ method, url, data, headers });
             if (response.status >= 200 && response.status < 300) {
