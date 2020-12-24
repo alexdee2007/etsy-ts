@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface IListingImage {
     /**
      * The numeric ID of the listing image.
@@ -95,11 +96,11 @@ export interface IDeleteListingImageParameters extends IStandardParameters {
 }
 export declare class ListingImage {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Retrieves a set of ListingImage objects associated to a Listing.
      */
-    findAllListingImages(parameters: IFindAllListingImagesParameters, options?: IAuthOptions): Promise<any>;
+    findAllListingImages(parameters: IFindAllListingImagesParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllListingImagesParameters, IListingImage>>;
     /**
      * Upload a new listing image, or re-associate a previously deleted one. You may associate an image
      to any listing within the same shop that the image's original listing belongs to.
@@ -111,15 +112,15 @@ export declare class ListingImage {
      When uploading a new listing image with a watermark, pass is_watermarked=1; existing listing images
      will not be affected by this parameter.
      */
-    uploadListingImage(parameters: IUploadListingImageParameters, options?: IAuthOptions): Promise<any>;
+    uploadListingImage(parameters: IUploadListingImageParameters, options?: IAuthOptions): Promise<IStandardResponse<IUploadListingImageParameters, IListingImage>>;
     /**
      * Retrieves a Image_Listing by id.
      */
-    getImage_Listing(parameters: IGetImageListingParameters, options?: IAuthOptions): Promise<any>;
+    getImage_Listing(parameters: IGetImageListingParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetImageListingParameters, IListingImage>>;
     /**
      * Deletes a listing image. A copy of the file remains on our servers,
      and so a deleted image may be re-associated with the listing without
      re-uploading the original image; see uploadListingImage
      */
-    deleteListingImage(parameters: IDeleteListingImageParameters, options?: IAuthOptions): Promise<any>;
+    deleteListingImage(parameters: IDeleteListingImageParameters, options?: IAuthOptions): Promise<IStandardResponse<IDeleteListingImageParameters, IListingImage>>;
 }

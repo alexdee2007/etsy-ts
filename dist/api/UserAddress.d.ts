@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface IUserAddress {
     /**
      * The numeric ID of the user's address.
@@ -70,21 +71,21 @@ export interface IDeleteUserAddressParameters extends IStandardParameters {
 }
 export declare class UserAddress {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Retrieves a set of UserAddress objects associated to a User.
      */
-    findAllUserAddresses(parameters: IFindAllUserAddressesParameters, options?: IAuthOptions): Promise<any>;
+    findAllUserAddresses(parameters: IFindAllUserAddressesParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllUserAddressesParameters, IUserAddress>>;
     /**
      * Creates a new UserAddress. Note: state is required when the country is US, Canada, or Australia. See section above about valid codes.
      */
-    createUserAddress(parameters: ICreateUserAddressParameters, options?: IAuthOptions): Promise<any>;
+    createUserAddress(parameters: ICreateUserAddressParameters, options?: IAuthOptions): Promise<IStandardResponse<ICreateUserAddressParameters, IUserAddress>>;
     /**
      * Retrieves a UserAddress by id.
      */
-    getUserAddress(parameters: IGetUserAddressParameters, options?: IAuthOptions): Promise<any>;
+    getUserAddress(parameters: IGetUserAddressParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetUserAddressParameters, IUserAddress>>;
     /**
      * Deletes the UserAddress with the given id.
      */
-    deleteUserAddress(parameters: IDeleteUserAddressParameters, options?: IAuthOptions): Promise<any>;
+    deleteUserAddress(parameters: IDeleteUserAddressParameters, options?: IAuthOptions): Promise<IStandardResponse<IDeleteUserAddressParameters, IUserAddress>>;
 }

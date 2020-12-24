@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface ILedger {
     /**
      * The ledger's numeric ID.
@@ -27,9 +28,9 @@ export interface IFindLedgerParameters extends IStandardParameters {
 }
 export declare class Ledger {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Get a Shop Payment Account Ledger
      */
-    findLedger(parameters: IFindLedgerParameters, options?: IAuthOptions): Promise<any>;
+    findLedger(parameters: IFindLedgerParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindLedgerParameters, ILedger>>;
 }

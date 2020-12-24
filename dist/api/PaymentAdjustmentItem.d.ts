@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface IPaymentAdjustmentItem {
     /**
      * The payment adjustment item's numeric ID.
@@ -40,13 +41,13 @@ export interface IFindPaymentAdjustmentItemParameters extends IStandardParameter
 }
 export declare class PaymentAdjustmentItem {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Get Etsy Payments Transaction Adjustment Items
      */
-    findPaymentAdjustmentItems(parameters: IFindPaymentAdjustmentItemsParameters, options?: IAuthOptions): Promise<any>;
+    findPaymentAdjustmentItems(parameters: IFindPaymentAdjustmentItemsParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindPaymentAdjustmentItemsParameters, IPaymentAdjustmentItem>>;
     /**
      * Get an Etsy Payments Transaction Adjustment Item
      */
-    findPaymentAdjustmentItem(parameters: IFindPaymentAdjustmentItemParameters, options?: IAuthOptions): Promise<any>;
+    findPaymentAdjustmentItem(parameters: IFindPaymentAdjustmentItemParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindPaymentAdjustmentItemParameters, IPaymentAdjustmentItem>>;
 }

@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface IForumPost {
     /**
      * Unique identifier of the thread
@@ -39,17 +40,17 @@ export interface IDeleteTreasuryCommentParameters extends IStandardParameters {
 }
 export declare class ForumPost {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Get a Treasury's Comments
      */
-    findTreasuryComments(parameters: IFindTreasuryCommentsParameters, options?: IAuthOptions): Promise<any>;
+    findTreasuryComments(parameters: IFindTreasuryCommentsParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindTreasuryCommentsParameters, IForumPost>>;
     /**
      * Leave a comment on a Treasury List
      */
-    postTreasuryComment(parameters: IPostTreasuryCommentParameters, options?: IAuthOptions): Promise<any>;
+    postTreasuryComment(parameters: IPostTreasuryCommentParameters, options?: IAuthOptions): Promise<IStandardResponse<IPostTreasuryCommentParameters, IForumPost>>;
     /**
      * Delete a given comment on a Treasury List
      */
-    deleteTreasuryComment(parameters: IDeleteTreasuryCommentParameters, options?: IAuthOptions): Promise<any>;
+    deleteTreasuryComment(parameters: IDeleteTreasuryCommentParameters, options?: IAuthOptions): Promise<IStandardResponse<IDeleteTreasuryCommentParameters, IForumPost>>;
 }

@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface IListing {
     /**
      * The listing's numeric ID.
@@ -387,93 +388,93 @@ export interface IFindAllCartListingsParameters extends IStandardParameters {
 }
 export declare class Listing {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Creates a new Listing.
      */
-    createListing(parameters: ICreateListingParameters, options?: IAuthOptions): Promise<any>;
+    createListing(parameters: ICreateListingParameters, options?: IAuthOptions): Promise<IStandardResponse<ICreateListingParameters, IListing>>;
     /**
      * Finds all FeaturedTreasury listings.
      */
-    findAllFeaturedListings(parameters: IFindAllFeaturedListingsParameters, options?: IAuthOptions): Promise<any>;
+    findAllFeaturedListings(parameters: IFindAllFeaturedListingsParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllFeaturedListingsParameters, IListing>>;
     /**
      * Retrieves a Listing by id.
      */
-    getListing(parameters: IGetListingParameters, options?: IAuthOptions): Promise<any>;
+    getListing(parameters: IGetListingParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetListingParameters, IListing>>;
     /**
      * Updates a Listing
      */
-    updateListing(parameters: IUpdateListingParameters, options?: IAuthOptions): Promise<any>;
+    updateListing(parameters: IUpdateListingParameters, options?: IAuthOptions): Promise<IStandardResponse<IUpdateListingParameters, IListing>>;
     /**
      * Deletes a Listing
      */
-    deleteListing(parameters: IDeleteListingParameters, options?: IAuthOptions): Promise<any>;
+    deleteListing(parameters: IDeleteListingParameters, options?: IAuthOptions): Promise<IStandardResponse<IDeleteListingParameters, IListing>>;
     /**
      * Finds all active Listings. (Note: the sort_on and sort_order options only work when combined with one of the search options: keywords, color, tags, location, etc.)
      */
-    findAllListingActive(parameters: IFindAllListingActiveParameters, options?: IAuthOptions): Promise<any>;
+    findAllListingActive(parameters: IFindAllListingActiveParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllListingActiveParameters, IListing>>;
     /**
      * Collects the list of interesting listings
      */
-    getInterestingListings(parameters: IGetInterestingListingsParameters, options?: IAuthOptions): Promise<any>;
+    getInterestingListings(parameters: IGetInterestingListingsParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetInterestingListingsParameters, IListing>>;
     /**
      * Collects the list of listings used to generate the trending listing page
      */
-    getTrendingListings(parameters: IGetTrendingListingsParameters, options?: IAuthOptions): Promise<any>;
+    getTrendingListings(parameters: IGetTrendingListingsParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetTrendingListingsParameters, IListing>>;
     /**
      * Finds all listings for a certain FeaturedTreasury.
      */
-    findAllListingsForFeaturedTreasuryId(parameters: IFindAllListingsForFeaturedTreasuryIdParameters, options?: IAuthOptions): Promise<any>;
+    findAllListingsForFeaturedTreasuryId(parameters: IFindAllListingsForFeaturedTreasuryIdParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllListingsForFeaturedTreasuryIdParameters, IListing>>;
     /**
      * Finds all active listings for a certain FeaturedTreasury.
      */
-    findAllActiveListingsForFeaturedTreasuryId(parameters: IFindAllActiveListingsForFeaturedTreasuryIdParameters, options?: IAuthOptions): Promise<any>;
+    findAllActiveListingsForFeaturedTreasuryId(parameters: IFindAllActiveListingsForFeaturedTreasuryIdParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllActiveListingsForFeaturedTreasuryIdParameters, IListing>>;
     /**
      * Finds FeaturedTreasury listings that are currently displayed on a regional homepage.
      */
-    findAllCurrentFeaturedListings(parameters: IFindAllCurrentFeaturedListingsParameters, options?: IAuthOptions): Promise<any>;
+    findAllCurrentFeaturedListings(parameters: IFindAllCurrentFeaturedListingsParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllCurrentFeaturedListingsParameters, IListing>>;
     /**
      * Finds all listings in a receipt
      */
-    findAllReceiptListings(parameters: IFindAllReceiptListingsParameters, options?: IAuthOptions): Promise<any>;
+    findAllReceiptListings(parameters: IFindAllReceiptListingsParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllReceiptListingsParameters, IListing>>;
     /**
      * Finds all active Listings associated with a Shop.(NOTE: If calling on behalf of a shop owner in the context of listing management, be sure to include the parameter include_private = true.  This will return private listings that are not publicly visible in the shop, but which can be managed.  This is an experimental feature and may change.)
      */
-    findAllShopListingsActive(parameters: IFindAllShopListingsActiveParameters, options?: IAuthOptions): Promise<any>;
+    findAllShopListingsActive(parameters: IFindAllShopListingsActiveParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllShopListingsActiveParameters, IListing>>;
     /**
      * Finds all of a Shop's draft listings
      */
-    findAllShopListingsDraft(parameters: IFindAllShopListingsDraftParameters, options?: IAuthOptions): Promise<any>;
+    findAllShopListingsDraft(parameters: IFindAllShopListingsDraftParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllShopListingsDraftParameters, IListing>>;
     /**
      * Retrieves Listings associated to a Shop that are expired
      */
-    findAllShopListingsExpired(parameters: IFindAllShopListingsExpiredParameters, options?: IAuthOptions): Promise<any>;
+    findAllShopListingsExpired(parameters: IFindAllShopListingsExpiredParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllShopListingsExpiredParameters, IListing>>;
     /**
      * Retrieves a Listing associated to a Shop that is inactive
      */
-    getShopListingExpired(parameters: IGetShopListingExpiredParameters, options?: IAuthOptions): Promise<any>;
+    getShopListingExpired(parameters: IGetShopListingExpiredParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetShopListingExpiredParameters, IListing>>;
     /**
      * Retrieves Listings associated to a Shop that are featured
      */
-    findAllShopListingsFeatured(parameters: IFindAllShopListingsFeaturedParameters, options?: IAuthOptions): Promise<any>;
+    findAllShopListingsFeatured(parameters: IFindAllShopListingsFeaturedParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllShopListingsFeaturedParameters, IListing>>;
     /**
      * Retrieves Listings associated to a Shop that are inactive
      */
-    findAllShopListingsInactive(parameters: IFindAllShopListingsInactiveParameters, options?: IAuthOptions): Promise<any>;
+    findAllShopListingsInactive(parameters: IFindAllShopListingsInactiveParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllShopListingsInactiveParameters, IListing>>;
     /**
      * Retrieves a Listing associated to a Shop that is inactive
      */
-    getShopListingInactive(parameters: IGetShopListingInactiveParameters, options?: IAuthOptions): Promise<any>;
+    getShopListingInactive(parameters: IGetShopListingInactiveParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetShopListingInactiveParameters, IListing>>;
     /**
      * Finds all listings within a shop section
      */
-    findAllShopSectionListings(parameters: IFindAllShopSectionListingsParameters, options?: IAuthOptions): Promise<any>;
+    findAllShopSectionListings(parameters: IFindAllShopSectionListingsParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllShopSectionListingsParameters, IListing>>;
     /**
      * Finds all listings within a shop section
      */
-    findAllShopSectionListingsActive(parameters: IFindAllShopSectionListingsActiveParameters, options?: IAuthOptions): Promise<any>;
+    findAllShopSectionListingsActive(parameters: IFindAllShopSectionListingsActiveParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllShopSectionListingsActiveParameters, IListing>>;
     /**
      * Finds all listings in a given Cart
      */
-    findAllCartListings(parameters: IFindAllCartListingsParameters, options?: IAuthOptions): Promise<any>;
+    findAllCartListings(parameters: IFindAllCartListingsParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllCartListingsParameters, IListing>>;
 }

@@ -3,7 +3,7 @@ export interface IStandardResponse<TParameters, TResult> {
     results: TResult[];
     params: TParameters;
     type: string;
-    pagination: {
+    pagination?: {
         effective_limit: number;
         effective_offset: number;
         next_offset: number | null;

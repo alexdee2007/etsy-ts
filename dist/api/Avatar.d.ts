@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface IAvatar {
     /**
      * The numeric ID for this avatar image.
@@ -56,13 +57,13 @@ export interface IGetAvatarImgSrcParameters extends IStandardParameters {
 }
 export declare class Avatar {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Upload a new user avatar image
      */
-    uploadAvatar(parameters: IUploadAvatarParameters, options?: IAuthOptions): Promise<any>;
+    uploadAvatar(parameters: IUploadAvatarParameters, options?: IAuthOptions): Promise<IStandardResponse<IUploadAvatarParameters, IAvatar>>;
     /**
      * Get avatar image source
      */
-    getAvatarImgSrc(parameters: IGetAvatarImgSrcParameters, options?: IAuthOptions): Promise<any>;
+    getAvatarImgSrc(parameters: IGetAvatarImgSrcParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetAvatarImgSrcParameters, IAvatar>>;
 }

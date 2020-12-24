@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface IShopSection {
     /**
      * The numeric ID of the shop section.
@@ -46,25 +47,25 @@ export interface IDeleteShopSectionParameters extends IStandardParameters {
 }
 export declare class ShopSection {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Retrieves a set of ShopSection objects associated to a Shop.
      */
-    findAllShopSections(parameters: IFindAllShopSectionsParameters, options?: IAuthOptions): Promise<any>;
+    findAllShopSections(parameters: IFindAllShopSectionsParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllShopSectionsParameters, IShopSection>>;
     /**
      * Creates a new ShopSection.
      */
-    createShopSection(parameters: ICreateShopSectionParameters, options?: IAuthOptions): Promise<any>;
+    createShopSection(parameters: ICreateShopSectionParameters, options?: IAuthOptions): Promise<IStandardResponse<ICreateShopSectionParameters, IShopSection>>;
     /**
      * Retrieves a ShopSection by id and shop_id
      */
-    getShopSection(parameters: IGetShopSectionParameters, options?: IAuthOptions): Promise<any>;
+    getShopSection(parameters: IGetShopSectionParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetShopSectionParameters, IShopSection>>;
     /**
      * Updates a ShopSection with the given id.
      */
-    updateShopSection(parameters: IUpdateShopSectionParameters, options?: IAuthOptions): Promise<any>;
+    updateShopSection(parameters: IUpdateShopSectionParameters, options?: IAuthOptions): Promise<IStandardResponse<IUpdateShopSectionParameters, IShopSection>>;
     /**
      * Deletes the ShopSection with the given id.
      */
-    deleteShopSection(parameters: IDeleteShopSectionParameters, options?: IAuthOptions): Promise<any>;
+    deleteShopSection(parameters: IDeleteShopSectionParameters, options?: IAuthOptions): Promise<IStandardResponse<IDeleteShopSectionParameters, IShopSection>>;
 }

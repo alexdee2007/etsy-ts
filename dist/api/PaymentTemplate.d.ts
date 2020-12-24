@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface IPaymentTemplate {
     /**
      * The numeric ID for this payment template
@@ -111,21 +112,21 @@ export interface IFindAllUserPaymentTemplatesParameters extends IStandardParamet
 }
 export declare class PaymentTemplate {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Retrieves the PaymentTemplate associated with the Shop
      */
-    findShopPaymentTemplates(parameters: IFindShopPaymentTemplatesParameters, options?: IAuthOptions): Promise<any>;
+    findShopPaymentTemplates(parameters: IFindShopPaymentTemplatesParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindShopPaymentTemplatesParameters, IPaymentTemplate>>;
     /**
      * Creates a new PaymentTemplate
      */
-    createShopPaymentTemplate(parameters: ICreateShopPaymentTemplateParameters, options?: IAuthOptions): Promise<any>;
+    createShopPaymentTemplate(parameters: ICreateShopPaymentTemplateParameters, options?: IAuthOptions): Promise<IStandardResponse<ICreateShopPaymentTemplateParameters, IPaymentTemplate>>;
     /**
      * Updates a PaymentTemplate
      */
-    updateShopPaymentTemplate(parameters: IUpdateShopPaymentTemplateParameters, options?: IAuthOptions): Promise<any>;
+    updateShopPaymentTemplate(parameters: IUpdateShopPaymentTemplateParameters, options?: IAuthOptions): Promise<IStandardResponse<IUpdateShopPaymentTemplateParameters, IPaymentTemplate>>;
     /**
      * Retrieves a set of PaymentTemplate objects associated to a User.
      */
-    findAllUserPaymentTemplates(parameters: IFindAllUserPaymentTemplatesParameters, options?: IAuthOptions): Promise<any>;
+    findAllUserPaymentTemplates(parameters: IFindAllUserPaymentTemplatesParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllUserPaymentTemplatesParameters, IPaymentTemplate>>;
 }

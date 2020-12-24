@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface IShopTranslation {
     /**
      * The numeric ID for the Shop.
@@ -104,21 +105,21 @@ export interface IDeleteShopTranslationParameters extends IStandardParameters {
 }
 export declare class ShopTranslation {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Retrieves a ShopTranslation by shop_id and language
      */
-    getShopTranslation(parameters: IGetShopTranslationParameters, options?: IAuthOptions): Promise<any>;
+    getShopTranslation(parameters: IGetShopTranslationParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetShopTranslationParameters, IShopTranslation>>;
     /**
      * Creates a ShopTranslation by shop_id and language
      */
-    createShopTranslation(parameters: ICreateShopTranslationParameters, options?: IAuthOptions): Promise<any>;
+    createShopTranslation(parameters: ICreateShopTranslationParameters, options?: IAuthOptions): Promise<IStandardResponse<ICreateShopTranslationParameters, IShopTranslation>>;
     /**
      * Updates a ShopTranslation by shop_id and language
      */
-    updateShopTranslation(parameters: IUpdateShopTranslationParameters, options?: IAuthOptions): Promise<any>;
+    updateShopTranslation(parameters: IUpdateShopTranslationParameters, options?: IAuthOptions): Promise<IStandardResponse<IUpdateShopTranslationParameters, IShopTranslation>>;
     /**
      * Deletes a ShopTranslation by shop_id and language
      */
-    deleteShopTranslation(parameters: IDeleteShopTranslationParameters, options?: IAuthOptions): Promise<any>;
+    deleteShopTranslation(parameters: IDeleteShopTranslationParameters, options?: IAuthOptions): Promise<IStandardResponse<IDeleteShopTranslationParameters, IShopTranslation>>;
 }

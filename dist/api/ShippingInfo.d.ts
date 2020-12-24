@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface IShippingInfo {
     /**
      * The numeric ID of this shipping info record.
@@ -67,25 +68,25 @@ export interface IDeleteShippingInfoParameters extends IStandardParameters {
 }
 export declare class ShippingInfo {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Retrieves a set of ShippingProfileEntries objects associated to a Listing.
      */
-    findAllListingShippingProfileEntries(parameters: IFindAllListingShippingProfileEntriesParameters, options?: IAuthOptions): Promise<any>;
+    findAllListingShippingProfileEntries(parameters: IFindAllListingShippingProfileEntriesParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllListingShippingProfileEntriesParameters, IShippingInfo>>;
     /**
      * Creates a new ShippingInfo.
      */
-    createShippingInfo(parameters: ICreateShippingInfoParameters, options?: IAuthOptions): Promise<any>;
+    createShippingInfo(parameters: ICreateShippingInfoParameters, options?: IAuthOptions): Promise<IStandardResponse<ICreateShippingInfoParameters, IShippingInfo>>;
     /**
      * Retrieves a ShippingInfo by id.
      */
-    getShippingInfo(parameters: IGetShippingInfoParameters, options?: IAuthOptions): Promise<any>;
+    getShippingInfo(parameters: IGetShippingInfoParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetShippingInfoParameters, IShippingInfo>>;
     /**
      * Updates a ShippingInfo with the given id.
      */
-    updateShippingInfo(parameters: IUpdateShippingInfoParameters, options?: IAuthOptions): Promise<any>;
+    updateShippingInfo(parameters: IUpdateShippingInfoParameters, options?: IAuthOptions): Promise<IStandardResponse<IUpdateShippingInfoParameters, IShippingInfo>>;
     /**
      * Deletes the ShippingInfo with the given id.
      */
-    deleteShippingInfo(parameters: IDeleteShippingInfoParameters, options?: IAuthOptions): Promise<any>;
+    deleteShippingInfo(parameters: IDeleteShippingInfoParameters, options?: IAuthOptions): Promise<IStandardResponse<IDeleteShippingInfoParameters, IShippingInfo>>;
 }

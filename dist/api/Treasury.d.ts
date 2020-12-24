@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface ITreasury {
     /**
      * Unique id of the collection
@@ -38,9 +39,10 @@ export interface ITreasury {
      */
     tags: string[];
     /**
+    
      * Clicks, views, shares, and reports metrics of this collection
      */
-    counts: any;
+    counts: ITreasuryCounts;
     /**
      * The algorithmic ranking value assigned to this collection
      */
@@ -74,6 +76,24 @@ export interface ITreasury {
      */
     became_public_date: number;
 }
+export interface ITreasuryCounts {
+    /**
+     * The number of times the Treasury has been clicked on
+     */
+    clicks: number;
+    /**
+     * The number of times the Treasury has been viewed
+     */
+    views: number;
+    /**
+     * The number of times the Treasury has been shared
+     */
+    shares: number;
+    /**
+     * The number of times the Treasury has been reported
+     */
+    reports: number;
+}
 export interface IFindAllTreasuriesParameters extends IStandardParameters {
     keywords?: string;
     sort_on?: 'hotness' | 'created';
@@ -98,21 +118,21 @@ export interface IFindAllUserTreasuriesParameters extends IStandardParameters {
 }
 export declare class Treasury {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Search Treasuries or else List all Treasuries
      */
-    findAllTreasuries(parameters: IFindAllTreasuriesParameters, options?: IAuthOptions): Promise<any>;
+    findAllTreasuries(parameters: IFindAllTreasuriesParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllTreasuriesParameters, ITreasury>>;
     /**
      * Get a Treasury
      */
-    getTreasury(parameters: IGetTreasuryParameters, options?: IAuthOptions): Promise<any>;
+    getTreasury(parameters: IGetTreasuryParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetTreasuryParameters, ITreasury>>;
     /**
      * Delete a Treasury
      */
-    deleteTreasury(parameters: IDeleteTreasuryParameters, options?: IAuthOptions): Promise<any>;
+    deleteTreasury(parameters: IDeleteTreasuryParameters, options?: IAuthOptions): Promise<IStandardResponse<IDeleteTreasuryParameters, ITreasury>>;
     /**
      * Get a user's Treasuries. Note: The treasury_r permission scope is required in order to display private Treasuries for a user when the boolean parameter include_private is true.
      */
-    findAllUserTreasuries(parameters: IFindAllUserTreasuriesParameters, options?: IAuthOptions): Promise<any>;
+    findAllUserTreasuries(parameters: IFindAllUserTreasuriesParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllUserTreasuriesParameters, ITreasury>>;
 }

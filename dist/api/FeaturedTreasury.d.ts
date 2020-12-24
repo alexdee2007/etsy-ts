@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface IFeaturedTreasury {
     /**
      * The string key to identify the Treasury
@@ -43,17 +44,17 @@ export interface IFindAllFeaturedTreasuriesByOwnerParameters extends IStandardPa
 }
 export declare class FeaturedTreasury {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Finds all FeaturedTreasuries.
      */
-    findAllFeaturedTreasuries(parameters: IFindAllFeaturedTreasuriesParameters, options?: IAuthOptions): Promise<any>;
+    findAllFeaturedTreasuries(parameters: IFindAllFeaturedTreasuriesParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllFeaturedTreasuriesParameters, IFeaturedTreasury>>;
     /**
      * Finds FeaturedTreasury by numeric ID.
      */
-    getFeaturedTreasuryById(parameters: IGetFeaturedTreasuryByIdParameters, options?: IAuthOptions): Promise<any>;
+    getFeaturedTreasuryById(parameters: IGetFeaturedTreasuryByIdParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetFeaturedTreasuryByIdParameters, IFeaturedTreasury>>;
     /**
      * Finds all FeaturedTreasury by numeric owner_id.
      */
-    findAllFeaturedTreasuriesByOwner(parameters: IFindAllFeaturedTreasuriesByOwnerParameters, options?: IAuthOptions): Promise<any>;
+    findAllFeaturedTreasuriesByOwner(parameters: IFindAllFeaturedTreasuriesByOwnerParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllFeaturedTreasuriesByOwnerParameters, IFeaturedTreasury>>;
 }

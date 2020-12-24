@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface IBillCharge {
     /**
      * The numeric ID for this bill charge record.
@@ -56,13 +57,13 @@ export interface IFindAllUserChargesParameters extends IStandardParameters {
 }
 export declare class BillCharge {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Metadata for the set of BillCharges objects associated to a User
      */
-    getUserChargesMetadata(parameters: IGetUserChargesMetadataParameters, options?: IAuthOptions): Promise<any>;
+    getUserChargesMetadata(parameters: IGetUserChargesMetadataParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetUserChargesMetadataParameters, IBillCharge>>;
     /**
      * Retrieves a set of BillCharge objects associated to a User. NOTE: from 8/8/12 the min_created and max_created arguments will be mandatory and can be no more than 31 days apart.
      */
-    findAllUserCharges(parameters: IFindAllUserChargesParameters, options?: IAuthOptions): Promise<any>;
+    findAllUserCharges(parameters: IFindAllUserChargesParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllUserChargesParameters, IBillCharge>>;
 }

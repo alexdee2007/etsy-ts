@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface IShippingTemplateEntry {
     /**
      * The numeric ID of this shipping template entry.
@@ -55,21 +56,21 @@ export interface IDeleteShippingTemplateEntryParameters extends IStandardParamet
 }
 export declare class ShippingTemplateEntry {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Creates a new ShippingTemplateEntry
      */
-    createShippingTemplateEntry(parameters: ICreateShippingTemplateEntryParameters, options?: IAuthOptions): Promise<any>;
+    createShippingTemplateEntry(parameters: ICreateShippingTemplateEntryParameters, options?: IAuthOptions): Promise<IStandardResponse<ICreateShippingTemplateEntryParameters, IShippingTemplateEntry>>;
     /**
      * Retrieves a ShippingTemplateEntry by id.
      */
-    getShippingTemplateEntry(parameters: IGetShippingTemplateEntryParameters, options?: IAuthOptions): Promise<any>;
+    getShippingTemplateEntry(parameters: IGetShippingTemplateEntryParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetShippingTemplateEntryParameters, IShippingTemplateEntry>>;
     /**
      * Updates a ShippingTemplateEntry
      */
-    updateShippingTemplateEntry(parameters: IUpdateShippingTemplateEntryParameters, options?: IAuthOptions): Promise<any>;
+    updateShippingTemplateEntry(parameters: IUpdateShippingTemplateEntryParameters, options?: IAuthOptions): Promise<IStandardResponse<IUpdateShippingTemplateEntryParameters, IShippingTemplateEntry>>;
     /**
      * Deletes the ShippingTemplateEntry
      */
-    deleteShippingTemplateEntry(parameters: IDeleteShippingTemplateEntryParameters, options?: IAuthOptions): Promise<any>;
+    deleteShippingTemplateEntry(parameters: IDeleteShippingTemplateEntryParameters, options?: IAuthOptions): Promise<IStandardResponse<IDeleteShippingTemplateEntryParameters, IShippingTemplateEntry>>;
 }

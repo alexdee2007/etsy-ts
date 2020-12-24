@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface IStyle {
     /**
      * Style ID for this style
@@ -14,9 +15,9 @@ export interface IFindSuggestedStylesParameters extends IStandardParameters {
 }
 export declare class Style {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Retrieve all suggested styles.
      */
-    findSuggestedStyles(parameters: IFindSuggestedStylesParameters, options?: IAuthOptions): Promise<any>;
+    findSuggestedStyles(parameters: IFindSuggestedStylesParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindSuggestedStylesParameters, IStyle>>;
 }

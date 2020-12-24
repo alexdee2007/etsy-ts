@@ -1,5 +1,7 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
+import { ICartListing, IShippingOption } from './Cart';
 export interface IGuestCart {
     /**
      * The numeric ID of the cart
@@ -63,7 +65,7 @@ export interface IGuestCart {
     /**
      * An array of purchase information for the listings
      */
-    listings: any[];
+    listings: ICartListing[];
     /**
      * The cart is download only
      */
@@ -75,7 +77,7 @@ export interface IGuestCart {
     /**
      * The selected shipping option identifier for the cart
      */
-    shipping_option: any;
+    shipping_option: IShippingOption;
 }
 export interface IFindAllGuestCartsParameters extends IStandardParameters {
     guest_id: any;
@@ -117,33 +119,33 @@ export interface IDeleteGuestCartParameters extends IStandardParameters {
 }
 export declare class GuestCart {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Get all guest's carts
      */
-    findAllGuestCarts(parameters: IFindAllGuestCartsParameters, options?: IAuthOptions): Promise<any>;
+    findAllGuestCarts(parameters: IFindAllGuestCartsParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllGuestCartsParameters, IGuestCart>>;
     /**
      * Add a listing to guest's cart
      */
-    addToGuestCart(parameters: IAddToGuestCartParameters, options?: IAuthOptions): Promise<any>;
+    addToGuestCart(parameters: IAddToGuestCartParameters, options?: IAuthOptions): Promise<IStandardResponse<IAddToGuestCartParameters, IGuestCart>>;
     /**
      * Update a guest's cart listing purchase quantity
      */
-    updateGuestCartListingQuantity(parameters: IUpdateGuestCartListingQuantityParameters, options?: IAuthOptions): Promise<any>;
+    updateGuestCartListingQuantity(parameters: IUpdateGuestCartListingQuantityParameters, options?: IAuthOptions): Promise<IStandardResponse<IUpdateGuestCartListingQuantityParameters, IGuestCart>>;
     /**
      * Remove a listing from a guest's cart
      */
-    removeGuestCartListing(parameters: IRemoveGuestCartListingParameters, options?: IAuthOptions): Promise<any>;
+    removeGuestCartListing(parameters: IRemoveGuestCartListingParameters, options?: IAuthOptions): Promise<IStandardResponse<IRemoveGuestCartListingParameters, IGuestCart>>;
     /**
      * Get a guest's cart
      */
-    findGuestCart(parameters: IFindGuestCartParameters, options?: IAuthOptions): Promise<any>;
+    findGuestCart(parameters: IFindGuestCartParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindGuestCartParameters, IGuestCart>>;
     /**
      * Update a guest's cart
      */
-    updateGuestCart(parameters: IUpdateGuestCartParameters, options?: IAuthOptions): Promise<any>;
+    updateGuestCart(parameters: IUpdateGuestCartParameters, options?: IAuthOptions): Promise<IStandardResponse<IUpdateGuestCartParameters, IGuestCart>>;
     /**
      * Delete a guest's cart
      */
-    deleteGuestCart(parameters: IDeleteGuestCartParameters, options?: IAuthOptions): Promise<any>;
+    deleteGuestCart(parameters: IDeleteGuestCartParameters, options?: IAuthOptions): Promise<IStandardResponse<IDeleteGuestCartParameters, IGuestCart>>;
 }

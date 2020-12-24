@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface ICart {
     /**
      * The numeric ID of the cart
@@ -63,7 +64,7 @@ export interface ICart {
     /**
      * An array of purchase information for the listings
      */
-    listings: any[];
+    listings: ICartListing[];
     /**
      * The cart is download only
      */
@@ -75,7 +76,67 @@ export interface ICart {
     /**
      * The selected shipping option identifier for the cart
      */
-    shipping_option: any;
+    shipping_option: IShippingOption;
+}
+export interface ICartListing {
+    /**
+     * The numeric ID of the listing
+     */
+    listing_id: number;
+    /**
+     * The quantity of the listing being purchased
+     */
+    purchase_quantity: number;
+    /**
+     * The purchase state of the listing, possible values: valid, invalid_quantity, invalid_shipping, not_active, edited, invalid_currency, invalid_shipping_currency
+     */
+    purchase_state: string;
+    /**
+     * True if this listing is for a digital download.
+     */
+    is_digital: boolean;
+    /**
+     * Written description of the files attached to this digital listing.
+     */
+    file_data: string;
+    /**
+     * When Variations are present on a listing, this can be used to differentiate multiple instances of the same listing.
+     */
+    listing_customization_id: number;
+    /**
+     * Whether Variations are available for this listing.
+     */
+    variations_available: boolean;
+    /**
+     * Whether the buyer selected Variations for this listing.
+     */
+    has_variations: boolean;
+    /**
+     * An array of selected Variations for this listing.
+     */
+    selected_variations: any[];
+}
+export interface IShippingOption {
+    /**
+     * The ID of the shipping option.
+     */
+    option_id: string;
+    /**
+     * The name of the shipping option.
+     */
+    name: string;
+    /**
+     * The type of shipping option.
+     */
+    option_type: number;
+    /**
+     * The total cart shipping price if the shipping option is selected.
+     */
+    cost: string;
+    /**
+     * The ISO (alphabetic) code for the shipping option's currency.
+     */
+    currency_code: string;
 }
 export interface IGetAllUserCartsParameters extends IStandardParameters {
     user_id: string | number;
@@ -147,49 +208,49 @@ export interface ICreateSingleListingCartParameters extends IStandardParameters 
 }
 export declare class Cart {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Get a user's Carts
      */
-    getAllUserCarts(parameters: IGetAllUserCartsParameters, options?: IAuthOptions): Promise<any>;
+    getAllUserCarts(parameters: IGetAllUserCartsParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetAllUserCartsParameters, ICart>>;
     /**
      * Add a listing to a cart
      */
-    addToCart(parameters: IAddToCartParameters, options?: IAuthOptions): Promise<any>;
+    addToCart(parameters: IAddToCartParameters, options?: IAuthOptions): Promise<IStandardResponse<IAddToCartParameters, ICart>>;
     /**
      * Update a cart listing purchase quantity
      */
-    updateCartListingQuantity(parameters: IUpdateCartListingQuantityParameters, options?: IAuthOptions): Promise<any>;
+    updateCartListingQuantity(parameters: IUpdateCartListingQuantityParameters, options?: IAuthOptions): Promise<IStandardResponse<IUpdateCartListingQuantityParameters, ICart>>;
     /**
      * Remove a listing from a cart
      */
-    removeCartListing(parameters: IRemoveCartListingParameters, options?: IAuthOptions): Promise<any>;
+    removeCartListing(parameters: IRemoveCartListingParameters, options?: IAuthOptions): Promise<IStandardResponse<IRemoveCartListingParameters, ICart>>;
     /**
      * Get a cart
      */
-    getUserCart(parameters: IGetUserCartParameters, options?: IAuthOptions): Promise<any>;
+    getUserCart(parameters: IGetUserCartParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetUserCartParameters, ICart>>;
     /**
      * Update a cart
      */
-    updateCart(parameters: IUpdateCartParameters, options?: IAuthOptions): Promise<any>;
+    updateCart(parameters: IUpdateCartParameters, options?: IAuthOptions): Promise<IStandardResponse<IUpdateCartParameters, ICart>>;
     /**
      * Delete a cart
      */
-    deleteCart(parameters: IDeleteCartParameters, options?: IAuthOptions): Promise<any>;
+    deleteCart(parameters: IDeleteCartParameters, options?: IAuthOptions): Promise<IStandardResponse<IDeleteCartParameters, ICart>>;
     /**
      * Saves and selects a shipping address for apple pay
      */
-    addAndSelectShippingForApplePay(parameters: IAddAndSelectShippingForApplePayParameters, options?: IAuthOptions): Promise<any>;
+    addAndSelectShippingForApplePay(parameters: IAddAndSelectShippingForApplePayParameters, options?: IAuthOptions): Promise<IStandardResponse<IAddAndSelectShippingForApplePayParameters, ICart>>;
     /**
      * Move a listing to Saved for Later
      */
-    saveListingForLater(parameters: ISaveListingForLaterParameters, options?: IAuthOptions): Promise<any>;
+    saveListingForLater(parameters: ISaveListingForLaterParameters, options?: IAuthOptions): Promise<IStandardResponse<ISaveListingForLaterParameters, ICart>>;
     /**
      * Get a cart from a shop ID
      */
-    getUserCartForShop(parameters: IGetUserCartForShopParameters, options?: IAuthOptions): Promise<any>;
+    getUserCartForShop(parameters: IGetUserCartForShopParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetUserCartForShopParameters, ICart>>;
     /**
      * Create a single-listing cart from a listing
      */
-    createSingleListingCart(parameters: ICreateSingleListingCartParameters, options?: IAuthOptions): Promise<any>;
+    createSingleListingCart(parameters: ICreateSingleListingCartParameters, options?: IAuthOptions): Promise<IStandardResponse<ICreateSingleListingCartParameters, ICart>>;
 }

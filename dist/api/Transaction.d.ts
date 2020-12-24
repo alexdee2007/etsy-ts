@@ -1,4 +1,4 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
 import { IStandardResponse } from '../client/IStandardResponse';
 export interface ITransaction {
@@ -136,19 +136,19 @@ export interface IFindAllUserBuyerTransactionsParameters extends IStandardParame
 }
 export declare class Transaction {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Retrieves a Shop_Transaction by id.
      */
-    getShop_Transaction(parameters: IGetShopTransactionParameters, options?: IAuthOptions): Promise<any>;
+    getShop_Transaction(parameters: IGetShopTransactionParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetShopTransactionParameters, ITransaction>>;
     /**
      * Retrieves a set of Transaction objects associated to a Listing.
      */
-    findAllListingTransactions(parameters: IFindAllListingTransactionsParameters, options?: IAuthOptions): Promise<any>;
+    findAllListingTransactions(parameters: IFindAllListingTransactionsParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllListingTransactionsParameters, ITransaction>>;
     /**
      * Retrieves a set of Transaction objects associated to a Shop_Receipt2.
      */
-    findAllShop_Receipt2Transactions(parameters: IFindAllShopReceipt2TransactionsParameters, options?: IAuthOptions): Promise<any>;
+    findAllShop_Receipt2Transactions(parameters: IFindAllShopReceipt2TransactionsParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllShopReceipt2TransactionsParameters, ITransaction>>;
     /**
      * Retrieves a set of Transaction objects associated to a Shop.
      */
@@ -156,5 +156,5 @@ export declare class Transaction {
     /**
      * Retrieves a set of Transaction objects associated to a User.
      */
-    findAllUserBuyerTransactions(parameters: IFindAllUserBuyerTransactionsParameters, options?: IAuthOptions): Promise<any>;
+    findAllUserBuyerTransactions(parameters: IFindAllUserBuyerTransactionsParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllUserBuyerTransactionsParameters, ITransaction>>;
 }

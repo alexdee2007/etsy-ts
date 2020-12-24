@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface IPayment {
     /**
      * The payment's numeric ID.
@@ -111,21 +112,21 @@ export interface IFindShopPaymentByReceiptParameters extends IStandardParameters
 }
 export declare class Payment {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Get an Etsy Payments Transaction
      */
-    findPayment(parameters: IFindPaymentParameters, options?: IAuthOptions): Promise<any>;
+    findPayment(parameters: IFindPaymentParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindPaymentParameters, IPayment>>;
     /**
      * Get a Payment from a Ledger Entry ID, if applicable
      */
-    findPaymentForLedgerEntry(parameters: IFindPaymentForLedgerEntryParameters, options?: IAuthOptions): Promise<any>;
+    findPaymentForLedgerEntry(parameters: IFindPaymentForLedgerEntryParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindPaymentForLedgerEntryParameters, IPayment>>;
     /**
      * Get a Payment from a PaymentAccount Ledger Entry ID, if applicable
      */
-    findPaymentForPaymentAccountLedgerEntry(parameters: IFindPaymentForPaymentAccountLedgerEntryParameters, options?: IAuthOptions): Promise<any>;
+    findPaymentForPaymentAccountLedgerEntry(parameters: IFindPaymentForPaymentAccountLedgerEntryParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindPaymentForPaymentAccountLedgerEntryParameters, IPayment>>;
     /**
      * Get a Payment by Shop Receipt ID
      */
-    findShopPaymentByReceipt(parameters: IFindShopPaymentByReceiptParameters, options?: IAuthOptions): Promise<any>;
+    findShopPaymentByReceipt(parameters: IFindShopPaymentByReceiptParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindShopPaymentByReceiptParameters, IPayment>>;
 }

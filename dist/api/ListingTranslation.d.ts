@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface IListingTranslation {
     /**
      * The numeric ID for the Listing.
@@ -46,21 +47,21 @@ export interface IDeleteListingTranslationParameters extends IStandardParameters
 }
 export declare class ListingTranslation {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Retrieves a ListingTranslation by listing_id and language
      */
-    getListingTranslation(parameters: IGetListingTranslationParameters, options?: IAuthOptions): Promise<any>;
+    getListingTranslation(parameters: IGetListingTranslationParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetListingTranslationParameters, IListingTranslation>>;
     /**
      * Creates a ListingTranslation by listing_id and language
      */
-    createListingTranslation(parameters: ICreateListingTranslationParameters, options?: IAuthOptions): Promise<any>;
+    createListingTranslation(parameters: ICreateListingTranslationParameters, options?: IAuthOptions): Promise<IStandardResponse<ICreateListingTranslationParameters, IListingTranslation>>;
     /**
      * Updates a ListingTranslation by listing_id and language
      */
-    updateListingTranslation(parameters: IUpdateListingTranslationParameters, options?: IAuthOptions): Promise<any>;
+    updateListingTranslation(parameters: IUpdateListingTranslationParameters, options?: IAuthOptions): Promise<IStandardResponse<IUpdateListingTranslationParameters, IListingTranslation>>;
     /**
      * Deletes a ListingTranslation by listing_id and language
      */
-    deleteListingTranslation(parameters: IDeleteListingTranslationParameters, options?: IAuthOptions): Promise<any>;
+    deleteListingTranslation(parameters: IDeleteListingTranslationParameters, options?: IAuthOptions): Promise<IStandardResponse<IDeleteListingTranslationParameters, IListingTranslation>>;
 }

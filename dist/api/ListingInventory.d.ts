@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface IListingInventory {
     /**
      * The products available for this listing.
@@ -31,13 +32,13 @@ export interface IUpdateInventoryParameters extends IStandardParameters {
 }
 export declare class ListingInventory {
     private readonly client;
-    constructor(client: ClientOauth);
+    constructor(client: Client);
     /**
      * Get the inventory for a listing
      */
-    getInventory(parameters: IGetInventoryParameters, options?: IAuthOptions): Promise<any>;
+    getInventory(parameters: IGetInventoryParameters, options?: IAuthOptions): Promise<IStandardResponse<IGetInventoryParameters, IListingInventory>>;
     /**
      * Update the inventory for a listing
      */
-    updateInventory(parameters: IUpdateInventoryParameters, options?: IAuthOptions): Promise<any>;
+    updateInventory(parameters: IUpdateInventoryParameters, options?: IAuthOptions): Promise<IStandardResponse<IUpdateInventoryParameters, IListingInventory>>;
 }
