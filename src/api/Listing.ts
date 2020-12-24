@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IListing {
@@ -620,61 +621,85 @@ export interface IFindAllCartListingsParameters extends IStandardParameters {
 
 //methods class
 export class Listing {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Creates a new Listing.
      */
-    async createListing(parameters: ICreateListingParameters, options?: IAuthOptions) {
+    async createListing(
+        parameters: ICreateListingParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<ICreateListingParameters, IListing>> {
         return this.client.request('/listings', parameters, 'POST', options);
     }
 
     /**
      * Finds all FeaturedTreasury listings.
      */
-    async findAllFeaturedListings(parameters: IFindAllFeaturedListingsParameters, options?: IAuthOptions) {
+    async findAllFeaturedListings(
+        parameters: IFindAllFeaturedListingsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllFeaturedListingsParameters, IListing>> {
         return this.client.request('/featured_treasuries/listings', parameters, 'GET', options);
     }
 
     /**
      * Retrieves a Listing by id.
      */
-    async getListing(parameters: IGetListingParameters, options?: IAuthOptions) {
+    async getListing(
+        parameters: IGetListingParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetListingParameters, IListing>> {
         return this.client.request('/listings/:listing_id', parameters, 'GET', options);
     }
 
     /**
      * Updates a Listing
      */
-    async updateListing(parameters: IUpdateListingParameters, options?: IAuthOptions) {
+    async updateListing(
+        parameters: IUpdateListingParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUpdateListingParameters, IListing>> {
         return this.client.request('/listings/:listing_id', parameters, 'PUT', options);
     }
 
     /**
      * Deletes a Listing
      */
-    async deleteListing(parameters: IDeleteListingParameters, options?: IAuthOptions) {
+    async deleteListing(
+        parameters: IDeleteListingParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteListingParameters, IListing>> {
         return this.client.request('/listings/:listing_id', parameters, 'DELETE', options);
     }
 
     /**
      * Finds all active Listings. (Note: the sort_on and sort_order options only work when combined with one of the search options: keywords, color, tags, location, etc.)
      */
-    async findAllListingActive(parameters: IFindAllListingActiveParameters, options?: IAuthOptions) {
+    async findAllListingActive(
+        parameters: IFindAllListingActiveParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllListingActiveParameters, IListing>> {
         return this.client.request('/listings/active', parameters, 'GET', options);
     }
 
     /**
      * Collects the list of interesting listings
      */
-    async getInterestingListings(parameters: IGetInterestingListingsParameters, options?: IAuthOptions) {
+    async getInterestingListings(
+        parameters: IGetInterestingListingsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetInterestingListingsParameters, IListing>> {
         return this.client.request('/listings/interesting', parameters, 'GET', options);
     }
 
     /**
      * Collects the list of listings used to generate the trending listing page
      */
-    async getTrendingListings(parameters: IGetTrendingListingsParameters, options?: IAuthOptions) {
+    async getTrendingListings(
+        parameters: IGetTrendingListingsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetTrendingListingsParameters, IListing>> {
         return this.client.request('/listings/trending', parameters, 'GET', options);
     }
 
@@ -684,7 +709,7 @@ export class Listing {
     async findAllListingsForFeaturedTreasuryId(
         parameters: IFindAllListingsForFeaturedTreasuryIdParameters,
         options?: IAuthOptions,
-    ) {
+    ): Promise<IStandardResponse<IFindAllListingsForFeaturedTreasuryIdParameters, IListing>> {
         return this.client.request('/featured_treasuries/:featured_treasury_id/listings', parameters, 'GET', options);
     }
 
@@ -694,7 +719,7 @@ export class Listing {
     async findAllActiveListingsForFeaturedTreasuryId(
         parameters: IFindAllActiveListingsForFeaturedTreasuryIdParameters,
         options?: IAuthOptions,
-    ) {
+    ): Promise<IStandardResponse<IFindAllActiveListingsForFeaturedTreasuryIdParameters, IListing>> {
         return this.client.request(
             '/featured_treasuries/:featured_treasury_id/listings/active',
             parameters,
@@ -709,70 +734,97 @@ export class Listing {
     async findAllCurrentFeaturedListings(
         parameters: IFindAllCurrentFeaturedListingsParameters,
         options?: IAuthOptions,
-    ) {
+    ): Promise<IStandardResponse<IFindAllCurrentFeaturedListingsParameters, IListing>> {
         return this.client.request('/featured_treasuries/listings/homepage_current', parameters, 'GET', options);
     }
 
     /**
      * Finds all listings in a receipt
      */
-    async findAllReceiptListings(parameters: IFindAllReceiptListingsParameters, options?: IAuthOptions) {
+    async findAllReceiptListings(
+        parameters: IFindAllReceiptListingsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllReceiptListingsParameters, IListing>> {
         return this.client.request('/receipts/:receipt_id/listings', parameters, 'GET', options);
     }
 
     /**
      * Finds all active Listings associated with a Shop.(NOTE: If calling on behalf of a shop owner in the context of listing management, be sure to include the parameter include_private = true.  This will return private listings that are not publicly visible in the shop, but which can be managed.  This is an experimental feature and may change.)
      */
-    async findAllShopListingsActive(parameters: IFindAllShopListingsActiveParameters, options?: IAuthOptions) {
+    async findAllShopListingsActive(
+        parameters: IFindAllShopListingsActiveParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllShopListingsActiveParameters, IListing>> {
         return this.client.request('/shops/:shop_id/listings/active', parameters, 'GET', options);
     }
 
     /**
      * Finds all of a Shop's draft listings
      */
-    async findAllShopListingsDraft(parameters: IFindAllShopListingsDraftParameters, options?: IAuthOptions) {
+    async findAllShopListingsDraft(
+        parameters: IFindAllShopListingsDraftParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllShopListingsDraftParameters, IListing>> {
         return this.client.request('/shops/:shop_id/listings/draft', parameters, 'GET', options);
     }
 
     /**
      * Retrieves Listings associated to a Shop that are expired
      */
-    async findAllShopListingsExpired(parameters: IFindAllShopListingsExpiredParameters, options?: IAuthOptions) {
+    async findAllShopListingsExpired(
+        parameters: IFindAllShopListingsExpiredParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllShopListingsExpiredParameters, IListing>> {
         return this.client.request('/shops/:shop_id/listings/expired', parameters, 'GET', options);
     }
 
     /**
      * Retrieves a Listing associated to a Shop that is inactive
      */
-    async getShopListingExpired(parameters: IGetShopListingExpiredParameters, options?: IAuthOptions) {
+    async getShopListingExpired(
+        parameters: IGetShopListingExpiredParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetShopListingExpiredParameters, IListing>> {
         return this.client.request('/shops/:shop_id/listings/expired/:listing_id', parameters, 'GET', options);
     }
 
     /**
      * Retrieves Listings associated to a Shop that are featured
      */
-    async findAllShopListingsFeatured(parameters: IFindAllShopListingsFeaturedParameters, options?: IAuthOptions) {
+    async findAllShopListingsFeatured(
+        parameters: IFindAllShopListingsFeaturedParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllShopListingsFeaturedParameters, IListing>> {
         return this.client.request('/shops/:shop_id/listings/featured', parameters, 'GET', options);
     }
 
     /**
      * Retrieves Listings associated to a Shop that are inactive
      */
-    async findAllShopListingsInactive(parameters: IFindAllShopListingsInactiveParameters, options?: IAuthOptions) {
+    async findAllShopListingsInactive(
+        parameters: IFindAllShopListingsInactiveParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllShopListingsInactiveParameters, IListing>> {
         return this.client.request('/shops/:shop_id/listings/inactive', parameters, 'GET', options);
     }
 
     /**
      * Retrieves a Listing associated to a Shop that is inactive
      */
-    async getShopListingInactive(parameters: IGetShopListingInactiveParameters, options?: IAuthOptions) {
+    async getShopListingInactive(
+        parameters: IGetShopListingInactiveParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetShopListingInactiveParameters, IListing>> {
         return this.client.request('/shops/:shop_id/listings/inactive/:listing_id', parameters, 'GET', options);
     }
 
     /**
      * Finds all listings within a shop section
      */
-    async findAllShopSectionListings(parameters: IFindAllShopSectionListingsParameters, options?: IAuthOptions) {
+    async findAllShopSectionListings(
+        parameters: IFindAllShopSectionListingsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllShopSectionListingsParameters, IListing>> {
         return this.client.request('/shops/:shop_id/sections/:shop_section_id/listings', parameters, 'GET', options);
     }
 
@@ -782,7 +834,7 @@ export class Listing {
     async findAllShopSectionListingsActive(
         parameters: IFindAllShopSectionListingsActiveParameters,
         options?: IAuthOptions,
-    ) {
+    ): Promise<IStandardResponse<IFindAllShopSectionListingsActiveParameters, IListing>> {
         return this.client.request(
             '/shops/:shop_id/sections/:shop_section_id/listings/active',
             parameters,
@@ -794,7 +846,10 @@ export class Listing {
     /**
      * Finds all listings in a given Cart
      */
-    async findAllCartListings(parameters: IFindAllCartListingsParameters, options?: IAuthOptions) {
+    async findAllCartListings(
+        parameters: IFindAllCartListingsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllCartListingsParameters, IListing>> {
         return this.client.request('/users/:user_id/carts/:cart_id/listings', parameters, 'GET', options);
     }
 }

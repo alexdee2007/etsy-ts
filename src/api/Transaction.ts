@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface ITransaction {
@@ -144,20 +145,25 @@ export interface IFindAllUserBuyerTransactionsParameters extends IStandardParame
 
 //methods class
 export class Transaction {
-
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Retrieves a Shop_Transaction by id.
      */
-    async getShop_Transaction(parameters: IGetShopTransactionParameters, options?: IAuthOptions) {
+    async getShop_Transaction(
+        parameters: IGetShopTransactionParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetShopTransactionParameters, ITransaction>> {
         return this.client.request('/transactions/:transaction_id', parameters, 'GET', options);
     }
 
     /**
      * Retrieves a set of Transaction objects associated to a Listing.
      */
-    async findAllListingTransactions(parameters: IFindAllListingTransactionsParameters, options?: IAuthOptions) {
+    async findAllListingTransactions(
+        parameters: IFindAllListingTransactionsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllListingTransactionsParameters, ITransaction>> {
         return this.client.request('/listings/:listing_id/transactions', parameters, 'GET', options);
     }
 
@@ -167,21 +173,27 @@ export class Transaction {
     async findAllShop_Receipt2Transactions(
         parameters: IFindAllShopReceipt2TransactionsParameters,
         options?: IAuthOptions,
-    ) {
+    ): Promise<IStandardResponse<IFindAllShopReceipt2TransactionsParameters, ITransaction>> {
         return this.client.request('/receipts/:receipt_id/transactions', parameters, 'GET', options);
     }
 
     /**
      * Retrieves a set of Transaction objects associated to a Shop.
      */
-    async findAllShopTransactions(parameters: IFindAllShopTransactionsParameters, options?: IAuthOptions) {
+    async findAllShopTransactions(
+        parameters: IFindAllShopTransactionsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllShopTransactionsParameters, ITransaction>> {
         return this.client.request('/shops/:shop_id/transactions', parameters, 'GET', options);
     }
 
     /**
      * Retrieves a set of Transaction objects associated to a User.
      */
-    async findAllUserBuyerTransactions(parameters: IFindAllUserBuyerTransactionsParameters, options?: IAuthOptions) {
+    async findAllUserBuyerTransactions(
+        parameters: IFindAllUserBuyerTransactionsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllUserBuyerTransactionsParameters, ITransaction>> {
         return this.client.request('/users/:user_id/transactions', parameters, 'GET', options);
     }
 }

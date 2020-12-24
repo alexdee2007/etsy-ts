@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IFavoriteListing {
@@ -53,40 +54,55 @@ export interface IDeleteUserFavoriteListingsParameters extends IStandardParamete
 
 //methods class
 export class FavoriteListing {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Retrieves a set of FavoriteListing objects associated to a Listing.
      */
-    async findAllListingFavoredBy(parameters: IFindAllListingFavoredByParameters, options?: IAuthOptions) {
+    async findAllListingFavoredBy(
+        parameters: IFindAllListingFavoredByParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllListingFavoredByParameters, IFavoriteListing>> {
         return this.client.request('/listings/:listing_id/favored-by', parameters, 'GET', options);
     }
 
     /**
      * Finds all favorite listings for a user
      */
-    async findAllUserFavoriteListings(parameters: IFindAllUserFavoriteListingsParameters, options?: IAuthOptions) {
+    async findAllUserFavoriteListings(
+        parameters: IFindAllUserFavoriteListingsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllUserFavoriteListingsParameters, IFavoriteListing>> {
         return this.client.request('/users/:user_id/favorites/listings', parameters, 'GET', options);
     }
 
     /**
      * Finds a favorite listing for a user
      */
-    async findUserFavoriteListings(parameters: IFindUserFavoriteListingsParameters, options?: IAuthOptions) {
+    async findUserFavoriteListings(
+        parameters: IFindUserFavoriteListingsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindUserFavoriteListingsParameters, IFavoriteListing>> {
         return this.client.request('/users/:user_id/favorites/listings/:listing_id', parameters, 'GET', options);
     }
 
     /**
      * Creates a new favorite listing for a user
      */
-    async createUserFavoriteListings(parameters: ICreateUserFavoriteListingsParameters, options?: IAuthOptions) {
+    async createUserFavoriteListings(
+        parameters: ICreateUserFavoriteListingsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<ICreateUserFavoriteListingsParameters, IFavoriteListing>> {
         return this.client.request('/users/:user_id/favorites/listings/:listing_id', parameters, 'POST', options);
     }
 
     /**
      * Delete a favorite listing for a user
      */
-    async deleteUserFavoriteListings(parameters: IDeleteUserFavoriteListingsParameters, options?: IAuthOptions) {
+    async deleteUserFavoriteListings(
+        parameters: IDeleteUserFavoriteListingsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteUserFavoriteListingsParameters, IFavoriteListing>> {
         return this.client.request('/users/:user_id/favorites/listings/:listing_id', parameters, 'DELETE', options);
     }
 }

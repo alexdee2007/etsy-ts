@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IImageType {
@@ -22,12 +23,15 @@ export interface IListImageTypesParameters extends IStandardParameters {}
 
 //methods class
 export class ImageType {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Lists available image types along with their supported sizes.
      */
-    async listImageTypes(parameters: IListImageTypesParameters, options?: IAuthOptions) {
+    async listImageTypes(
+        parameters: IListImageTypesParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IListImageTypesParameters, IImageType>> {
         return this.client.request('/image_types', parameters, 'GET', options);
     }
 }

@@ -1,5 +1,7 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
+import { ICartListing, IShippingOption } from './Cart';
 
 //fields
 export interface IGuestCart {
@@ -65,7 +67,7 @@ export interface IGuestCart {
     /**
      * An array of purchase information for the listings
      */
-    listings: any[];
+    listings: ICartListing[];
     /**
      * The cart is download only
      */
@@ -77,7 +79,7 @@ export interface IGuestCart {
     /**
      * The selected shipping option identifier for the cart
      */
-    shipping_option: any;
+    shipping_option: IShippingOption;
 }
 
 //parameters types
@@ -128,19 +130,25 @@ export interface IDeleteGuestCartParameters extends IStandardParameters {
 
 //methods class
 export class GuestCart {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Get all guest's carts
      */
-    async findAllGuestCarts(parameters: IFindAllGuestCartsParameters, options?: IAuthOptions) {
+    async findAllGuestCarts(
+        parameters: IFindAllGuestCartsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllGuestCartsParameters, IGuestCart>> {
         return this.client.request('/guests/:guest_id/carts', parameters, 'GET', options);
     }
 
     /**
      * Add a listing to guest's cart
      */
-    async addToGuestCart(parameters: IAddToGuestCartParameters, options?: IAuthOptions) {
+    async addToGuestCart(
+        parameters: IAddToGuestCartParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IAddToGuestCartParameters, IGuestCart>> {
         return this.client.request('/guests/:guest_id/carts', parameters, 'POST', options);
     }
 
@@ -150,35 +158,47 @@ export class GuestCart {
     async updateGuestCartListingQuantity(
         parameters: IUpdateGuestCartListingQuantityParameters,
         options?: IAuthOptions,
-    ) {
+    ): Promise<IStandardResponse<IUpdateGuestCartListingQuantityParameters, IGuestCart>> {
         return this.client.request('/guests/:guest_id/carts', parameters, 'PUT', options);
     }
 
     /**
      * Remove a listing from a guest's cart
      */
-    async removeGuestCartListing(parameters: IRemoveGuestCartListingParameters, options?: IAuthOptions) {
+    async removeGuestCartListing(
+        parameters: IRemoveGuestCartListingParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IRemoveGuestCartListingParameters, IGuestCart>> {
         return this.client.request('/guests/:guest_id/carts', parameters, 'DELETE', options);
     }
 
     /**
      * Get a guest's cart
      */
-    async findGuestCart(parameters: IFindGuestCartParameters, options?: IAuthOptions) {
+    async findGuestCart(
+        parameters: IFindGuestCartParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindGuestCartParameters, IGuestCart>> {
         return this.client.request('/guests/:guest_id/carts/:cart_id', parameters, 'GET', options);
     }
 
     /**
      * Update a guest's cart
      */
-    async updateGuestCart(parameters: IUpdateGuestCartParameters, options?: IAuthOptions) {
+    async updateGuestCart(
+        parameters: IUpdateGuestCartParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUpdateGuestCartParameters, IGuestCart>> {
         return this.client.request('/guests/:guest_id/carts/:cart_id', parameters, 'PUT', options);
     }
 
     /**
      * Delete a guest's cart
      */
-    async deleteGuestCart(parameters: IDeleteGuestCartParameters, options?: IAuthOptions) {
+    async deleteGuestCart(
+        parameters: IDeleteGuestCartParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteGuestCartParameters, IGuestCart>> {
         return this.client.request('/guests/:guest_id/carts/:cart_id', parameters, 'DELETE', options);
     }
 }

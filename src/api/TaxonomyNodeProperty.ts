@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface ITaxonomyNodeProperty {
@@ -18,7 +19,7 @@ export interface ITaxonomyNodeProperty {
     /**
      * A list of available scales.
      */
-    scales: any[];
+    scales: ITaxonomyPropertyScale[];
     /**
      * Is this attribute required for listings in this category?
      */
@@ -38,11 +39,49 @@ export interface ITaxonomyNodeProperty {
     /**
      * A list of allowed values.
      */
-    possible_values: any[];
+    possible_values: ITaxonomyPropertyValue[];
     /**
      * A list of values that are always selected for the given category.
      */
-    selected_values: any[];
+    selected_values: ITaxonomyPropertyValue[];
+}
+
+export interface ITaxonomyPropertyScale {
+    /**
+     * The ID of the scale.
+     */
+    scale_id: number;
+    /**
+     * How to label the scale.
+     */
+    display_name: string;
+    /**
+     * A description of the scale.
+     */
+    description: string;
+}
+
+export interface ITaxonomyPropertyValue {
+    /**
+     * The numeric ID of this value.
+     */
+    value_id: number;
+    /**
+     * How to display the value.
+     */
+    name: string;
+    /**
+     * The ID of the scale this belongs to (if any).
+     */
+    scale_id: number;
+    /**
+     * The order of this value under its property
+     */
+    order: number;
+    /**
+     * The list of values this value is equal to (if any).
+     */
+    equal_to: number[];
 }
 
 //parameters types
@@ -52,12 +91,15 @@ export interface IGetTaxonomyNodePropertiesParameters extends IStandardParameter
 
 //methods class
 export class TaxonomyNodeProperty {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Get the possible properties of a taxonomy node
      */
-    async getTaxonomyNodeProperties(parameters: IGetTaxonomyNodePropertiesParameters, options?: IAuthOptions) {
+    async getTaxonomyNodeProperties(
+        parameters: IGetTaxonomyNodePropertiesParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetTaxonomyNodePropertiesParameters, ITaxonomyNodeProperty>> {
         return this.client.request('/taxonomy/seller/:taxonomy_id/properties', parameters, 'GET', options);
     }
 }

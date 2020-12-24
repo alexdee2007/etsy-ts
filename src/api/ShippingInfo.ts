@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IShippingInfo {
@@ -75,7 +76,7 @@ export interface IDeleteShippingInfoParameters extends IStandardParameters {
 
 //methods class
 export class ShippingInfo {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Retrieves a set of ShippingProfileEntries objects associated to a Listing.
@@ -83,35 +84,47 @@ export class ShippingInfo {
     async findAllListingShippingProfileEntries(
         parameters: IFindAllListingShippingProfileEntriesParameters,
         options?: IAuthOptions,
-    ) {
+    ): Promise<IStandardResponse<IFindAllListingShippingProfileEntriesParameters, IShippingInfo>> {
         return this.client.request('/listings/:listing_id/shipping/info', parameters, 'GET', options);
     }
 
     /**
      * Creates a new ShippingInfo.
      */
-    async createShippingInfo(parameters: ICreateShippingInfoParameters, options?: IAuthOptions) {
+    async createShippingInfo(
+        parameters: ICreateShippingInfoParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<ICreateShippingInfoParameters, IShippingInfo>> {
         return this.client.request('/listings/:listing_id/shipping/info', parameters, 'POST', options);
     }
 
     /**
      * Retrieves a ShippingInfo by id.
      */
-    async getShippingInfo(parameters: IGetShippingInfoParameters, options?: IAuthOptions) {
+    async getShippingInfo(
+        parameters: IGetShippingInfoParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetShippingInfoParameters, IShippingInfo>> {
         return this.client.request('/shipping/info/:shipping_info_id', parameters, 'GET', options);
     }
 
     /**
      * Updates a ShippingInfo with the given id.
      */
-    async updateShippingInfo(parameters: IUpdateShippingInfoParameters, options?: IAuthOptions) {
+    async updateShippingInfo(
+        parameters: IUpdateShippingInfoParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUpdateShippingInfoParameters, IShippingInfo>> {
         return this.client.request('/shipping/info/:shipping_info_id', parameters, 'PUT', options);
     }
 
     /**
      * Deletes the ShippingInfo with the given id.
      */
-    async deleteShippingInfo(parameters: IDeleteShippingInfoParameters, options?: IAuthOptions) {
+    async deleteShippingInfo(
+        parameters: IDeleteShippingInfoParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteShippingInfoParameters, IShippingInfo>> {
         return this.client.request('/shipping/info/:shipping_info_id', parameters, 'DELETE', options);
     }
 }

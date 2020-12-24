@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface ILedger {
@@ -32,12 +33,15 @@ export interface IFindLedgerParameters extends IStandardParameters {
 
 //methods class
 export class Ledger {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Get a Shop Payment Account Ledger
      */
-    async findLedger(parameters: IFindLedgerParameters, options?: IAuthOptions) {
+    async findLedger(
+        parameters: IFindLedgerParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindLedgerParameters, ILedger>> {
         return this.client.request('/shops/:shop_id/ledger/', parameters, 'GET', options);
     }
 }

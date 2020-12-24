@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IPaymentAccountLedgerEntry {
@@ -49,12 +50,15 @@ export interface IFindPaymentAccountEntriesParameters extends IStandardParameter
 
 //methods class
 export class PaymentAccountLedgerEntry {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Get a Shop Payment Account Ledger's Entries
      */
-    async findPaymentAccountEntries(parameters: IFindPaymentAccountEntriesParameters, options?: IAuthOptions) {
+    async findPaymentAccountEntries(
+        parameters: IFindPaymentAccountEntriesParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindPaymentAccountEntriesParameters, IPaymentAccountLedgerEntry>> {
         return this.client.request('/shops/:shop_id/payment_account/entries', parameters, 'GET', options);
     }
 }

@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IAvatar {
@@ -62,19 +63,25 @@ export interface IGetAvatarImgSrcParameters extends IStandardParameters {
 
 //methods class
 export class Avatar {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Upload a new user avatar image
      */
-    async uploadAvatar(parameters: IUploadAvatarParameters, options?: IAuthOptions) {
+    async uploadAvatar(
+        parameters: IUploadAvatarParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUploadAvatarParameters, IAvatar>> {
         return this.client.request('/users/:user_id/avatar', parameters, 'POST', options);
     }
 
     /**
      * Get avatar image source
      */
-    async getAvatarImgSrc(parameters: IGetAvatarImgSrcParameters, options?: IAuthOptions) {
+    async getAvatarImgSrc(
+        parameters: IGetAvatarImgSrcParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetAvatarImgSrcParameters, IAvatar>> {
         return this.client.request('/users/:user_id/avatar/src', parameters, 'GET', options);
     }
 }

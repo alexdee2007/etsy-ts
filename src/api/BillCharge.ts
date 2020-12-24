@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IBillCharge {
@@ -62,19 +63,25 @@ export interface IFindAllUserChargesParameters extends IStandardParameters {
 
 //methods class
 export class BillCharge {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Metadata for the set of BillCharges objects associated to a User
      */
-    async getUserChargesMetadata(parameters: IGetUserChargesMetadataParameters, options?: IAuthOptions) {
+    async getUserChargesMetadata(
+        parameters: IGetUserChargesMetadataParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetUserChargesMetadataParameters, IBillCharge>> {
         return this.client.request('/users/:user_id/charges/meta', parameters, 'GET', options);
     }
 
     /**
      * Retrieves a set of BillCharge objects associated to a User. NOTE: from 8/8/12 the min_created and max_created arguments will be mandatory and can be no more than 31 days apart.
      */
-    async findAllUserCharges(parameters: IFindAllUserChargesParameters, options?: IAuthOptions) {
+    async findAllUserCharges(
+        parameters: IFindAllUserChargesParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllUserChargesParameters, IBillCharge>> {
         return this.client.request('/users/:user_id/charges', parameters, 'GET', options);
     }
 }

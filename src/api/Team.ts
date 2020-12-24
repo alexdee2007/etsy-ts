@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface ITeam {
@@ -45,26 +46,35 @@ export interface IFindAllTeamsForUserParameters extends IStandardParameters {
 
 //methods class
 export class Team {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Returns all Teams
      */
-    async findAllTeams(parameters: IFindAllTeamsParameters, options?: IAuthOptions) {
+    async findAllTeams(
+        parameters: IFindAllTeamsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllTeamsParameters, ITeam>> {
         return this.client.request('/teams', parameters, 'GET', options);
     }
 
     /**
      * Returns specified team by ID or team name
      */
-    async findTeams(parameters: IFindTeamsParameters, options?: IAuthOptions) {
+    async findTeams(
+        parameters: IFindTeamsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindTeamsParameters, ITeam>> {
         return this.client.request('/teams/:team_ids/', parameters, 'GET', options);
     }
 
     /**
      * Returns a list of teams for a specific user
      */
-    async findAllTeamsForUser(parameters: IFindAllTeamsForUserParameters, options?: IAuthOptions) {
+    async findAllTeamsForUser(
+        parameters: IFindAllTeamsForUserParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllTeamsForUserParameters, ITeam>> {
         return this.client.request('/users/:user_id/teams', parameters, 'GET', options);
     }
 }

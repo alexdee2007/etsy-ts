@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IFeedback {
@@ -102,33 +103,45 @@ export interface IFindAllFeedbackFromSellersParameters extends IStandardParamete
 
 //methods class
 export class Feedback {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    async findAllUserFeedbackAsAuthor(parameters: IFindAllUserFeedbackAsAuthorParameters, options?: IAuthOptions) {
+    async findAllUserFeedbackAsAuthor(
+        parameters: IFindAllUserFeedbackAsAuthorParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllUserFeedbackAsAuthorParameters, IFeedback>> {
         return this.client.request('/users/:user_id/feedback/as-author', parameters, 'GET', options);
     }
 
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    async findAllUserFeedbackAsBuyer(parameters: IFindAllUserFeedbackAsBuyerParameters, options?: IAuthOptions) {
+    async findAllUserFeedbackAsBuyer(
+        parameters: IFindAllUserFeedbackAsBuyerParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllUserFeedbackAsBuyerParameters, IFeedback>> {
         return this.client.request('/users/:user_id/feedback/as-buyer', parameters, 'GET', options);
     }
 
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    async findAllUserFeedbackAsSeller(parameters: IFindAllUserFeedbackAsSellerParameters, options?: IAuthOptions) {
+    async findAllUserFeedbackAsSeller(
+        parameters: IFindAllUserFeedbackAsSellerParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllUserFeedbackAsSellerParameters, IFeedback>> {
         return this.client.request('/users/:user_id/feedback/as-seller', parameters, 'GET', options);
     }
 
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    async findAllUserFeedbackAsSubject(parameters: IFindAllUserFeedbackAsSubjectParameters, options?: IAuthOptions) {
+    async findAllUserFeedbackAsSubject(
+        parameters: IFindAllUserFeedbackAsSubjectParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllUserFeedbackAsSubjectParameters, IFeedback>> {
         return this.client.request('/users/:user_id/feedback/as-subject', parameters, 'GET', options);
     }
 
@@ -137,7 +150,10 @@ export class Feedback {
      This is essentially the union between the findAllUserFeedbackAsBuyer
      and findAllUserFeedbackAsSubject methods.
      */
-    async findAllFeedbackFromBuyers(parameters: IFindAllFeedbackFromBuyersParameters, options?: IAuthOptions) {
+    async findAllFeedbackFromBuyers(
+        parameters: IFindAllFeedbackFromBuyersParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllFeedbackFromBuyersParameters, IFeedback>> {
         return this.client.request('/users/:user_id/feedback/from-buyers', parameters, 'GET', options);
     }
 
@@ -146,7 +162,10 @@ export class Feedback {
      This is essentially the union between
      the findAllUserFeedbackAsBuyer and findAllUserFeedbackAsSubject methods.
      */
-    async findAllFeedbackFromSellers(parameters: IFindAllFeedbackFromSellersParameters, options?: IAuthOptions) {
+    async findAllFeedbackFromSellers(
+        parameters: IFindAllFeedbackFromSellersParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllFeedbackFromSellersParameters, IFeedback>> {
         return this.client.request('/users/:user_id/feedback/from-sellers', parameters, 'GET', options);
     }
 }

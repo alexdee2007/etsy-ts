@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IShippingUpgrade {
@@ -96,33 +97,45 @@ export interface IDeleteShippingTemplateUpgradeParameters extends IStandardParam
 
 //methods class
 export class ShippingUpgrade {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Get the shipping upgrades available for a listing.
      */
-    async getListingShippingUpgrades(parameters: IGetListingShippingUpgradesParameters, options?: IAuthOptions) {
+    async getListingShippingUpgrades(
+        parameters: IGetListingShippingUpgradesParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetListingShippingUpgradesParameters, IShippingUpgrade>> {
         return this.client.request('/listings/:listing_id/shipping/upgrades', parameters, 'GET', options);
     }
 
     /**
      * Creates a new ShippingUpgrade for the listing. Will unlink the listing if linked to a ShippingTemplate.
      */
-    async createListingShippingUpgrade(parameters: ICreateListingShippingUpgradeParameters, options?: IAuthOptions) {
+    async createListingShippingUpgrade(
+        parameters: ICreateListingShippingUpgradeParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<ICreateListingShippingUpgradeParameters, IShippingUpgrade>> {
         return this.client.request('/listings/:listing_id/shipping/upgrades', parameters, 'POST', options);
     }
 
     /**
      * Updates a ShippingUpgrade on a listing. Will unlink the listing if linked to a ShippingTemplate.
      */
-    async updateListingShippingUpgrade(parameters: IUpdateListingShippingUpgradeParameters, options?: IAuthOptions) {
+    async updateListingShippingUpgrade(
+        parameters: IUpdateListingShippingUpgradeParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUpdateListingShippingUpgradeParameters, IShippingUpgrade>> {
         return this.client.request('/listings/:listing_id/shipping/upgrades', parameters, 'PUT', options);
     }
 
     /**
      * Deletes the ShippingUpgrade from the listing. Will unlink the listing if linked to a ShippingTemplate.
      */
-    async deleteListingShippingUpgrade(parameters: IDeleteListingShippingUpgradeParameters, options?: IAuthOptions) {
+    async deleteListingShippingUpgrade(
+        parameters: IDeleteListingShippingUpgradeParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteListingShippingUpgradeParameters, IShippingUpgrade>> {
         return this.client.request('/listings/:listing_id/shipping/upgrades', parameters, 'DELETE', options);
     }
 
@@ -132,28 +145,37 @@ export class ShippingUpgrade {
     async findAllShippingTemplateUpgrades(
         parameters: IFindAllShippingTemplateUpgradesParameters,
         options?: IAuthOptions,
-    ) {
+    ): Promise<IStandardResponse<IFindAllShippingTemplateUpgradesParameters, IShippingUpgrade>> {
         return this.client.request('/shipping/templates/:shipping_template_id/upgrades', parameters, 'GET', options);
     }
 
     /**
      * Creates a new ShippingUpgrade for the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
      */
-    async createShippingTemplateUpgrade(parameters: ICreateShippingTemplateUpgradeParameters, options?: IAuthOptions) {
+    async createShippingTemplateUpgrade(
+        parameters: ICreateShippingTemplateUpgradeParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<ICreateShippingTemplateUpgradeParameters, IShippingUpgrade>> {
         return this.client.request('/shipping/templates/:shipping_template_id/upgrades', parameters, 'POST', options);
     }
 
     /**
      * Updates a ShippingUpgrade of the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
      */
-    async updateShippingTemplateUpgrade(parameters: IUpdateShippingTemplateUpgradeParameters, options?: IAuthOptions) {
+    async updateShippingTemplateUpgrade(
+        parameters: IUpdateShippingTemplateUpgradeParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUpdateShippingTemplateUpgradeParameters, IShippingUpgrade>> {
         return this.client.request('/shipping/templates/:shipping_template_id/upgrades', parameters, 'PUT', options);
     }
 
     /**
      * Deletes the ShippingUpgrade from the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
      */
-    async deleteShippingTemplateUpgrade(parameters: IDeleteShippingTemplateUpgradeParameters, options?: IAuthOptions) {
+    async deleteShippingTemplateUpgrade(
+        parameters: IDeleteShippingTemplateUpgradeParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteShippingTemplateUpgradeParameters, IShippingUpgrade>> {
         return this.client.request('/shipping/templates/:shipping_template_id/upgrades', parameters, 'DELETE', options);
     }
 }

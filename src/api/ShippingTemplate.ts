@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IShippingTemplate {
@@ -77,33 +78,45 @@ export interface IFindAllUserShippingProfilesParameters extends IStandardParamet
 
 //methods class
 export class ShippingTemplate {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Creates a new ShippingTemplate
      */
-    async createShippingTemplate(parameters: ICreateShippingTemplateParameters, options?: IAuthOptions) {
+    async createShippingTemplate(
+        parameters: ICreateShippingTemplateParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<ICreateShippingTemplateParameters, IShippingTemplate>> {
         return this.client.request('/shipping/templates', parameters, 'POST', options);
     }
 
     /**
      * Retrieves a ShippingTemplate by id.
      */
-    async getShippingTemplate(parameters: IGetShippingTemplateParameters, options?: IAuthOptions) {
+    async getShippingTemplate(
+        parameters: IGetShippingTemplateParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetShippingTemplateParameters, IShippingTemplate>> {
         return this.client.request('/shipping/templates/:shipping_template_id', parameters, 'GET', options);
     }
 
     /**
      * Updates a ShippingTemplate
      */
-    async updateShippingTemplate(parameters: IUpdateShippingTemplateParameters, options?: IAuthOptions) {
+    async updateShippingTemplate(
+        parameters: IUpdateShippingTemplateParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUpdateShippingTemplateParameters, IShippingTemplate>> {
         return this.client.request('/shipping/templates/:shipping_template_id', parameters, 'PUT', options);
     }
 
     /**
      * Deletes the ShippingTemplate with the given id.
      */
-    async deleteShippingTemplate(parameters: IDeleteShippingTemplateParameters, options?: IAuthOptions) {
+    async deleteShippingTemplate(
+        parameters: IDeleteShippingTemplateParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteShippingTemplateParameters, IShippingTemplate>> {
         return this.client.request('/shipping/templates/:shipping_template_id', parameters, 'DELETE', options);
     }
 
@@ -113,14 +126,17 @@ export class ShippingTemplate {
     async findAllShippingTemplateEntries(
         parameters: IFindAllShippingTemplateEntriesParameters,
         options?: IAuthOptions,
-    ) {
+    ): Promise<IStandardResponse<IFindAllShippingTemplateEntriesParameters, IShippingTemplate>> {
         return this.client.request('/shipping/templates/:shipping_template_id/entries', parameters, 'GET', options);
     }
 
     /**
      * Retrieves a set of ShippingTemplate objects associated to a User.
      */
-    async findAllUserShippingProfiles(parameters: IFindAllUserShippingProfilesParameters, options?: IAuthOptions) {
+    async findAllUserShippingProfiles(
+        parameters: IFindAllUserShippingProfilesParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllUserShippingProfilesParameters, IShippingTemplate>> {
         return this.client.request('/users/:user_id/shipping/templates', parameters, 'GET', options);
     }
 }

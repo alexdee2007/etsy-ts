@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IPropertyValue {
@@ -54,33 +55,45 @@ export interface IDeleteAttributeParameters extends IStandardParameters {
 
 //methods class
 export class PropertyValue {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Get all of the attributes for a listing
      */
-    async getAttributes(parameters: IGetAttributesParameters, options?: IAuthOptions) {
+    async getAttributes(
+        parameters: IGetAttributesParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetAttributesParameters, IPropertyValue>> {
         return this.client.request('/listings/:listing_id/attributes', parameters, 'GET', options);
     }
 
     /**
      * Get an attribute for a listing
      */
-    async getAttribute(parameters: IGetAttributeParameters, options?: IAuthOptions) {
+    async getAttribute(
+        parameters: IGetAttributeParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetAttributeParameters, IPropertyValue>> {
         return this.client.request('/listings/:listing_id/attributes/:property_id', parameters, 'GET', options);
     }
 
     /**
      * Update or populate an attribute for a listing
      */
-    async updateAttribute(parameters: IUpdateAttributeParameters, options?: IAuthOptions) {
+    async updateAttribute(
+        parameters: IUpdateAttributeParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUpdateAttributeParameters, IPropertyValue>> {
         return this.client.request('/listings/:listing_id/attributes/:property_id', parameters, 'PUT', options);
     }
 
     /**
      * Delete an attribute for a listing
      */
-    async deleteAttribute(parameters: IDeleteAttributeParameters, options?: IAuthOptions) {
+    async deleteAttribute(
+        parameters: IDeleteAttributeParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteAttributeParameters, IPropertyValue>> {
         return this.client.request('/listings/:listing_id/attributes/:property_id', parameters, 'DELETE', options);
     }
 }

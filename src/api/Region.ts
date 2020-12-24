@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IRegion {
@@ -28,26 +29,35 @@ export interface IFindEligibleRegionsParameters extends IStandardParameters {}
 
 //methods class
 export class Region {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Finds all Region.
      */
-    async findAllRegion(parameters: IFindAllRegionParameters, options?: IAuthOptions) {
+    async findAllRegion(
+        parameters: IFindAllRegionParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllRegionParameters, IRegion>> {
         return this.client.request('/regions', parameters, 'GET', options);
     }
 
     /**
      * Retrieves a Region by id.
      */
-    async getRegion(parameters: IGetRegionParameters, options?: IAuthOptions) {
+    async getRegion(
+        parameters: IGetRegionParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetRegionParameters, IRegion>> {
         return this.client.request('/regions/:region_id', parameters, 'GET', options);
     }
 
     /**
      *
      */
-    async findEligibleRegions(parameters: IFindEligibleRegionsParameters, options?: IAuthOptions) {
+    async findEligibleRegions(
+        parameters: IFindEligibleRegionsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindEligibleRegionsParameters, IRegion>> {
         return this.client.request('/regions/eligible', parameters, 'GET', options);
     }
 }

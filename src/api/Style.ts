@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IStyle {
@@ -18,12 +19,15 @@ export interface IFindSuggestedStylesParameters extends IStandardParameters {}
 
 //methods class
 export class Style {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Retrieve all suggested styles.
      */
-    async findSuggestedStyles(parameters: IFindSuggestedStylesParameters, options?: IAuthOptions) {
+    async findSuggestedStyles(
+        parameters: IFindSuggestedStylesParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindSuggestedStylesParameters, IStyle>> {
         return this.client.request('/taxonomy/styles', parameters, 'GET', options);
     }
 }

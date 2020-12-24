@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IListingInventory {
@@ -37,19 +38,25 @@ export interface IUpdateInventoryParameters extends IStandardParameters {
 
 //methods class
 export class ListingInventory {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Get the inventory for a listing
      */
-    async getInventory(parameters: IGetInventoryParameters, options?: IAuthOptions) {
+    async getInventory(
+        parameters: IGetInventoryParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetInventoryParameters, IListingInventory>> {
         return this.client.request('/listings/:listing_id/inventory', parameters, 'GET', options);
     }
 
     /**
      * Update the inventory for a listing
      */
-    async updateInventory(parameters: IUpdateInventoryParameters, options?: IAuthOptions) {
+    async updateInventory(
+        parameters: IUpdateInventoryParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUpdateInventoryParameters, IListingInventory>> {
         return this.client.request('/listings/:listing_id/inventory', parameters, 'PUT', options);
     }
 }

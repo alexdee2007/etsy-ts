@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IUserAddress {
@@ -78,33 +79,45 @@ export interface IDeleteUserAddressParameters extends IStandardParameters {
 
 //methods class
 export class UserAddress {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Retrieves a set of UserAddress objects associated to a User.
      */
-    async findAllUserAddresses(parameters: IFindAllUserAddressesParameters, options?: IAuthOptions) {
+    async findAllUserAddresses(
+        parameters: IFindAllUserAddressesParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllUserAddressesParameters, IUserAddress>> {
         return this.client.request('/users/:user_id/addresses', parameters, 'GET', options);
     }
 
     /**
      * Creates a new UserAddress. Note: state is required when the country is US, Canada, or Australia. See section above about valid codes.
      */
-    async createUserAddress(parameters: ICreateUserAddressParameters, options?: IAuthOptions) {
+    async createUserAddress(
+        parameters: ICreateUserAddressParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<ICreateUserAddressParameters, IUserAddress>> {
         return this.client.request('/users/:user_id/addresses/', parameters, 'POST', options);
     }
 
     /**
      * Retrieves a UserAddress by id.
      */
-    async getUserAddress(parameters: IGetUserAddressParameters, options?: IAuthOptions) {
+    async getUserAddress(
+        parameters: IGetUserAddressParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetUserAddressParameters, IUserAddress>> {
         return this.client.request('/users/:user_id/addresses/:user_address_id', parameters, 'GET', options);
     }
 
     /**
      * Deletes the UserAddress with the given id.
      */
-    async deleteUserAddress(parameters: IDeleteUserAddressParameters, options?: IAuthOptions) {
+    async deleteUserAddress(
+        parameters: IDeleteUserAddressParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteUserAddressParameters, IUserAddress>> {
         return this.client.request('/users/:user_id/addresses/:user_address_id', parameters, 'DELETE', options);
     }
 }

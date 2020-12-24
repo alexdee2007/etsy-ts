@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface ICountry {
@@ -49,26 +50,35 @@ export interface IFindByIsoCodeParameters extends IStandardParameters {
 
 //methods class
 export class Country {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Finds all Country.
      */
-    async findAllCountry(parameters: IFindAllCountryParameters, options?: IAuthOptions) {
+    async findAllCountry(
+        parameters: IFindAllCountryParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllCountryParameters, ICountry>> {
         return this.client.request('/countries', parameters, 'GET', options);
     }
 
     /**
      * Retrieves a Country by id.
      */
-    async getCountry(parameters: IGetCountryParameters, options?: IAuthOptions) {
+    async getCountry(
+        parameters: IGetCountryParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetCountryParameters, ICountry>> {
         return this.client.request('/countries/:country_id', parameters, 'GET', options);
     }
 
     /**
      * Get the country info for the given ISO code.
      */
-    async findByIsoCode(parameters: IFindByIsoCodeParameters, options?: IAuthOptions) {
+    async findByIsoCode(
+        parameters: IFindByIsoCodeParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindByIsoCodeParameters, ICountry>> {
         return this.client.request('/countries/iso/:iso_code', parameters, 'GET', options);
     }
 }

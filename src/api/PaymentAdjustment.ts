@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IPaymentAdjustment {
@@ -78,19 +79,25 @@ export interface IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters ex
 
 //methods class
 export class PaymentAdjustment {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Get a Payment Adjustments from a Payment Id
      */
-    async findPaymentAdjustments(parameters: IFindPaymentAdjustmentsParameters, options?: IAuthOptions) {
+    async findPaymentAdjustments(
+        parameters: IFindPaymentAdjustmentsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindPaymentAdjustmentsParameters, IPaymentAdjustment>> {
         return this.client.request('/payments/:payment_id/adjustments', parameters, 'GET', options);
     }
 
     /**
      * Get an Etsy Payments Transaction Adjustment
      */
-    async findPaymentAdjustment(parameters: IFindPaymentAdjustmentParameters, options?: IAuthOptions) {
+    async findPaymentAdjustment(
+        parameters: IFindPaymentAdjustmentParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindPaymentAdjustmentParameters, IPaymentAdjustment>> {
         return this.client.request(
             '/payments/:payment_id/adjustments/:payment_adjustment_id',
             parameters,
@@ -105,7 +112,7 @@ export class PaymentAdjustment {
     async findPaymentAdjustmentForLedgerEntry(
         parameters: IFindPaymentAdjustmentForLedgerEntryParameters,
         options?: IAuthOptions,
-    ) {
+    ): Promise<IStandardResponse<IFindPaymentAdjustmentForLedgerEntryParameters, IPaymentAdjustment>> {
         return this.client.request(
             '/shops/:shop_id/ledger/entries/:ledger_entry_id/adjustment',
             parameters,
@@ -120,7 +127,7 @@ export class PaymentAdjustment {
     async findPaymentAdjustmentForPaymentAccountLedgerEntry(
         parameters: IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters,
         options?: IAuthOptions,
-    ) {
+    ): Promise<IStandardResponse<IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, IPaymentAdjustment>> {
         return this.client.request(
             '/shops/:shop_id/payment_account/entries/:ledger_entry_id/adjustment',
             parameters,

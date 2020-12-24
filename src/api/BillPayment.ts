@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IBillPayment {
@@ -54,12 +55,15 @@ export interface IFindAllUserPaymentsParameters extends IStandardParameters {
 
 //methods class
 export class BillPayment {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Retrieves a set of BillPayment objects associated to a User.
      */
-    async findAllUserPayments(parameters: IFindAllUserPaymentsParameters, options?: IAuthOptions) {
+    async findAllUserPayments(
+        parameters: IFindAllUserPaymentsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllUserPaymentsParameters, IBillPayment>> {
         return this.client.request('/users/:user_id/payments', parameters, 'GET', options);
     }
 }

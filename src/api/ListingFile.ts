@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IListingFile {
@@ -62,12 +63,15 @@ export interface IDeleteListingFileParameters extends IStandardParameters {
 
 //methods class
 export class ListingFile {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Finds all ListingFiles on a Listing
      */
-    async findAllListingFiles(parameters: IFindAllListingFilesParameters, options?: IAuthOptions) {
+    async findAllListingFiles(
+        parameters: IFindAllListingFilesParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllListingFilesParameters, IListingFile>> {
         return this.client.request('/listings/:listing_id/files', parameters, 'GET', options);
     }
 
@@ -77,14 +81,20 @@ export class ListingFile {
      a file to a listing that is currently not digital, the listing will be converted to a digital listing.  This will
      cause the listing to have free shipping and will remove any variations.
      */
-    async uploadListingFile(parameters: IUploadListingFileParameters, options?: IAuthOptions) {
+    async uploadListingFile(
+        parameters: IUploadListingFileParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUploadListingFileParameters, IListingFile>> {
         return this.client.request('/listings/:listing_id/files', parameters, 'POST', options);
     }
 
     /**
      * Finds a ListingFile by ID
      */
-    async findListingFile(parameters: IFindListingFileParameters, options?: IAuthOptions) {
+    async findListingFile(
+        parameters: IFindListingFileParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindListingFileParameters, IListingFile>> {
         return this.client.request('/listings/:listing_id/files/:listing_file_id', parameters, 'GET', options);
     }
 
@@ -92,7 +102,10 @@ export class ListingFile {
      * Removes the listing file from this listing.  If this is the last file on a listing, the listing will no longer
      be considered a digital listing.
      */
-    async deleteListingFile(parameters: IDeleteListingFileParameters, options?: IAuthOptions) {
+    async deleteListingFile(
+        parameters: IDeleteListingFileParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteListingFileParameters, IListingFile>> {
         return this.client.request('/listings/:listing_id/files/:listing_file_id', parameters, 'DELETE', options);
     }
 }

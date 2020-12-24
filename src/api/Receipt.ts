@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IReceipt {
@@ -162,7 +163,34 @@ export interface IReceipt {
     /**
      * Shipment information associated to this receipt.
      */
-    shipments: any[];
+    shipments: IReceiptShipment[];
+}
+
+export interface IReceiptShipment {
+    /**
+     * Shipping carrier name.
+     */
+    carrier_name: string;
+    /**
+     * Receipt shipping id used internally
+     */
+    receipt_shipping_id: number;
+    /**
+     * Tracking code for carrier.
+     */
+    tracking_code: string;
+    /**
+     * Tracking URL for carrier's website.
+     */
+    tracking_url: string;
+    /**
+     * Optional note sent to buyer.
+     */
+    buyer_note: string;
+    /**
+     * Date the notification was sent.
+     */
+    notification_date: number;
 }
 
 //parameters types
@@ -220,54 +248,75 @@ export interface IFindAllUserBuyerReceiptsParameters extends IStandardParameters
 
 //methods class
 export class Receipt {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Retrieves a Shop_Receipt2 by id.
      */
-    async getShop_Receipt2(parameters: IGetShopReceipt2Parameters, options?: IAuthOptions) {
+    async getShop_Receipt2(
+        parameters: IGetShopReceipt2Parameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetShopReceipt2Parameters, IReceipt>> {
         return this.client.request('/receipts/:receipt_id', parameters, 'GET', options);
     }
 
     /**
      * Updates a Shop_Receipt2
      */
-    async updateReceipt(parameters: IUpdateReceiptParameters, options?: IAuthOptions) {
+    async updateReceipt(
+        parameters: IUpdateReceiptParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUpdateReceiptParameters, IReceipt>> {
         return this.client.request('/receipts/:receipt_id', parameters, 'PUT', options);
     }
 
     /**
      * Retrieves a set of Receipt objects associated to a Shop.
      */
-    async findAllShopReceipts(parameters: IFindAllShopReceiptsParameters, options?: IAuthOptions) {
+    async findAllShopReceipts(
+        parameters: IFindAllShopReceiptsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllShopReceiptsParameters, IReceipt>> {
         return this.client.request('/shops/:shop_id/receipts', parameters, 'GET', options);
     }
 
     /**
      * Submits tracking information and sends a shipping notification email to the buyer. If send_bcc is true, the shipping notification will be sent to the seller as well. Refer to additional documentation.
      */
-    async submitTracking(parameters: ISubmitTrackingParameters, options?: IAuthOptions) {
+    async submitTracking(
+        parameters: ISubmitTrackingParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<ISubmitTrackingParameters, IReceipt>> {
         return this.client.request('/shops/:shop_id/receipts/:receipt_id/tracking', parameters, 'POST', options);
     }
 
     /**
      * Retrieves a set of Receipt objects associated to a Shop based on the status.
      */
-    async findAllShopReceiptsByStatus(parameters: IFindAllShopReceiptsByStatusParameters, options?: IAuthOptions) {
+    async findAllShopReceiptsByStatus(
+        parameters: IFindAllShopReceiptsByStatusParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllShopReceiptsByStatusParameters, IReceipt>> {
         return this.client.request('/shops/:shop_id/receipts/:status', parameters, 'GET', options);
     }
 
     /**
      * Searches the set of Receipt objects associated to a Shop by a query
      */
-    async searchAllShopReceipts(parameters: ISearchAllShopReceiptsParameters, options?: IAuthOptions) {
+    async searchAllShopReceipts(
+        parameters: ISearchAllShopReceiptsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<ISearchAllShopReceiptsParameters, IReceipt>> {
         return this.client.request('/shops/:shop_id/receipts/search', parameters, 'GET', options);
     }
 
     /**
      * Retrieves a set of Receipt objects associated to a User.
      */
-    async findAllUserBuyerReceipts(parameters: IFindAllUserBuyerReceiptsParameters, options?: IAuthOptions) {
+    async findAllUserBuyerReceipts(
+        parameters: IFindAllUserBuyerReceiptsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllUserBuyerReceiptsParameters, IReceipt>> {
         return this.client.request('/users/:user_id/receipts', parameters, 'GET', options);
     }
 }

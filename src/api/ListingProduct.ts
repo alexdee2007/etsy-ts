@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IListingProduct {
@@ -33,12 +34,15 @@ export interface IGetProductParameters extends IStandardParameters {
 
 //methods class
 export class ListingProduct {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Get a specific offering for a listing
      */
-    async getProduct(parameters: IGetProductParameters, options?: IAuthOptions) {
+    async getProduct(
+        parameters: IGetProductParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetProductParameters, IListingProduct>> {
         return this.client.request('/listings/:listing_id/products/:product_id', parameters, 'GET', options);
     }
 }

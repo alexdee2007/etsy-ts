@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IShopTranslation {
@@ -112,33 +113,45 @@ export interface IDeleteShopTranslationParameters extends IStandardParameters {
 
 //methods class
 export class ShopTranslation {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Retrieves a ShopTranslation by shop_id and language
      */
-    async getShopTranslation(parameters: IGetShopTranslationParameters, options?: IAuthOptions) {
+    async getShopTranslation(
+        parameters: IGetShopTranslationParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetShopTranslationParameters, IShopTranslation>> {
         return this.client.request('/shops/:shop_id/translations/:language', parameters, 'GET', options);
     }
 
     /**
      * Creates a ShopTranslation by shop_id and language
      */
-    async createShopTranslation(parameters: ICreateShopTranslationParameters, options?: IAuthOptions) {
+    async createShopTranslation(
+        parameters: ICreateShopTranslationParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<ICreateShopTranslationParameters, IShopTranslation>> {
         return this.client.request('/shops/:shop_id/translations/:language', parameters, 'POST', options);
     }
 
     /**
      * Updates a ShopTranslation by shop_id and language
      */
-    async updateShopTranslation(parameters: IUpdateShopTranslationParameters, options?: IAuthOptions) {
+    async updateShopTranslation(
+        parameters: IUpdateShopTranslationParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUpdateShopTranslationParameters, IShopTranslation>> {
         return this.client.request('/shops/:shop_id/translations/:language', parameters, 'PUT', options);
     }
 
     /**
      * Deletes a ShopTranslation by shop_id and language
      */
-    async deleteShopTranslation(parameters: IDeleteShopTranslationParameters, options?: IAuthOptions) {
+    async deleteShopTranslation(
+        parameters: IDeleteShopTranslationParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteShopTranslationParameters, IShopTranslation>> {
         return this.client.request('/shops/:shop_id/translations/:language', parameters, 'DELETE', options);
     }
 }

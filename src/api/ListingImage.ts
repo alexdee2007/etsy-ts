@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IListingImage {
@@ -103,12 +104,15 @@ export interface IDeleteListingImageParameters extends IStandardParameters {
 
 //methods class
 export class ListingImage {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Retrieves a set of ListingImage objects associated to a Listing.
      */
-    async findAllListingImages(parameters: IFindAllListingImagesParameters, options?: IAuthOptions) {
+    async findAllListingImages(
+        parameters: IFindAllListingImagesParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllListingImagesParameters, IListingImage>> {
         return this.client.request('/listings/:listing_id/images', parameters, 'GET', options);
     }
 
@@ -123,14 +127,20 @@ export class ListingImage {
      When uploading a new listing image with a watermark, pass is_watermarked=1; existing listing images
      will not be affected by this parameter.
      */
-    async uploadListingImage(parameters: IUploadListingImageParameters, options?: IAuthOptions) {
+    async uploadListingImage(
+        parameters: IUploadListingImageParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUploadListingImageParameters, IListingImage>> {
         return this.client.request('/listings/:listing_id/images', parameters, 'POST', options);
     }
 
     /**
      * Retrieves a Image_Listing by id.
      */
-    async getImage_Listing(parameters: IGetImageListingParameters, options?: IAuthOptions) {
+    async getImage_Listing(
+        parameters: IGetImageListingParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetImageListingParameters, IListingImage>> {
         return this.client.request('/listings/:listing_id/images/:listing_image_id', parameters, 'GET', options);
     }
 
@@ -139,7 +149,10 @@ export class ListingImage {
      and so a deleted image may be re-associated with the listing without
      re-uploading the original image; see uploadListingImage
      */
-    async deleteListingImage(parameters: IDeleteListingImageParameters, options?: IAuthOptions) {
+    async deleteListingImage(
+        parameters: IDeleteListingImageParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteListingImageParameters, IListingImage>> {
         return this.client.request('/listings/:listing_id/images/:listing_image_id', parameters, 'DELETE', options);
     }
 }

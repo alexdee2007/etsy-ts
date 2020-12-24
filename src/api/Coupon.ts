@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface ICoupon {
@@ -85,40 +86,55 @@ export interface IDeleteCouponParameters extends IStandardParameters {
 
 //methods class
 export class Coupon {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Retrieves all Shop_Coupons by shop_id
      */
-    async findAllShopCoupons(parameters: IFindAllShopCouponsParameters, options?: IAuthOptions) {
+    async findAllShopCoupons(
+        parameters: IFindAllShopCouponsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllShopCouponsParameters, ICoupon>> {
         return this.client.request('/shops/:shop_id/coupons', parameters, 'GET', options);
     }
 
     /**
      * Creates a new Coupon. May only have one of free_shipping, pct_discount or fixed_discount
      */
-    async createCoupon(parameters: ICreateCouponParameters, options?: IAuthOptions) {
+    async createCoupon(
+        parameters: ICreateCouponParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<ICreateCouponParameters, ICoupon>> {
         return this.client.request('/shops/:shop_id/coupons', parameters, 'POST', options);
     }
 
     /**
      * Retrieves a Shop_Coupon by id and shop_id
      */
-    async findCoupon(parameters: IFindCouponParameters, options?: IAuthOptions) {
+    async findCoupon(
+        parameters: IFindCouponParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindCouponParameters, ICoupon>> {
         return this.client.request('/shops/:shop_id/coupons/:coupon_id', parameters, 'GET', options);
     }
 
     /**
      * Updates a coupon
      */
-    async updateCoupon(parameters: IUpdateCouponParameters, options?: IAuthOptions) {
+    async updateCoupon(
+        parameters: IUpdateCouponParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUpdateCouponParameters, ICoupon>> {
         return this.client.request('/shops/:shop_id/coupons/:coupon_id', parameters, 'PUT', options);
     }
 
     /**
      * Deletes a coupon
      */
-    async deleteCoupon(parameters: IDeleteCouponParameters, options?: IAuthOptions) {
+    async deleteCoupon(
+        parameters: IDeleteCouponParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteCouponParameters, ICoupon>> {
         return this.client.request('/shops/:shop_id/coupons/:coupon_id', parameters, 'DELETE', options);
     }
 }

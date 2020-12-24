@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IPaymentTemplate {
@@ -119,26 +120,35 @@ export interface IFindAllUserPaymentTemplatesParameters extends IStandardParamet
 
 //methods class
 export class PaymentTemplate {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Retrieves the PaymentTemplate associated with the Shop
      */
-    async findShopPaymentTemplates(parameters: IFindShopPaymentTemplatesParameters, options?: IAuthOptions) {
+    async findShopPaymentTemplates(
+        parameters: IFindShopPaymentTemplatesParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindShopPaymentTemplatesParameters, IPaymentTemplate>> {
         return this.client.request('/shops/:shop_id/payment_templates', parameters, 'GET', options);
     }
 
     /**
      * Creates a new PaymentTemplate
      */
-    async createShopPaymentTemplate(parameters: ICreateShopPaymentTemplateParameters, options?: IAuthOptions) {
+    async createShopPaymentTemplate(
+        parameters: ICreateShopPaymentTemplateParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<ICreateShopPaymentTemplateParameters, IPaymentTemplate>> {
         return this.client.request('/shops/:shop_id/payment_templates', parameters, 'POST', options);
     }
 
     /**
      * Updates a PaymentTemplate
      */
-    async updateShopPaymentTemplate(parameters: IUpdateShopPaymentTemplateParameters, options?: IAuthOptions) {
+    async updateShopPaymentTemplate(
+        parameters: IUpdateShopPaymentTemplateParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUpdateShopPaymentTemplateParameters, IPaymentTemplate>> {
         return this.client.request(
             '/shops/:shop_id/payment_templates/:payment_template_id',
             parameters,
@@ -150,7 +160,10 @@ export class PaymentTemplate {
     /**
      * Retrieves a set of PaymentTemplate objects associated to a User.
      */
-    async findAllUserPaymentTemplates(parameters: IFindAllUserPaymentTemplatesParameters, options?: IAuthOptions) {
+    async findAllUserPaymentTemplates(
+        parameters: IFindAllUserPaymentTemplatesParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllUserPaymentTemplatesParameters, IPaymentTemplate>> {
         return this.client.request('/users/:user_id/payments/templates', parameters, 'GET', options);
     }
 }

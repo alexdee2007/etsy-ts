@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IListingTranslation {
@@ -54,33 +55,45 @@ export interface IDeleteListingTranslationParameters extends IStandardParameters
 
 //methods class
 export class ListingTranslation {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Retrieves a ListingTranslation by listing_id and language
      */
-    async getListingTranslation(parameters: IGetListingTranslationParameters, options?: IAuthOptions) {
+    async getListingTranslation(
+        parameters: IGetListingTranslationParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetListingTranslationParameters, IListingTranslation>> {
         return this.client.request('/listings/:listing_id/translations/:language', parameters, 'GET', options);
     }
 
     /**
      * Creates a ListingTranslation by listing_id and language
      */
-    async createListingTranslation(parameters: ICreateListingTranslationParameters, options?: IAuthOptions) {
+    async createListingTranslation(
+        parameters: ICreateListingTranslationParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<ICreateListingTranslationParameters, IListingTranslation>> {
         return this.client.request('/listings/:listing_id/translations/:language', parameters, 'POST', options);
     }
 
     /**
      * Updates a ListingTranslation by listing_id and language
      */
-    async updateListingTranslation(parameters: IUpdateListingTranslationParameters, options?: IAuthOptions) {
+    async updateListingTranslation(
+        parameters: IUpdateListingTranslationParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUpdateListingTranslationParameters, IListingTranslation>> {
         return this.client.request('/listings/:listing_id/translations/:language', parameters, 'PUT', options);
     }
 
     /**
      * Deletes a ListingTranslation by listing_id and language
      */
-    async deleteListingTranslation(parameters: IDeleteListingTranslationParameters, options?: IAuthOptions) {
+    async deleteListingTranslation(
+        parameters: IDeleteListingTranslationParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteListingTranslationParameters, IListingTranslation>> {
         return this.client.request('/listings/:listing_id/translations/:language', parameters, 'DELETE', options);
     }
 }

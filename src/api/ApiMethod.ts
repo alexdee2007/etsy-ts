@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IApiMethod {
@@ -14,11 +15,11 @@ export interface IApiMethod {
     /**
      * An array of method parameters and types.
      */
-    params: any;
+    params: IParamList[];
     /**
      * An array of default values for parameters.  Parameters that lack a default are required.
      */
-    defaults: any;
+    defaults: IParamList[];
     /**
      * The resource type returned by the method.
      */
@@ -33,17 +34,27 @@ export interface IApiMethod {
     http_method: string;
 }
 
+export interface IParamList {
+    /**
+     * Each field in the record represents an Etsy API method parameter.  The value corresponds to one of the documented data or resource types.
+     */
+    param_name: string;
+}
+
 //parameters types
 export interface IGetMethodTableParameters extends IStandardParameters {}
 
 //methods class
 export class ApiMethod {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Get a list of all methods available.
      */
-    async getMethodTable(parameters: IGetMethodTableParameters, options?: IAuthOptions) {
+    async getMethodTable(
+        parameters: IGetMethodTableParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetMethodTableParameters, IApiMethod>> {
         return this.client.request('/', parameters, 'GET', options);
     }
 }

@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IShippingTemplateEntry {
@@ -63,19 +64,25 @@ export interface IDeleteShippingTemplateEntryParameters extends IStandardParamet
 
 //methods class
 export class ShippingTemplateEntry {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Creates a new ShippingTemplateEntry
      */
-    async createShippingTemplateEntry(parameters: ICreateShippingTemplateEntryParameters, options?: IAuthOptions) {
+    async createShippingTemplateEntry(
+        parameters: ICreateShippingTemplateEntryParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<ICreateShippingTemplateEntryParameters, IShippingTemplateEntry>> {
         return this.client.request('/shipping/templates/entries', parameters, 'POST', options);
     }
 
     /**
      * Retrieves a ShippingTemplateEntry by id.
      */
-    async getShippingTemplateEntry(parameters: IGetShippingTemplateEntryParameters, options?: IAuthOptions) {
+    async getShippingTemplateEntry(
+        parameters: IGetShippingTemplateEntryParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetShippingTemplateEntryParameters, IShippingTemplateEntry>> {
         return this.client.request(
             '/shipping/templates/entries/:shipping_template_entry_id',
             parameters,
@@ -87,7 +94,10 @@ export class ShippingTemplateEntry {
     /**
      * Updates a ShippingTemplateEntry
      */
-    async updateShippingTemplateEntry(parameters: IUpdateShippingTemplateEntryParameters, options?: IAuthOptions) {
+    async updateShippingTemplateEntry(
+        parameters: IUpdateShippingTemplateEntryParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUpdateShippingTemplateEntryParameters, IShippingTemplateEntry>> {
         return this.client.request(
             '/shipping/templates/entries/:shipping_template_entry_id',
             parameters,
@@ -99,7 +109,10 @@ export class ShippingTemplateEntry {
     /**
      * Deletes the ShippingTemplateEntry
      */
-    async deleteShippingTemplateEntry(parameters: IDeleteShippingTemplateEntryParameters, options?: IAuthOptions) {
+    async deleteShippingTemplateEntry(
+        parameters: IDeleteShippingTemplateEntryParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteShippingTemplateEntryParameters, IShippingTemplateEntry>> {
         return this.client.request(
             '/shipping/templates/entries/:shipping_template_entry_id',
             parameters,

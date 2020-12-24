@@ -1,5 +1,6 @@
 import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 export interface ITransaction {
     /**
      * The numeric ID for this transaction.
@@ -151,7 +152,7 @@ export declare class Transaction {
     /**
      * Retrieves a set of Transaction objects associated to a Shop.
      */
-    findAllShopTransactions(parameters: IFindAllShopTransactionsParameters, options?: IAuthOptions): Promise<any>;
+    findAllShopTransactions(parameters: IFindAllShopTransactionsParameters, options?: IAuthOptions): Promise<IStandardResponse<IFindAllShopTransactionsParameters, ITransaction>>;
     /**
      * Retrieves a set of Transaction objects associated to a User.
      */

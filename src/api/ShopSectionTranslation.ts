@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IShopSectionTranslation {
@@ -46,12 +47,15 @@ export interface IDeleteShopSectionTranslationParameters extends IStandardParame
 
 //methods class
 export class ShopSectionTranslation {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Retrieves a ShopSectionTranslation by shop_id, shop_section_id and language
      */
-    async getShopSectionTranslation(parameters: IGetShopSectionTranslationParameters, options?: IAuthOptions) {
+    async getShopSectionTranslation(
+        parameters: IGetShopSectionTranslationParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetShopSectionTranslationParameters, IShopSectionTranslation>> {
         return this.client.request(
             '/shops/:shop_id/sections/:shop_section_id/translations/:language',
             parameters,
@@ -63,7 +67,10 @@ export class ShopSectionTranslation {
     /**
      * Creates a ShopSectionTranslation by shop_id, shop_section_id and language
      */
-    async createShopSectionTranslation(parameters: ICreateShopSectionTranslationParameters, options?: IAuthOptions) {
+    async createShopSectionTranslation(
+        parameters: ICreateShopSectionTranslationParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<ICreateShopSectionTranslationParameters, IShopSectionTranslation>> {
         return this.client.request(
             '/shops/:shop_id/sections/:shop_section_id/translations/:language',
             parameters,
@@ -75,7 +82,10 @@ export class ShopSectionTranslation {
     /**
      * Updates a ShopSectionTranslation by shop_id, shop_section_id and language
      */
-    async updateShopSectionTranslation(parameters: IUpdateShopSectionTranslationParameters, options?: IAuthOptions) {
+    async updateShopSectionTranslation(
+        parameters: IUpdateShopSectionTranslationParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUpdateShopSectionTranslationParameters, IShopSectionTranslation>> {
         return this.client.request(
             '/shops/:shop_id/sections/:shop_section_id/translations/:language',
             parameters,
@@ -87,7 +97,10 @@ export class ShopSectionTranslation {
     /**
      * Deletes a ShopSectionTranslation by shop_id, shop_section_id and language
      */
-    async deleteShopSectionTranslation(parameters: IDeleteShopSectionTranslationParameters, options?: IAuthOptions) {
+    async deleteShopSectionTranslation(
+        parameters: IDeleteShopSectionTranslationParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteShopSectionTranslationParameters, IShopSectionTranslation>> {
         return this.client.request(
             '/shops/:shop_id/sections/:shop_section_id/translations/:language',
             parameters,

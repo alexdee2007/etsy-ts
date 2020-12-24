@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface ITaxonomy {
@@ -54,26 +55,35 @@ export interface IGetSellerTaxonomyVersionParameters extends IStandardParameters
 
 //methods class
 export class Taxonomy {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Retrieve the entire taxonomy as seen by buyers in search.
      */
-    async getBuyerTaxonomy(parameters: IGetBuyerTaxonomyParameters, options?: IAuthOptions) {
+    async getBuyerTaxonomy(
+        parameters: IGetBuyerTaxonomyParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetBuyerTaxonomyParameters, ITaxonomy>> {
         return this.client.request('/taxonomy/buyer/get', parameters, 'GET', options);
     }
 
     /**
      * Retrieve the entire taxonomy as used by sellers in the listing process.
      */
-    async getSellerTaxonomy(parameters: IGetSellerTaxonomyParameters, options?: IAuthOptions) {
+    async getSellerTaxonomy(
+        parameters: IGetSellerTaxonomyParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetSellerTaxonomyParameters, ITaxonomy>> {
         return this.client.request('/taxonomy/seller/get', parameters, 'GET', options);
     }
 
     /**
      * Get the current version of the seller taxonomy
      */
-    async getSellerTaxonomyVersion(parameters: IGetSellerTaxonomyVersionParameters, options?: IAuthOptions) {
+    async getSellerTaxonomyVersion(
+        parameters: IGetSellerTaxonomyVersionParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetSellerTaxonomyVersionParameters, ITaxonomy>> {
         return this.client.request('/taxonomy/seller/version', parameters, 'GET', options);
     }
 }

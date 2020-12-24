@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IForumPost {
@@ -45,26 +46,35 @@ export interface IDeleteTreasuryCommentParameters extends IStandardParameters {}
 
 //methods class
 export class ForumPost {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Get a Treasury's Comments
      */
-    async findTreasuryComments(parameters: IFindTreasuryCommentsParameters, options?: IAuthOptions) {
+    async findTreasuryComments(
+        parameters: IFindTreasuryCommentsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindTreasuryCommentsParameters, IForumPost>> {
         return this.client.request('/treasuries/:treasury_key/comments', parameters, 'GET', options);
     }
 
     /**
      * Leave a comment on a Treasury List
      */
-    async postTreasuryComment(parameters: IPostTreasuryCommentParameters, options?: IAuthOptions) {
+    async postTreasuryComment(
+        parameters: IPostTreasuryCommentParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IPostTreasuryCommentParameters, IForumPost>> {
         return this.client.request('/treasuries/:treasury_key/comments', parameters, 'POST', options);
     }
 
     /**
      * Delete a given comment on a Treasury List
      */
-    async deleteTreasuryComment(parameters: IDeleteTreasuryCommentParameters, options?: IAuthOptions) {
+    async deleteTreasuryComment(
+        parameters: IDeleteTreasuryCommentParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteTreasuryCommentParameters, IForumPost>> {
         return this.client.request('/treasuries/:treasury_key/comments/:comment_id', parameters, 'DELETE', options);
     }
 }

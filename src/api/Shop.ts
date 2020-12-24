@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IShop {
@@ -214,6 +215,50 @@ export interface IShop {
     include_dispute_form_link: boolean;
 }
 
+export interface IStructuredPolicies {
+    /**
+     * Unqiue identifier for the policies
+     */
+    structured_policies_id: number;
+    /**
+     * Payment information for the seller.
+     */
+    payments: any;
+    /**
+     * Structured refunds information for the seller.
+     */
+    refunds: any;
+    /**
+     * Structured shipping information for the seller.
+     */
+    shipping: any;
+    create_date: number;
+    update_date: number;
+    create_date_formatted: string;
+    update_date_formatted: string;
+    /**
+     * True if the shop has previously filled out any unstructured policies.
+     */
+    has_unstructured_policies: boolean;
+    additional_terms_and_conditions: string;
+    /**
+     * True if the shop is in Germany
+     */
+    shop_in_germany: boolean;
+    /**
+     * Character limits for custom fields
+     */
+    char_limits: any;
+    /**
+     * Whether to include a link to dispute resolution form.
+     */
+    include_dispute_form_link: boolean;
+    /**
+     * Privacy policy for the shop.
+     */
+    privacy: any;
+}
+
 //parameters types
 export interface IFindAllShopsParameters extends IStandardParameters {
     shop_name?: string;
@@ -266,54 +311,75 @@ export interface IFindAllUserShopsParameters extends IStandardParameters {
 
 //methods class
 export class Shop {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Finds all Shops.  If there is a keywords parameter, finds shops with shop_name starting with keywords.
      */
-    async findAllShops(parameters: IFindAllShopsParameters, options?: IAuthOptions) {
+    async findAllShops(
+        parameters: IFindAllShopsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllShopsParameters, IShop>> {
         return this.client.request('/shops', parameters, 'GET', options);
     }
 
     /**
      * Retrieves a Shop by id.
      */
-    async getShop(parameters: IGetShopParameters, options?: IAuthOptions) {
+    async getShop(
+        parameters: IGetShopParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetShopParameters, IShop>> {
         return this.client.request('/shops/:shop_id', parameters, 'GET', options);
     }
 
     /**
      * Updates a Shop
      */
-    async updateShop(parameters: IUpdateShopParameters, options?: IAuthOptions) {
+    async updateShop(
+        parameters: IUpdateShopParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUpdateShopParameters, IShop>> {
         return this.client.request('/shops/:shop_id', parameters, 'PUT', options);
     }
 
     /**
      * Upload a new shop banner image
      */
-    async uploadShopBanner(parameters: IUploadShopBannerParameters, options?: IAuthOptions) {
+    async uploadShopBanner(
+        parameters: IUploadShopBannerParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUploadShopBannerParameters, IShop>> {
         return this.client.request('/shops/:shop_id/appearance/banner', parameters, 'POST', options);
     }
 
     /**
      * Deletes a shop banner image
      */
-    async deleteShopBanner(parameters: IDeleteShopBannerParameters, options?: IAuthOptions) {
+    async deleteShopBanner(
+        parameters: IDeleteShopBannerParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IDeleteShopBannerParameters, IShop>> {
         return this.client.request('/shops/:shop_id/appearance/banner', parameters, 'DELETE', options);
     }
 
     /**
      * Retrieves a shop by a listing id.
      */
-    async getListingShop(parameters: IGetListingShopParameters, options?: IAuthOptions) {
+    async getListingShop(
+        parameters: IGetListingShopParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetListingShopParameters, IShop>> {
         return this.client.request('/shops/listing/:listing_id', parameters, 'GET', options);
     }
 
     /**
      * Retrieves a set of Shop objects associated to a User.
      */
-    async findAllUserShops(parameters: IFindAllUserShopsParameters, options?: IAuthOptions) {
+    async findAllUserShops(
+        parameters: IFindAllUserShopsParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindAllUserShopsParameters, IShop>> {
         return this.client.request('/users/:user_id/shops', parameters, 'GET', options);
     }
 }

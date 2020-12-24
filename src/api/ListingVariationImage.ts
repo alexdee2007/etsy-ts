@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IListingVariationImage {
@@ -21,19 +22,25 @@ export interface IUpdateVariationImagesParameters extends IStandardParameters {
 
 //methods class
 export class ListingVariationImage {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Gets all variation images on a listing
      */
-    async getVariationImages(parameters: IGetVariationImagesParameters, options?: IAuthOptions) {
+    async getVariationImages(
+        parameters: IGetVariationImagesParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IGetVariationImagesParameters, IListingVariationImage>> {
         return this.client.request('/listings/:listing_id/variation-images', parameters, 'GET', options);
     }
 
     /**
      * Creates variation images on a listing
      */
-    async updateVariationImages(parameters: IUpdateVariationImagesParameters, options?: IAuthOptions) {
+    async updateVariationImages(
+        parameters: IUpdateVariationImagesParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IUpdateVariationImagesParameters, IListingVariationImage>> {
         return this.client.request('/listings/:listing_id/variation-images', parameters, 'POST', options);
     }
 }

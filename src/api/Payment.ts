@@ -1,5 +1,6 @@
-import { ClientOauth, IAuthOptions } from '../client/ClientOauth';
+import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
+import { IStandardResponse } from '../client/IStandardResponse';
 
 //fields
 export interface IPayment {
@@ -119,19 +120,25 @@ export interface IFindShopPaymentByReceiptParameters extends IStandardParameters
 
 //methods class
 export class Payment {
-    constructor(private readonly client: ClientOauth) {}
+    constructor(private readonly client: Client) {}
 
     /**
      * Get an Etsy Payments Transaction
      */
-    async findPayment(parameters: IFindPaymentParameters, options?: IAuthOptions) {
+    async findPayment(
+        parameters: IFindPaymentParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindPaymentParameters, IPayment>> {
         return this.client.request('/payments/:payment_id', parameters, 'GET', options);
     }
 
     /**
      * Get a Payment from a Ledger Entry ID, if applicable
      */
-    async findPaymentForLedgerEntry(parameters: IFindPaymentForLedgerEntryParameters, options?: IAuthOptions) {
+    async findPaymentForLedgerEntry(
+        parameters: IFindPaymentForLedgerEntryParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindPaymentForLedgerEntryParameters, IPayment>> {
         return this.client.request(
             '/shops/:shop_id/ledger/entries/:ledger_entry_id/payment',
             parameters,
@@ -146,7 +153,7 @@ export class Payment {
     async findPaymentForPaymentAccountLedgerEntry(
         parameters: IFindPaymentForPaymentAccountLedgerEntryParameters,
         options?: IAuthOptions,
-    ) {
+    ): Promise<IStandardResponse<IFindPaymentForPaymentAccountLedgerEntryParameters, IPayment>> {
         return this.client.request(
             '/shops/:shop_id/payment_account/entries/:ledger_entry_id/payment',
             parameters,
@@ -158,7 +165,10 @@ export class Payment {
     /**
      * Get a Payment by Shop Receipt ID
      */
-    async findShopPaymentByReceipt(parameters: IFindShopPaymentByReceiptParameters, options?: IAuthOptions) {
+    async findShopPaymentByReceipt(
+        parameters: IFindShopPaymentByReceiptParameters,
+        options?: IAuthOptions,
+    ): Promise<IStandardResponse<IFindShopPaymentByReceiptParameters, IPayment>> {
         return this.client.request('/shops/:shop_id/receipts/:receipt_id/payments', parameters, 'GET', options);
     }
 }
