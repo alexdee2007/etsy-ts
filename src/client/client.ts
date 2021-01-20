@@ -179,9 +179,9 @@ export class Client {
                 break;
 
             default:
-                if (parameters.FormData && parameters.FormData instanceof <any>FormData) {
-                    headers = parameters.FormData.getHeaders();
-                    body = parameters.FormData;
+                if (parameters.formData && parameters.formData instanceof <any>FormData) {
+                    headers = parameters.formData.getHeaders();
+                    body = parameters.formData;
                 } else {
                     headers['Content-Type'] = 'application/json';
                     body = JSON.stringify(parameters);

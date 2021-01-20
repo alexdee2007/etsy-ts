@@ -116,9 +116,9 @@ class Client {
                     }
                     break;
                 default:
-                    if (parameters.FormData && parameters.FormData instanceof FormData) {
-                        headers = parameters.FormData.getHeaders();
-                        body = parameters.FormData;
+                    if (parameters.formData && parameters.formData instanceof FormData) {
+                        headers = parameters.formData.getHeaders();
+                        body = parameters.formData;
                     }
                     else {
                         headers['Content-Type'] = 'application/json';
