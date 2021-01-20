@@ -1,6 +1,7 @@
 import { Client, IAuthOptions } from '../client/client';
 import { IStandardParameters } from '../client/IStandardParameters';
 import { IStandardResponse } from '../client/IStandardResponse';
+import * as FormData from 'form-data';
 export interface IListingImage {
     /**
      * The numeric ID of the listing image.
@@ -81,10 +82,10 @@ export interface IFindAllListingImagesParameters extends IStandardParameters {
 export interface IUploadListingImageParameters extends IStandardParameters {
     listing_id: number;
     listing_image_id?: number;
-    image?: any;
     rank?: number;
     overwrite?: boolean;
     is_watermarked?: boolean;
+    formData?: FormData;
 }
 export interface IGetImageListingParameters extends IStandardParameters {
     listing_image_id: number[];

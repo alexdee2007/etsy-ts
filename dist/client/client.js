@@ -35,6 +35,7 @@ exports.Client = void 0;
 const oauth = __importStar(require("oauth"));
 const api = __importStar(require("../index"));
 const axios_1 = __importDefault(require("axios"));
+const FormData = __importStar(require("form-data"));
 class Client {
     constructor(options) {
         this.baseUrl = options.baseUrl || 'https://openapi.etsy.com/v2';
@@ -115,8 +116,14 @@ class Client {
                     }
                     break;
                 default:
-                    headers['Content-Type'] = 'application/json';
-                    body = JSON.stringify(parameters);
+                    if (parameters.FormData && parameters.FormData instanceof FormData) {
+                        headers = parameters.FormData.getHeaders();
+                        body = parameters.FormData;
+                    }
+                    else {
+                        headers['Content-Type'] = 'application/json';
+                        body = JSON.stringify(parameters);
+                    }
             }
             if (options && options.token && options.tokenSecret) {
                 headers['Authorization'] = this.etsyOAuth.authHeader(url, options.token, options.tokenSecret, method);

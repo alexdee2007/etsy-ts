@@ -1,6 +1,7 @@
 import * as oauth from 'oauth';
 import * as api from '../index';
 import axios, { Method } from 'axios';
+import * as FormData from 'form-data';
 
 export interface IAuthOptions {
     token: string;
@@ -178,8 +179,13 @@ export class Client {
                 break;
 
             default:
-                headers['Content-Type'] = 'application/json';
-                body = JSON.stringify(parameters);
+                if (parameters.FormData && parameters.FormData instanceof <any>FormData) {
+                    headers = parameters.FormData.getHeaders();
+                    body = parameters.FormData;
+                } else {
+                    headers['Content-Type'] = 'application/json';
+                    body = JSON.stringify(parameters);
+                }
         }
 
         if (options && options.token && options.tokenSecret) {
