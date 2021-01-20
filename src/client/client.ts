@@ -95,7 +95,7 @@ export class Client {
         this.consumerSecret = options.consumerSecret;
         this.version = options.version || '1.0';
         this.authorizeCallback = options.authorizeCallback || null;
-        this.signatureMethod = options.signatureMethod || 'HMAC-SHA1';
+        this.signatureMethod = options.signatureMethod || 'PLAINTEXT';
 
         this.etsyOAuth = new oauth.OAuth(
             this.requestUrl,

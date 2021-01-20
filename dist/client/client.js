@@ -44,7 +44,7 @@ class Client {
         this.consumerSecret = options.consumerSecret;
         this.version = options.version || '1.0';
         this.authorizeCallback = options.authorizeCallback || null;
-        this.signatureMethod = options.signatureMethod || 'HMAC-SHA1';
+        this.signatureMethod = options.signatureMethod || 'PLAINTEXT';
         this.etsyOAuth = new oauth.OAuth(this.requestUrl, this.accessUrl, this.consumerKey, this.consumerSecret, this.version, this.authorizeCallback, this.signatureMethod);
         this.ApiMethod = new api.ApiMethod(this);
         this.Avatar = new api.Avatar(this);
