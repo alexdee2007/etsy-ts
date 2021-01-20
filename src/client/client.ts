@@ -179,7 +179,7 @@ export class Client {
                 break;
 
             default:
-                if (parameters.formData && parameters.formData instanceof <any>FormData) {
+                if (parameters.formData) {
                     headers = parameters.formData.getHeaders();
                     body = parameters.formData;
                 } else {
