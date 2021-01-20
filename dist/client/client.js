@@ -35,7 +35,6 @@ exports.Client = void 0;
 const oauth = __importStar(require("oauth"));
 const api = __importStar(require("../index"));
 const axios_1 = __importDefault(require("axios"));
-const FormData = __importStar(require("form-data"));
 class Client {
     constructor(options) {
         this.baseUrl = options.baseUrl || 'https://openapi.etsy.com/v2';
@@ -116,7 +115,7 @@ class Client {
                     }
                     break;
                 default:
-                    if (parameters.formData && parameters.formData instanceof FormData) {
+                    if (parameters.formData) {
                         headers = parameters.formData.getHeaders();
                         body = parameters.formData;
                     }
