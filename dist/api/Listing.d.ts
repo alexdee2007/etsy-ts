@@ -242,6 +242,7 @@ export interface IUpdateListingParameters extends IStandardParameters {
     listing_id: number;
     title?: string;
     description?: string;
+    sku?: string;
     materials?: string[];
     renew?: boolean;
     shipping_template_id?: number;
